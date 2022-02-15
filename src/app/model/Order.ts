@@ -1,3 +1,5 @@
+import { Document } from "./Document";
+
 export interface Order{
     id:number;
     pickUpdate:Date;
@@ -9,5 +11,5 @@ export interface Order{
     isReady:boolean;
 
     //discounts
-    //list
+    documents:Array<Document>;
 }
