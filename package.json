@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@awesome-cordova-plugins/core": "^5.39.1",
+    "@awesome-cordova-plugins/http": "^5.39.1",
     "@capacitor/app": "1.1.0",
     "@capacitor/core": "3.4.0",
     "@capacitor/haptics": "1.1.4",
@@ -47,7 +49,9 @@
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "cordova-android": "^10.1.1",
+    "cordova-plugin-advanced-http": "^3.2.2",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -75,10 +79,14 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-advanced-http": {
+        "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
+      }
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
