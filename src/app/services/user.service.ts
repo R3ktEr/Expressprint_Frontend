@@ -40,7 +40,7 @@ export class UserService {
   public async getUsers():Promise<User[]>{
     
     return new Promise((resolve, reject)=>{
-      this.http.get("http://localhost:8080/user", {}, {}).then(response=>{
+      this.http.get(environment.serverUrl+"user", {}, {}).then(response=>{
         try{
           console.log(response)
 
@@ -71,11 +71,11 @@ export class UserService {
 
   public async deleteUser(id:number):Promise<string>{
     return new Promise((resolve, reject)=>{
-      this.http.delete(environment.serverUrl+"orders/"+id, {}, {}).then(response=>{
+      this.http.delete(environment.serverUrl+"user/"+id, {}, {}).then(response=>{
         try{
           console.log("Usuario borrado")
 
-          let users:User[]=JSON.parse(response.data)
+         
           
           resolve("Usuario borrado")
         }catch(err){
