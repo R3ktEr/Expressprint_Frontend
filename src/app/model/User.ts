@@ -1,3 +1,5 @@
+import { Order } from "./Order";
+
 export interface User{
     id:number;
     mail:string;
@@ -5,6 +7,9 @@ export interface User{
     phonenumber:number;
     admin:boolean;
     isDisabled:boolean;
-    userOrders:User[];
+    userOrders:Order[];
+
+   
 
 }
+
