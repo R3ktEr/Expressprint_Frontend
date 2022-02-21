@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {User} from '../model/User';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import { resolve } from 'dns';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
