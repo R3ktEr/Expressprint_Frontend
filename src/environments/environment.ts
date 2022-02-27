@@ -4,7 +4,17 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://localhost:8080/"
+  serverUrl: "http://localhost:8080/",
+
+  firebaseConfig : {
+    apiKey: "AIzaSyB6oYqOeCcgf9Pk4sTW8YWKunoZ6ypPdjU",
+    authDomain: "expressprint-5fcbd.firebaseapp.com",
+    projectId: "expressprint-5fcbd",
+    storageBucket: "expressprint-5fcbd.appspot.com",
+    messagingSenderId: "921786245072",
+    appId: "1:921786245072:web:f74ea67cfc532edceaa3d5",
+    measurementId: "G-XWGWDHERJ3"
+  }
 };
 
 /*

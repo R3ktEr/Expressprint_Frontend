@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "921786245072",
+    "project_id": "expressprint-5fcbd",
+    "storage_bucket": "expressprint-5fcbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921786245072:android:ce6b16be93efea2feaa3d5",
+        "android_client_info": {
+          "package_name": "com.iesfranciscodelosrios.expressprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921786245072-15raqampr57qi34d282ts8oevih9okcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrheUAmDVJzDZCw73RS026gApks-IaA9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921786245072-15raqampr57qi34d282ts8oevih9okcr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

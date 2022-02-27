@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Expressprint</string>
+    <string name="title_activity_main">Expressprint</string>
+    <string name="package_name">com.iesfranciscodelosrios.expressprint</string>
+    <string name="custom_url_scheme">com.iesfranciscodelosrios.expressprint</string>
+</resources>

@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-title class="bar_title">Iniciar Sesión</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+    <ion-card class="card">
+        <!--<img class="login_image" src="../../../assets/images/nota.png">-->
+        <ion-card-header>
+            <ion-card-title class="card-title" color="secondary">Iniciar Sesión</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+            <form [formGroup]="form" (ngSubmit)="loginWithMail()">
+                <ion-input class="input" color="secondary" placeholder="Correo" formControlName="email"></ion-input>
+                <ion-input class="input" color="secondary" type="password" placeholder="Contraseña" formControlName="password"></ion-input>
+                <ion-button class="login-button" type="submit" shape="round">
+                    <ion-icon name="person"></ion-icon>&nbsp;Iniciar Sesion
+                </ion-button>
+                <ion-button class="register-button" (click)="register()" shape="round">
+                    <ion-icon name="person-add"></ion-icon>&nbsp;Registrarse
+                </ion-button>
+                <ion-label class="orlabel">o</ion-label>
+                <ion-button class="login_google_button" shape="round" (click)="signin()">
+                    <ion-icon name="logo-google"></ion-icon>&nbsp; Iniciar Sesion con Google
+                </ion-button>
+            </form>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
