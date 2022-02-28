@@ -1,50 +1,59 @@
-import {EndedType, SheetSize, ThicknessType} from 'src/app/model/Enums';
+import { EndedType, ImpressionsTypes, SheetSize, ThicknessType } from 'src/app/model/Enums';
+
+export interface PricesRequest {
+  colorList: Color[];
+  copyList: Copy[];
+  endedList: Ended[];
+  impressionPerSideList: ImpressionPerSide[];
+  sizeList: Size[];
+  thicknessList: Thickness[];
+}
 
 export interface Color {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
+  date?: Date;
+  isValid?: boolean;
   isColor: boolean;
 }
 
 export interface Copy {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
+  date?: Date;
+  isValid?: boolean;
 }
 
 export interface Ended {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
+  date?: Date;
+  isValid?: boolean;
   endedType: EndedType;
 }
 
 export interface ImpressionPerSide {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
-  impressionsTypes: ImpressionPerSide;
+  date?: Date;
+  isValid?: boolean;
+  impressionsTypes: ImpressionsTypes;
 }
 
 export interface Size {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
+  date?: Date;
+  isValid?: boolean;
   sizeSheet: SheetSize;
   sheetSize: string;
 }
 
 export interface Thickness {
-  id: number;
+  id?: number;
   price: number;
-  date: Date;
-  isValid: boolean;
+  date?: Date;
+  isValid?: boolean;
   thicknessType: ThicknessType;
   description: string;
 }
