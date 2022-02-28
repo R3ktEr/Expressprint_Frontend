@@ -52,8 +52,7 @@ export class LoginPage implements OnInit {
   public async signin(){
     try {
       await this.authS.login();
-      //this.router.navigate(['private/tabs/tab1']);
-      console.log("Navega")
+      this.router.navigate(['private/tabs/tab1']);
     } catch (err) {
       console.error(err);
     }
