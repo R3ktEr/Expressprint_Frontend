@@ -3,6 +3,16 @@
 	"appName": "Expressprint",
 	"webDir": "www",
 	"bundledWebRuntime": false,
+	"plugins": {
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "921786245072-15raqampr57qi34d282ts8oevih9okcr.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		}
+	},
 	"cordova": {
 		"preferences": {
 			"ScrollEnabled": "false",

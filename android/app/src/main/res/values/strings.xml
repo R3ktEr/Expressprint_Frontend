@@ -4,4 +4,5 @@
     <string name="title_activity_main">Expressprint</string>
     <string name="package_name">com.iesfranciscodelosrios.expressprint</string>
     <string name="custom_url_scheme">com.iesfranciscodelosrios.expressprint</string>
+    <string name="server_client_id">921786245072-15raqampr57qi34d282ts8oevih9okcr.apps.googleusercontent.com</string>
 </resources>
