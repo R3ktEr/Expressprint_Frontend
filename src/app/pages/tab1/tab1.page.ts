@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/model/Order';
+import { _User } from 'src/app/model/User';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,10 +11,23 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class Tab1Page {
 
-  constructor(private orderService:OrderService) {}
+  public user:_User;
+  private datacoming:any;
+
+  constructor(private route:ActivatedRoute, private orderService:OrderService) {
+    this.datacoming=this.route.snapshot.params['user'];
+    if(this.datacoming){
+      try{
+        this.user=JSON.parse(this.datacoming);
+        console.log(this.user)
+      }catch(err){
+        //console.log(err);
+      }
+    }
+  }
 
   public getOrders():void{ 
-    this.orderService.getAllOrders().then(response=>{
+    this.orderService.getAllOrders().subscribe(response=>{
       let orders:Order[]
       orders=response
 

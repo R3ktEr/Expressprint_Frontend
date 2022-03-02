@@ -3,5 +3,6 @@ export interface Discounts {
 	name:string,
 	percentage:number,
 	fixed_value:number,
-	isFixed:boolean
+	isFixed:boolean,
+	isActive:boolean
 }
