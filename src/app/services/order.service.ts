@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../model/Order';
 
@@ -7,113 +8,41 @@ import { Order } from '../model/Order';
   providedIn: 'root'
 })
 export class OrderService {
-  constructor(private http: HTTP) { }
+  constructor(private http: HttpClient) { }
 
-  public async getAllOrders():Promise<Order[]> {
-    return new Promise((resolve, reject)=>{
-      this.http.get(environment.serverUrl+"orders", {}, {}).then(response=>{
-        try{
-          console.log(response)
+  public getAllOrders():Observable<Order[]> {
+    let orders=this.http.get<Order[]>(`${environment.serverUrl}orders`)
 
-          let orders:Order[]=JSON.parse(response.data)
-          
-          resolve(orders)
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
+    return orders;
   }
 
-  public async getOrderById(id_user:number, id_order:number):Promise<Order> {
-    return new Promise((resolve, reject)=>{
-      this.http.get(environment.serverUrl+"orders/"+id_user+"/"+id_order, {}, {}).then(response=>{
-        try{
-          console.log(response)
+  public getOrderById(id_user:number, id_order:number):Observable<Order> {
+    let order=this.http.get<Order>(`${environment.serverUrl}orders/${id_user}/${id_order}`)
 
-          let order:Order=JSON.parse(response.data)
-          
-          resolve(order)
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
+    return order;
   }
 
-  public async getOrdersByUser(id_user:number):Promise<Order[]> {
-    return new Promise((resolve, reject)=>{
-      this.http.get(environment.serverUrl+"orders/"+id_user, {}, {}).then(response=>{
-        try{
-          console.log(response)
+  public getOrdersByUser(id_user:number): Observable<Order> {
+    let order=this.http.get<Order>(`${environment.serverUrl}orders/${id_user}`)
 
-          let orders:Order[]=JSON.parse(response.data)
-          
-          resolve(orders)
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
+    return order;
   }
 
-  public async saveOrder(order:Order):Promise<Order> {
-    return new Promise((resolve, reject)=>{
-      try{
-        let orderJSON:any=JSON.stringify(order)
+  public createOrder(order:Order):Observable<Order> {
+    let o=this.http.post<Order>(`${environment.serverUrl}orders`, order)
 
-        this.http.post(environment.serverUrl+"orders", orderJSON, {}).then(response=>{
-          try{
-            console.log(response)
-  
-            let order:Order=JSON.parse(response.data)
-            
-            resolve(order)
-          }catch(err){
-            reject(err)
-          }
-        })
-      }catch(err){
-        reject(err)
-      }
-    })
+    return o;
   }
 
-  public async updateOrder(order:Order):Promise<Order> {
-    return new Promise((resolve, reject)=>{
-      try{
-        let orderJSON:any=JSON.stringify(order)
+  public updateOrder(order:Order):Observable<Order> {
+    let o=this.http.put<Order>(`${environment.serverUrl}orders`,order)
 
-        this.http.put(environment.serverUrl+"orders", orderJSON, {}).then(response=>{
-          try{
-            console.log(response)
-  
-            let order:Order=JSON.parse(response.data)
-            
-            resolve(order)
-          }catch(err){
-            reject(err)
-          }
-        })
-      }catch(err){
-        reject(err)
-      }
-    })
+    return o;
   }
 
-  public async deleteOrderById(id_user:number, id_order:number):Promise<string> {
-    return new Promise((resolve, reject)=>{
-      this.http.delete(environment.serverUrl+"orders/"+id_user+"/"+id_order, {}, {}).then(response=>{
-        try{
-          console.log("Pedido borrado")
+  public deleteOrderById(id_user:number, id_order:number):Observable<string> {
+    let isDeleted=this.http.delete<string>(`${environment.serverUrl}orders/${id_user}/${id_order}`)
 
-          let orders:Order[]=JSON.parse(response.data)
-          
-          resolve("Pedido borrado")
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
+    return isDeleted;
   }
 }

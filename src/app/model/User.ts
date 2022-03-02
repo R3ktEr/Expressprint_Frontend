@@ -1,15 +1,14 @@
 import { Order } from "./Order";
 
-export interface User{
-    id:number;
+export interface _User{
+    id?:number;
+    googleId:string;
     mail:string;
     name:string;
-    phonenumber:number;
+    phonenumber?:number;
     admin:boolean;
-    isDisabled:boolean;
-    userOrders:Order[];
+    disabled:boolean;
 
-   
-
+    userOrders?:Array<Order>;
 }
 
