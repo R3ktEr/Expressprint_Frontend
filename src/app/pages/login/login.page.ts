@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
+import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -18,7 +19,7 @@ export class LoginPage implements OnInit {
   public form:FormGroup
 
   constructor(private platform:Platform, private authS:AuthService, private router:Router, private fb:FormBuilder, 
-    private notS:NotificationsService) {
+    private notS:NotificationsService, private navCtrl:NavController) {
     this.isAndroid=this.platform.is("android");
     this.form=this.fb.group({
       email:["", Validators.required],
@@ -51,8 +52,9 @@ export class LoginPage implements OnInit {
 
   public async signin(){
     try {
-      await this.authS.login();
-      this.router.navigate(['private/tabs/tab1']);
+      let user:_User=await this.authS.login();
+      
+      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
     } catch (err) {
       console.error(err);
     }
@@ -71,8 +73,8 @@ export class LoginPage implements OnInit {
     await this.notS.presentLoading();
 
     try{
-      await this.authS.login(userdata);
-      this.router.navigate(['private/tabs/tab1']);
+      let user:_User=await this.authS.login(userdata);
+      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
     }catch(err){
       this.notS.presentToast("Contraseña incorrecta", "danger");
     }

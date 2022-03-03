@@ -1,0 +1,26 @@
+{
+    "/user": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/orders": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/discounts": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/prices": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

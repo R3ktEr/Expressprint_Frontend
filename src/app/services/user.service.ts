@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {User} from '../model/User';
-import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import {_User} from '../model/User';
+import {HttpClient, HttpParams, HttpStatusCode} from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,104 +11,31 @@ import { environment } from 'src/environments/environment';
 
 export class UserService {
 
-  constructor(private http:HTTP) { }
+  constructor(private http:HttpClient) { }
 
+  public createUpdateUser(user:_User): Observable<_User> {
+    let u=this.http.post<_User>(`${environment.serverUrl}user`,user);
 
-  public async addUser(user:User):Promise<User>{
-    return new Promise((resolve, reject)=>{
-      try{
-        let userJSON:any=JSON.stringify(user)
-
-        this.http.post(environment.serverUrl+"users", userJSON, {}).then(response=>{
-          try{
-            console.log(response)
-  
-            let user:User=JSON.parse(response.data)
-            
-            resolve(user)
-          }catch(err){
-            reject(err)
-          }
-        })
-      }catch(err){
-        reject(err)
-      }
-    })
+    return u;
   }
 
   
-
-  public async getUsers():Promise<User[]>{
-    
-    return new Promise((resolve, reject)=>{
-      this.http.get(environment.serverUrl+"user", {}, {}).then(response=>{
-        try{
-          console.log(response)
-
-          let users:User[]=JSON.parse(response.data)
-          
-          resolve(users)
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
-  }
-
-  public async getUserByMail(userMail:string):Promise<User>{
-    return new Promise((resolve, reject)=>{
-      this.http.get(environment.serverUrl+"user/"+userMail,{},{}).then(response=>{
-        try {
-          console.log(response)
-
-          let user:User=JSON.parse(response.data)
-          resolve(user);
-        } catch (err) {
-          reject(err)
-        }
-      })
-    }) 
-  }
-
-  public async deleteUser(id:number):Promise<string>{
-    return new Promise((resolve, reject)=>{
-      this.http.delete(environment.serverUrl+"user/"+id, {}, {}).then(response=>{
-        try{
-          console.log("Usuario borrado")
-
-         
-          
-          resolve("Usuario borrado")
-        }catch(err){
-          reject(err)
-        }
-      })
-    })
-  }
-  public async updateUser(user:User):Promise<User>
-  {
-    return new Promise((resolve, reject)=>{
-      try{
-        let orderJSON:any=JSON.stringify(user)
-
-        this.http.put(environment.serverUrl+"users", orderJSON, {}).then(response=>{
-          try{
-            console.log(response)
+  public getUsers():Observable<_User[]>{
+    let users=this.http.get<_User[]>(`${environment.serverUrl}user`);
   
-            let user:User=JSON.parse(response.data)
-            
-            resolve(user)
-          }catch(err){
-            reject(err)
-          }
-        })
-      }catch(err){
-        reject(err)
-      }
-    })
+    return users;
   }
 
+  public getUserByMail(mail:string):Observable<_User>{
+    let u=this.http.get<_User>(`${environment.serverUrl}user/${mail}`);
+  
+    return u;
+  }
 
+  public deleteUser(id:number):Observable<string>{
+    let response=this.http.post<string>(`${environment.serverUrl}user`,id);
 
+    return response;
+  }
 }
 

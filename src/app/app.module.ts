@@ -15,6 +15,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

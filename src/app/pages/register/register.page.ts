@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -14,13 +15,14 @@ export class RegisterPage implements OnInit {
   public form:FormGroup
   public user:any;
 
-  constructor(private router:Router, private fb:FormBuilder, private authS:AuthService, private notS:NotificationsService) { }
+  constructor(private router:Router, private fb:FormBuilder, private authS:AuthService, private notS:NotificationsService, 
+    private navCtrl:NavController) { }
 
   ngOnInit() {
     this.form=this.fb.group({
       email:["", Validators.required],
-      password:["",Validators.required],
-      repeatedPassword:["",Validators.required]
+      password:["",[Validators.required, Validators.minLength(6)]],
+      repeatedPassword:["",[Validators.required, Validators.minLength(6)]]
     })
   }
 
@@ -38,9 +40,10 @@ export class RegisterPage implements OnInit {
       try{
         let user=await this.authS.singUpWithMail(userdata);
         await this.notS.presentToast("Usuario registrado con exito", "success")
-        this.router.navigate(['private/tabs/tab1']);
+        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
         console.log(this.user);
       }catch(err){
+        this.notS.presentToast("El correo introducido ya está siendo utilizado", "warning");
         console.log(err);
       }
     }else{
