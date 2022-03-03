@@ -19,16 +19,16 @@ export class UserService {
     return u;
   }
 
-  
+
   public getUsers():Observable<_User[]>{
     let users=this.http.get<_User[]>(`${environment.serverUrl}user`);
-  
+
     return users;
   }
 
   public getUserByMail(mail:string):Observable<_User>{
     let u=this.http.get<_User>(`${environment.serverUrl}user/${mail}`);
-  
+
     return u;
   }
 

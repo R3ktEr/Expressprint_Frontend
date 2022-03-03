@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private storage: LocalStorageService, private firebase: AngularFireAuth,
     private platform: Platform, private userService:UserService) {
     this.isAndroid = platform.is("android");
-    
+
   }
 
   async singUpWithMail(userdata: any): Promise<any> {
@@ -40,10 +40,9 @@ export class AuthService {
 
           try{
             await this.checkDatabase(user);
-            reject("El usuario ya existe en la base de datos") 
+            reject("El usuario ya existe en la base de datos")
           }catch(notFound){
             let u=await this.userService.createUpdateUser(user).toPromise()
-            console.log(u)
             await this.keepSession();
             resolve(u);
           }
@@ -54,27 +53,26 @@ export class AuthService {
     });
   }
 
-  public async loadSession() {
+  public async loadSession(): Promise<_User> {
     try{
       let user = await this.storage.getItem('user');
       if (user) {
         user = JSON.parse(user);
         this.gUser = user;
+        return user;
       }
     }catch(err){
       console.log(err);
     }
   }
 
-  public async login(userdata?): Promise<any>{
+  public async login(userdata?): Promise<_User>{
     return new Promise(async (resolve,reject)=>{
-      
+
       if(!userdata){
         try{
           this.gUser=await GoogleAuth.signIn();
 
-          console.log(this.gUser.id)
-          console.log(this.gUser)
 
           let user: _User={
             googleId:this.gUser.id,
@@ -83,16 +81,16 @@ export class AuthService {
             admin:false,
             disabled:false,
           }
-
+          this.gUser = user;
           try{
-            await this.checkDatabase(user);
+            this.gUser = await this.checkDatabase(this.gUser);
             await this.keepSession();
           }catch(notFound){
             await this.keepSession();
-            this.userService.createUpdateUser(user);
+            this.userService.createUpdateUser(this.gUser);
           }
 
-          resolve(user);
+          resolve(this.gUser);
         }catch(err){
           //console.log(err);
           reject(err);
@@ -111,16 +109,16 @@ export class AuthService {
           }
 
           console.log(user)
-
-          try{ 
-            await this.checkDatabase(user);
+          this.gUser = user;
+          try{
+            this.gUser = await this.checkDatabase(this.gUser);
             await this.keepSession(); //Solo si se encuentra el usuario en la base de datos del backend
           }catch(notFound){
-            await this.userService.createUpdateUser(user); //Si no se encuentra el usuario en la base de datos del backend
+            await this.userService.createUpdateUser(this.gUser); //Si no se encuentra el usuario en la base de datos del backend
             await this.keepSession();
           }
 
-          resolve(user);
+          resolve(this.gUser);
         }catch(err){
           reject(err);
         }
@@ -159,21 +157,8 @@ export class AuthService {
     if (this.gUser) return true; else return false;
   }
 
-  public async checkDatabase(u:_User): Promise<_User | boolean> {
-    return new Promise(async (resolve,reject)=>{
-      try{
-        let user:_User;
-    
-        this.userService.getUserByMail(u.mail).toPromise().then(data=>{
-          user=data;
-          
-          resolve(user);    
-        }).catch(data=>{
-          reject(data);
-        });
-      }catch(err){
-        reject(err)
-      }
-    });
+  public async checkDatabase(u: _User): Promise<_User>{
+    return this.userService.getUserByMail(u.mail).toPromise();
   }
+
 }

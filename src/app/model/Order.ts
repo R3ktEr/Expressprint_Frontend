@@ -4,13 +4,13 @@ import { _User } from "./User";
 
 export interface Order{
     id:number;
-    pickUpdate:Date;
+    pickupDate:Date;
     orderDate:Date;
     user: _User;
-    isPayed:boolean;
-    isPickedUp:boolean;
+    payed:boolean;
+    pickedUp:boolean;
     finalPrice:number;
-    isReady:boolean;
+    ready:boolean;
 
     discounts?:Array<Discounts>;
     documents?:Array<Document>;

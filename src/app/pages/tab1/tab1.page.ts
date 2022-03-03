@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Order } from 'src/app/model/Order';
-import { _User } from 'src/app/model/User';
-import { OrderService } from 'src/app/services/order.service';
+import {Component} from '@angular/core';
+import {Order} from 'src/app/model/Order';
+import {OrderService} from 'src/app/services/order.service';
+import {AuthService} from '../../services/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {_User} from '../../model/User';
+import {NavController} from '@ionic/angular';
+import {Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-tab1',
@@ -10,30 +15,85 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  public orders: Order[];
+  private ordersCopy: Order[];
+  private subscription: Subscription;
+  private dataIncoming: _User;
+  public user: _User;
+  private filter: any;
 
-  public user:_User;
-  private datacoming:any;
+  constructor(private orderService: OrderService, private authS: AuthService, private router: Router,
+              private navController: NavController, private route: ActivatedRoute, private localstorage: LocalStorageService) {
+    /*this.user = {
+      disabled: false,
+      googleId: '',
+      mail: '',
+      name: '',
+      phonenumber: 0,
+      id: 1, admin: true
+    };*/
+    this.ordersCopy = [];
+    this.filter = {
+      payed: false,
+      pickedUp: false
+    };
+    if(this.route.snapshot.params.tab === 'login'){
+      this.user = this.route.snapshot.params.user;
+    }else {
 
-  constructor(private route:ActivatedRoute, private orderService:OrderService) {
-    this.datacoming=this.route.snapshot.params['user'];
-    if(this.datacoming){
-      try{
-        this.user=JSON.parse(this.datacoming);
-        console.log(this.user)
-      }catch(err){
-        //console.log(err);
-      }
     }
   }
 
-  public getOrders():void{ 
-    this.orderService.getAllOrders().subscribe(response=>{
-      let orders:Order[]
-      orders=response
+  ionViewWillEnter() {
 
-      for(let i=0; i<orders.length; i++){
-        console.log(orders[i])
-      }
-    })
+    if (this.user.admin) {
+      this.getAllOrders();
+    } else {
+      this.getOrders();
+    }
   }
+
+  public getOrders(): void {
+    this.subscription = this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
+      this.orders = value;
+      this.ordersCopy = [];
+      this.orders.forEach(values => {
+        this.ordersCopy.push(values);
+      });
+    });
+  }
+
+  public getAllOrders(): void {
+    this.subscription = this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).subscribe(value => {
+      this.orders = value;
+      this.ordersCopy = [];
+      this.orders.forEach(values => {
+        this.ordersCopy.push(values);
+      });
+    });
+  }
+
+  public viewOrder(order: Order): void {
+    this.navController.navigateForward(['private/tabs/tab3', {data: JSON.stringify(order)}]);
+  }
+
+  public async logout() {
+    await this.authS.logout();
+    await this.router.navigate(['']);
+  }
+
+  public showOnly(event?, type?: string) {
+    if (type === 'NotDelivered') {
+      this.filter.pickedUp = event.detail.checked;
+    }
+    if (type === 'NotPayed') {
+      this.filter.payed = event.detail.checked;
+    }
+    if(this.filter.payed === true || this.filter.pickedUp === true) {
+      this.orders = this.ordersCopy.filter(obj => obj.payed === this.filter.payed && obj.pickedUp === this.filter.pickedUp);
+    }else{
+      this.orders = this.ordersCopy;
+    }
+  }
+
 }

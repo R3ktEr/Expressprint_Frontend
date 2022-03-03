@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   private isAndroid:boolean;
   public form:FormGroup
 
-  constructor(private platform:Platform, private authS:AuthService, private router:Router, private fb:FormBuilder, 
+  constructor(private platform:Platform, private authS:AuthService, private router:Router, private fb:FormBuilder,
     private notS:NotificationsService, private navCtrl:NavController) {
     this.isAndroid=this.platform.is("android");
     this.form=this.fb.group({
@@ -35,25 +35,22 @@ export class LoginPage implements OnInit {
     }
 
     if(this.authS.isLogged()){
-      this.router.navigate(['private/tabs/tab1']);
+      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(this.authS.gUser)}]);
     }
   }
 
   ionViewWillEnter(){
+    let user: _User;
     this.platform.ready().then(async()=>{
       await GoogleAuth.initialize(); //lee la config clientid del meta de index.html
       await this.authS.loadSession();
     })
-  
-    if(this.authS.isLogged()){
-      this.router.navigate(['private/tabs/tab1']);
-    }
   }
 
   public async signin(){
     try {
       let user:_User=await this.authS.login();
-      
+
       this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
     } catch (err) {
       console.error(err);
@@ -69,12 +66,12 @@ export class LoginPage implements OnInit {
       email: this.form.get("email").value,
       password: this.form.get("password").value
     }
-    
+
     await this.notS.presentLoading();
 
     try{
       let user:_User=await this.authS.login(userdata);
-      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user), tab:'login'}]);
     }catch(err){
       this.notS.presentToast("Contraseña incorrecta", "danger");
     }

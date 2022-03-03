@@ -22,8 +22,8 @@ export class OrderService {
     return order;
   }
 
-  public getOrdersByUser(id_user:number): Observable<Order> {
-    let order=this.http.get<Order>(`${environment.serverUrl}orders/${id_user}`)
+  public getOrdersByUser(id_user:number): Observable<Order[]> {
+    let order=this.http.get<Order[]>(`${environment.serverUrl}orders/${id_user}`)
 
     return order;
   }
