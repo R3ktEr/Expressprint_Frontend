@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthService } from './services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,8 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule],
   providers: [HTTP,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },LocalStorageService, AuthService],

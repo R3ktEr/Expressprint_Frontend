@@ -1,17 +1,192 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Nuevo Pedido</ion-title>
   </ion-toolbar>
 </ion-header>
-
+   
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form>
+    <ion-text color="secondary">
+      <h1>Color</h1>
+    </ion-text>
+    <ion-segment>
+      <ion-card>
+        <ion-segment-button value="BlancoyNegro">
+          <ion-card-header>
+            <ion-card-title>Blanco y Negro</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="Color">
+          <ion-card-header>
+            <ion-card-title>Color</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-text color="secondary">
+      <h1>Tamaño de papel</h1>
+    </ion-text>
+    <ion-segment color="secondary">
+      <ion-card>
+        <ion-segment-button value="A3">
+          <ion-card-header>
+            <ion-card-title>A3</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="A4">
+          <ion-card-header>
+            <ion-card-title>A4</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="A5">
+          <ion-card-header>
+            <ion-card-title>A5</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
+    <ion-text color="secondary">
+      <h1>Grosor del papel</h1>
+    </ion-text>
+    <ion-segment color="secondary">
+      <ion-card>
+        <ion-segment-button value="80">
+          <ion-card-header>
+            <ion-card-title>80</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="160">
+          <ion-card-header>
+            <ion-card-title>160</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="280">
+          <ion-card-header>
+            <ion-card-title>280</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
+    <ion-text color="secondary">
+      <h1>Forma de impresión</h1>
+    </ion-text>
+    <ion-segment color="secondary">
+      <ion-card>
+        <ion-segment-button value="UnaCara">
+          <ion-card-header>
+            <ion-card-title>Una cara</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="DobleCara">
+          <ion-card-header>
+            <ion-card-title>Doble cara</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
+    <ion-text color="secondary">
+      <h1>Impresiones por cara</h1>
+    </ion-text>
+    <ion-segment color="secondary">
+      <ion-card>
+        <ion-segment-button value="Normal">
+          <ion-card-header>
+            <ion-card-title>Normal</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="2Paginas">
+          <ion-card-header>
+            <ion-card-title>2 páginas</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="2Diapositivas">
+          <ion-card-header>
+            <ion-card-title>2 diapositivas</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="4Diapositivas">
+          <ion-card-header>
+            <ion-card-title>4 diapositivas</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
+    <ion-text color="secondary">
+      <h1>Orientación</h1>
+    </ion-text>
+    <ion-segment color="secondary">
+      <ion-card>
+        <ion-segment-button value="Normal">
+          <ion-card-header>
+            <ion-card-title>Normal</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="Automática">
+          <ion-card-header>
+            <ion-card-title>Automática</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <br/>
+      <ion-card>
+        <ion-segment-button value="Vertical">
+          <ion-card-header>
+            <ion-card-title>Vertical</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+      <ion-card>
+        <ion-segment-button value="Horizontal">
+          <ion-card-header>
+            <ion-card-title>Horizontal</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+        </ion-segment-button>
+      </ion-card>
+    </ion-segment>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block"
+          >Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
