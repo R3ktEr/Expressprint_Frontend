@@ -18,35 +18,37 @@ export class Tab1Page {
   public orders: Order[];
   private ordersCopy: Order[];
   private subscription: Subscription;
-  private dataIncoming: _User;
+  private dataIncoming: any;
   public user: _User;
+  public isAdmin: boolean;
   private filter: any;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router,
               private navController: NavController, private route: ActivatedRoute, private localstorage: LocalStorageService) {
-    /*this.user = {
-      disabled: false,
-      googleId: '',
-      mail: '',
-      name: '',
-      phonenumber: 0,
-      id: 1, admin: true
-    };*/
+    
     this.ordersCopy = [];
     this.filter = {
       payed: false,
       pickedUp: false
     };
-    if(this.route.snapshot.params.tab === 'login'){
-      this.user = this.route.snapshot.params.user;
-    }else {
 
+    try{
+      this.dataIncoming=this.route.snapshot.params.user;
+
+      if(this.dataIncoming){
+        this.user=this.dataIncoming;
+        this.isAdmin=this.user.admin;
+      }
+    }catch(err){
+      //console.log(err)
     }
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    this.user=await this.authS.loadSession()
+    this.isAdmin=this.user.admin;
 
-    if (this.user.admin) {
+    if (this.isAdmin) {
       this.getAllOrders();
     } else {
       this.getOrders();
