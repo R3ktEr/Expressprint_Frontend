@@ -1,192 +1,188 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Nuevo Pedido</ion-title>
-  </ion-toolbar>
-</ion-header>
-   
-<ion-content [fullscreen]="true">
-  <form>
-    <ion-text color="secondary">
-      <h1>Color</h1>
-    </ion-text>
-    <ion-segment>
-      <ion-card>
-        <ion-segment-button value="BlancoyNegro">
-          <ion-card-header>
-            <ion-card-title>Blanco y Negro</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="Color">
-          <ion-card-header>
-            <ion-card-title>Color</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title> Nuevo pedido </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-text color="secondary">
-      <h1>Tamaño de papel</h1>
-    </ion-text>
-    <ion-segment color="secondary">
-      <ion-card>
-        <ion-segment-button value="A3">
-          <ion-card-header>
-            <ion-card-title>A3</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="A4">
-          <ion-card-header>
-            <ion-card-title>A4</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="A5">
-          <ion-card-header>
-            <ion-card-title>A5</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
-    <ion-text color="secondary">
-      <h1>Grosor del papel</h1>
-    </ion-text>
-    <ion-segment color="secondary">
-      <ion-card>
-        <ion-segment-button value="80">
-          <ion-card-header>
-            <ion-card-title>80</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="160">
-          <ion-card-header>
-            <ion-card-title>160</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="280">
-          <ion-card-header>
-            <ion-card-title>280</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
-    <ion-text color="secondary">
-      <h1>Forma de impresión</h1>
-    </ion-text>
-    <ion-segment color="secondary">
-      <ion-card>
-        <ion-segment-button value="UnaCara">
-          <ion-card-header>
-            <ion-card-title>Una cara</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="DobleCara">
-          <ion-card-header>
-            <ion-card-title>Doble cara</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
-    <ion-text color="secondary">
-      <h1>Impresiones por cara</h1>
-    </ion-text>
-    <ion-segment color="secondary">
-      <ion-card>
-        <ion-segment-button value="Normal">
-          <ion-card-header>
-            <ion-card-title>Normal</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="2Paginas">
-          <ion-card-header>
-            <ion-card-title>2 páginas</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="2Diapositivas">
-          <ion-card-header>
-            <ion-card-title>2 diapositivas</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="4Diapositivas">
-          <ion-card-header>
-            <ion-card-title>4 diapositivas</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
-    <ion-text color="secondary">
-      <h1>Orientación</h1>
-    </ion-text>
-    <ion-segment color="secondary">
-      <ion-card>
-        <ion-segment-button value="Normal">
-          <ion-card-header>
-            <ion-card-title>Normal</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="Automática">
-          <ion-card-header>
-            <ion-card-title>Automática</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <br/>
-      <ion-card>
-        <ion-segment-button value="Vertical">
-          <ion-card-header>
-            <ion-card-title>Vertical</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-      <ion-card>
-        <ion-segment-button value="Horizontal">
-          <ion-card-header>
-            <ion-card-title>Horizontal</ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
-          </ion-card-header>
-        </ion-segment-button>
-      </ion-card>
-    </ion-segment>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block"
-          >Submit</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
-</ion-content>
+ 
+    <form>
+      <div>
+        <div style="margin-left:25%;" class="material-textfield blue">
+          <input type="number" required/>
+          <label data-content="Número de copias"></label>
+        </div>
+      </div>
+      <div>
+        <h1>Color</h1>
+        <fieldset style="border: none !important">
+          <div class="radiobtn">
+            <input type="radio" id="b" name="b" value="b" />
+            <label for="b">Blanco/Negro</label>
+          </div>
+
+          <div class="radiobtn">
+            <input type="radio" id="c" name="b" value="c" />
+            <label for="c">A color</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Tamaño de papel</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="a3" name="drone" value="a3" />
+              <label for="a3">A3</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="a4" name="drone" value="a4" />
+              <label for="a4">A4</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="a5" name="drone" value="a5" />
+              <label for="a5">A5</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Grosor del papel</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="w80" name="grosor" value="80" />
+              <label for="w80">80</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="w160" name="grosor" value="160" />
+              <label for="w160">160</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="w280" name="grosor" value="280" />
+              <label for="w280">280</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Forma de impresión</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="una" name="nCaras" value="una" />
+              <label for="una">Una cara</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="doble" name="nCaras" value="doble" />
+              <label for="doble">Doble cara</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Impresiones por cara</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="normal" name="impresionesCara" value="normal" />
+              <label for="normal">Normal</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="twoPa" name="impresionesCara" value="twoPa" />
+              <label for="twoPa">2 Páginas</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="twoDi" name="impresionesCara" value="twoDi" />
+              <label for="twoPa">2 Diapositivas</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="fourDi" name="impresionesCara" value="fourDi" />
+              <label for="fourDi">4 Diapositivas</label>
+            </div>
+
+          </fieldset>
+        </div>
+      </div>
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Orientación</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="Automatica" name="Orientacion" value="Automatica" />
+              <label for="Automatica">Automática</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="Vertical" name="Orientacion" value="Vertical" />
+              <label for="Vertical">Vertical</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="Horizontal" name="Orientacion" value="Horizontal" />
+              <label for="Horizontal">Horizontal</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Pasar Página</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="largo" name="pasarpagina" value="largo" />
+              <label for="largo">Lado largo</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="corto" name="pasarpagina" value="corto" />
+              <label for="corto">Lado Corto</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      
+      <div class="div">
+        <div>
+          <h1 class="marginh1">Acabados</h1>
+          <fieldset style="border: none !important">
+            <div class="radiobtn">
+              <input type="radio" id="sinacabado" name="Acabados" value="sinacabado" />
+              <label for="sinacabado">Sin acabado</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="Encuadernado" name="Acabados" value="encuadernado" />
+              <label for="Encuadernado">Encuadernado </label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="grapado" name="Acabados" value="grapado" />
+              <label for="grapado">Grapado</label>
+            </div>
+
+            <div class="radiobtn">
+              <input type="radio" id="twoagu" name="Acabados" value="twoagu" />
+              <label for="twoagu">2 Agujeros </label>
+            </div>
+            <div class="radiobtn">
+              <input type="radio" id="fouragu" name="Acabados" value="fouragu" />
+              <label for="corto">4 Agujeros </label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <ion-button type="submit" expand="block" style="width: 100%;">Enviar pedido</ion-button>
+    </form>
+  </ion-content>
+
