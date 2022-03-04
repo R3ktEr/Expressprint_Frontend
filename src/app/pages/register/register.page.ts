@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
-
+import { getAuth, sendEmailVerification } from "firebase/auth";
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -27,6 +27,7 @@ export class RegisterPage implements OnInit {
   }
 
   public async register(){
+    const auth = getAuth();
     let userdata={
       email: this.form.get("email").value,
       password: this.form.get("password").value,
@@ -38,8 +39,12 @@ export class RegisterPage implements OnInit {
 
     if(userdata.password==userdata.repeatedPassword){
       try{
+        
         let user=await this.authS.singUpWithMail(userdata);
         await this.notS.presentToast("Usuario registrado con exito", "success")
+       await sendEmailVerification(auth.currentUser)
+
+
         this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
         console.log(this.user);
       }catch(err){
