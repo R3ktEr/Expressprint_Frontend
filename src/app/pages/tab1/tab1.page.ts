@@ -56,6 +56,7 @@ export class Tab1Page {
   }
 
   public getOrders(): void {
+    console.log(this.user)
     this.subscription = this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
       this.orders = value;
       this.ordersCopy = [];

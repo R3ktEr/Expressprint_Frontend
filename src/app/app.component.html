@@ -1,3 +1,18 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-menu side="start" menuId="first" contentId="main" [disabled]="menuDisabled">
+        <ion-header>
+            <ion-toolbar color="primary">
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item>
+                    <ion-button class="logout" expand="full" size="medium" shape="round" color="primary" (click)="logout()">
+                        <ion-icon name="arrow-back-outline"></ion-icon>Cerrar Sesion</ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main" (activate)="disableMenu()"></ion-router-outlet>
 </ion-app>

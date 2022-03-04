@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -39,9 +40,10 @@ export class RegisterPage implements OnInit {
     if(userdata.password==userdata.repeatedPassword){
       try{
         let user=await this.authS.singUpWithMail(userdata);
+
         await this.notS.presentToast("Usuario registrado con exito", "success")
         this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
-        console.log(this.user);
+       
       }catch(err){
         this.notS.presentToast("El correo introducido ya está siendo utilizado", "warning");
         console.log(err);
