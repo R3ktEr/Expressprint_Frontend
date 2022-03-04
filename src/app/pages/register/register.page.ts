@@ -42,8 +42,10 @@ export class RegisterPage implements OnInit {
         
         let user=await this.authS.singUpWithMail(userdata);
         await this.notS.presentToast("Usuario registrado con exito", "success")
-       await sendEmailVerification(auth.currentUser)
-       this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+       await sendEmailVerification(auth.currentUser).then(()=>{
+        this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+       })
+       
 
         this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
         console.log(this.user);
