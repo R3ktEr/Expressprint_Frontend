@@ -6,10 +6,10 @@
   </ion-header>
 
  
-    <form>
+    <form [formGroup]="orderForm" (submit)="addOrder()">
       <div>
         <div style="margin-left:25%;" class="material-textfield blue">
-          <input type="number" required/>
+          <input formControlName="nCopies" type="number" required/>
           <label data-content="Número de copias"></label>
         </div>
       </div>
@@ -17,12 +17,12 @@
         <h1>Color</h1>
         <fieldset style="border: none !important">
           <div class="radiobtn">
-            <input type="radio" id="b" name="b" value="b" />
+            <input formControlName="isColor" type="radio" id="b" name="isColor" value="false" />
             <label for="b">Blanco/Negro</label>
           </div>
 
           <div class="radiobtn">
-            <input type="radio" id="c" name="b" value="c" />
+            <input formControlName="isColor" type="radio" id="c" name="isColor" value="true" />
             <label for="c">A color</label>
           </div>
         </fieldset>
@@ -32,17 +32,17 @@
           <h1 class="marginh1">Tamaño de papel</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="a3" name="drone" value="a3" />
+              <input formControlName="size" type="radio" id="a3" name="size" value="a3" />
               <label for="a3">A3</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="a4" name="drone" value="a4" />
+              <input formControlName="size" type="radio" id="a4" name="size" value="a4" />
               <label for="a4">A4</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="a5" name="drone" value="a5" />
+              <input formControlName="size" type="radio" id="a5" name="size" value="a5" />
               <label for="a5">A5</label>
             </div>
           </fieldset>
@@ -53,17 +53,17 @@
           <h1 class="marginh1">Grosor del papel</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="w80" name="grosor" value="80" />
+              <input formControlName="thickness" type="radio" id="w80" name="thickness" value="80" />
               <label for="w80">80</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="w160" name="grosor" value="160" />
+              <input formControlName="thickness" type="radio" id="w160" name="thickness" value="160" />
               <label for="w160">160</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="w280" name="grosor" value="280" />
+              <input formControlName="thickness" type="radio" id="w280" name="thickness" value="280" />
               <label for="w280">280</label>
             </div>
           </fieldset>
@@ -74,12 +74,12 @@
           <h1 class="marginh1">Forma de impresión</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="una" name="nCaras" value="una" />
+              <input formControlName="isTwoSides" type="radio" id="una" name="isTwoSides" value="false" />
               <label for="una">Una cara</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="doble" name="nCaras" value="doble" />
+              <input formControlName="isTwoSides" type="radio" id="doble" name="isTwoSides" value="true" />
               <label for="doble">Doble cara</label>
             </div>
           </fieldset>
@@ -90,22 +90,22 @@
           <h1 class="marginh1">Impresiones por cara</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="normal" name="impresionesCara" value="normal" />
+              <input formControlName="impressionPerSide" type="radio" id="normal" name="impressionPerSide" value="normal" />
               <label for="normal">Normal</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="twoPa" name="impresionesCara" value="twoPa" />
+              <input formControlName="impressionPerSide" type="radio" id="twoPa" name="impressionPerSide" value="twoPa" />
               <label for="twoPa">2 Páginas</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="twoDi" name="impresionesCara" value="twoDi" />
+              <input formControlName="impressionPerSide" type="radio" id="twoDi" name="impressionPerSide" value="twoDi" />
               <label for="twoPa">2 Diapositivas</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="fourDi" name="impresionesCara" value="fourDi" />
+              <input formControlName="impressionPerSide" type="radio" id="fourDi" name="impressionPerSide" value="fourDi" />
               <label for="fourDi">4 Diapositivas</label>
             </div>
 
@@ -117,17 +117,11 @@
           <h1 class="marginh1">Orientación</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="Automatica" name="Orientacion" value="Automatica" />
-              <label for="Automatica">Automática</label>
-            </div>
-
-            <div class="radiobtn">
-              <input type="radio" id="Vertical" name="Orientacion" value="Vertical" />
+              <input formControlName="isVertical" type="radio" id="Vertical" name="isVertical" value="true" />
               <label for="Vertical">Vertical</label>
             </div>
-
             <div class="radiobtn">
-              <input type="radio" id="Horizontal" name="Orientacion" value="Horizontal" />
+              <input formControlName="isVertical" type="radio" id="Horizontal" name="isVertical" value="false" />
               <label for="Horizontal">Horizontal</label>
             </div>
           </fieldset>
@@ -136,15 +130,15 @@
 
       <div class="div">
         <div>
-          <h1 class="marginh1">Pasar Página</h1>
+          <h1 class="marginh1">Pasar página</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="largo" name="pasarpagina" value="largo" />
+              <input formControlName="ringedPosition" type="radio" id="largo" name="ringedPosition" value="largo" />
               <label for="largo">Lado largo</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="corto" name="pasarpagina" value="corto" />
+              <input formControlName="ringedPosition" type="radio" id="corto" name="ringedPosition" value="corto" />
               <label for="corto">Lado Corto</label>
             </div>
           </fieldset>
@@ -157,26 +151,26 @@
           <h1 class="marginh1">Acabados</h1>
           <fieldset style="border: none !important">
             <div class="radiobtn">
-              <input type="radio" id="sinacabado" name="Acabados" value="sinacabado" />
+              <input formControlName="finishType" type="radio" id="sinacabado" name="finishType" value="sinacabado" />
               <label for="sinacabado">Sin acabado</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="Encuadernado" name="Acabados" value="encuadernado" />
+              <input formControlName="finishType" type="radio" id="Encuadernado" name="finishType" value="encuadernado" />
               <label for="Encuadernado">Encuadernado </label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="grapado" name="Acabados" value="grapado" />
+              <input formControlName="finishType" type="radio" id="grapado" name="finishType" value="grapado" />
               <label for="grapado">Grapado</label>
             </div>
 
             <div class="radiobtn">
-              <input type="radio" id="twoagu" name="Acabados" value="twoagu" />
+              <input formControlName="finishType" type="radio" id="twoagu" name="finishType" value="twoagu" />
               <label for="twoagu">2 Agujeros </label>
             </div>
             <div class="radiobtn">
-              <input type="radio" id="fouragu" name="Acabados" value="fouragu" />
+              <input formControlName="finishType" type="radio" id="fouragu" name="finishType" value="fouragu" />
               <label for="corto">4 Agujeros </label>
             </div>
           </fieldset>
