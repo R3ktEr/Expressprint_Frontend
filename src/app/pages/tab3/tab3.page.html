@@ -1,10 +1,9 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title> Nuevo pedido </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+    <ion-header [translucent]="true">
+        <ion-toolbar>
+            <ion-title> Nuevo pedido </ion-title>
+        </ion-toolbar>
+    </ion-header>
  
     <form [formGroup]="orderForm" (submit)="addOrder()">
       <div>
@@ -45,10 +44,7 @@
               <input formControlName="size" type="radio" id="a5" name="size" value="a5" />
               <label for="a5">A5</label>
             </div>
-          </fieldset>
         </div>
-      </div>
-      <div class="div">
         <div>
           <h1 class="marginh1">Grosor del papel</h1>
           <fieldset style="border: none !important">
@@ -124,7 +120,6 @@
               <input formControlName="isVertical" type="radio" id="Horizontal" name="isVertical" value="false" />
               <label for="Horizontal">Horizontal</label>
             </div>
-          </fieldset>
         </div>
       </div>
 
@@ -154,12 +149,12 @@
               <input formControlName="finishType" type="radio" id="sinacabado" name="finishType" value="sinacabado" />
               <label for="sinacabado">Sin acabado</label>
             </div>
-
+        </div>
             <div class="radiobtn">
               <input formControlName="finishType" type="radio" id="Encuadernado" name="finishType" value="encuadernado" />
               <label for="Encuadernado">Encuadernado </label>
             </div>
-
+        </div>
             <div class="radiobtn">
               <input formControlName="finishType" type="radio" id="grapado" name="finishType" value="grapado" />
               <label for="grapado">Grapado</label>
@@ -175,8 +170,6 @@
             </div>
           </fieldset>
         </div>
-      </div>
-      <ion-button type="submit" expand="block" style="width: 100%;">Enviar pedido</ion-button>
+        <ion-button type="submit" expand="block" style="width: 100%;">Enviar pedido</ion-button>
     </form>
-  </ion-content>
-
+</ion-content>

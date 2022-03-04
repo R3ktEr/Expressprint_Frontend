@@ -27,6 +27,7 @@ export class AuthService {
         await this.firebase.createUserWithEmailAndPassword(userdata.email,
           userdata.password).then(response => {
             this.gUser = response.user;
+            console.log(this.gUser)
           });
           this.loggedWithMail=true;
 
@@ -38,13 +39,16 @@ export class AuthService {
             disabled:false,
           }
 
+          this.gUser = user;
+
           try{
-            await this.checkDatabase(user);
+            this.gUser = await this.checkDatabase(user);
             reject("El usuario ya existe en la base de datos")
           }catch(notFound){
-            let u=await this.userService.createUpdateUser(user).toPromise()
+            this.gUser = await this.userService.createUpdateUser(user).toPromise()
+            console.log(this.gUser)
             await this.keepSession();
-            resolve(u);
+            resolve(this.gUser);
           }
 
       }catch(err){
@@ -98,12 +102,11 @@ export class AuthService {
       }else{
         try{
           let u=await this.firebase.signInWithEmailAndPassword(userdata.email, userdata.password);
-          this.gUser=u.user;
 
           let user: _User={
-            googleId:this.gUser.id,
-            mail:this.gUser.email,
-            name:this.gUser.name,
+            googleId:u.user.uid,
+            mail:u.user.email,
+            name:"No Name Set",
             admin:false,
             disabled:false,
           }
@@ -111,10 +114,10 @@ export class AuthService {
           console.log(user)
           this.gUser = user;
           try{
-            this.gUser = await this.checkDatabase(this.gUser);
+            this.gUser = await this.checkDatabase(user);
             await this.keepSession(); //Solo si se encuentra el usuario en la base de datos del backend
           }catch(notFound){
-            await this.userService.createUpdateUser(this.gUser); //Si no se encuentra el usuario en la base de datos del backend
+            this.gUser = await this.userService.createUpdateUser(this.gUser); //Si no se encuentra el usuario en la base de datos del backend
             await this.keepSession();
           }
 
