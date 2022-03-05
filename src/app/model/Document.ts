@@ -2,7 +2,7 @@ import { Order } from "./Order";
 import { Color, Copy, Ended, ImpressionPerSide, Size, Thickness } from "./Products";
 
 export interface Document{
-    id:number;
+    id?:number;
     copyPrice:Copy;
     nCopies:number;
     isColor:Color;
@@ -14,7 +14,7 @@ export interface Document{
     isVertical:boolean;
     ringedPosition:boolean;
 
-    order:Order;
-    comment:string;
-    url:string;
+    order?:Order;
+    comment?:string;
+    url?:string;
 }
