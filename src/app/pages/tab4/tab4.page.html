@@ -1,0 +1,170 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Nuevo Pedido</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title class="title">Características del pedido</ion-card-title>
+        </ion-card-header>
+
+        <form [formGroup]="formOrder" (ngSubmit)="saveOrder()">
+            <ion-card-content>
+                <div class="item">
+                    <ion-label class="subtitle">Copias</ion-label>
+
+                    <div class="parent">
+                        <ion-label class="label">Numero de copias: </ion-label>
+                        <ion-input type="number" class="input" formControlName="ncopies" color="tertiary" placeholder="Ej: 1"></ion-input>
+                    </div>
+
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Color</ion-label>
+                    <ion-radio-group formControlName="color">
+                        <ion-item>
+                            <ion-label class="label">Blanco y Negro</ion-label>
+                            <ion-radio value="false"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Color</ion-label>
+                            <ion-radio value="true"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Tamaño del Papel</ion-label>
+                    <ion-radio-group formControlName="size">
+                        <ion-item>
+                            <ion-label class="label">A3</ion-label>
+                            <ion-radio value="A3"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">A4</ion-label>
+                            <ion-radio value="A4"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">A5</ion-label>
+                            <ion-radio value="A5"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Grosor del Papel</ion-label>
+                    <ion-radio-group formControlName="thickness">
+                        <ion-item>
+                            <ion-label class="label">Papel Copistería: 80GR</ion-label>
+                            <ion-radio value="G80"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Grueso Alto: 160GR</ion-label>
+                            <ion-radio value="G160"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Tipo Carátula: 280GR</ion-label>
+                            <ion-radio value="G280"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Forma de Impresión</ion-label>
+                    <ion-radio-group formControlName="impressionType">
+                        <ion-item>
+                            <ion-label class="label">Una cara</ion-label>
+                            <ion-radio value="false"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Dos caras</ion-label>
+                            <ion-radio value="true"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Impresiones por cara</ion-label>
+                    <ion-radio-group formControlName="impressionPerSide">
+                        <ion-item>
+                            <ion-label class="label">Normal</ion-label>
+                            <ion-radio value="normal"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Dos páginas</ion-label>
+                            <ion-radio value="twoPages"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Dos diapositivas</ion-label>
+                            <ion-radio value="twoSlides"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Cuatro diapositivas</ion-label>
+                            <ion-radio value="fourSlides"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Orientación</ion-label>
+                    <ion-radio-group formControlName="orientation">
+                        <ion-item>
+                            <ion-label class="label">Vertical</ion-label>
+                            <ion-radio value="true"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Horizontal</ion-label>
+                            <ion-radio value="false"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Paso de Página</ion-label>
+                    <ion-radio-group formControlName="ringedPosition">
+                        <ion-item>
+                            <ion-label class="label">Por el lado corto</ion-label>
+                            <ion-radio value="false"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Por el lado largo</ion-label>
+                            <ion-radio value="true"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+
+                <div class="item">
+                    <ion-label class="subtitle">Acabados</ion-label>
+                    <ion-radio-group formControlName="ended">
+                        <ion-item>
+                            <ion-label class="label">Sin acabado</ion-label>
+                            <ion-radio value="no_ended"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Encuadernado</ion-label>
+                            <ion-radio value="bound"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">Grapado</ion-label>
+                            <ion-radio value="stapled"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">2 Agujeros</ion-label>
+                            <ion-radio value="twoHoles"></ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="label">4 Agujeros</ion-label>
+                            <ion-radio value="fourHoles"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </div>
+                <div class="item">
+                    <ion-button class="btn" shape="round" type="submit" [disabled]="this.formOrder.invalid">Enviar pedido</ion-button>
+                </div>
+            </ion-card-content>
+        </form>
+    </ion-card>
+</ion-content>
