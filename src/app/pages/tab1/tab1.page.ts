@@ -8,6 +8,7 @@ import {NavController} from '@ionic/angular';
 import {Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {LocalStorageService} from '../../services/local-storage.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-tab1',
@@ -22,9 +23,11 @@ export class Tab1Page {
   public user: _User;
   public isAdmin: boolean;
   private filter: any;
+  private noPrices: string;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router,
-              private navController: NavController, private route: ActivatedRoute, private localstorage: LocalStorageService) {
+              private navController: NavController, private route: ActivatedRoute, private localstorage: LocalStorageService,
+              private notS:NotificationsService) {
     
     this.ordersCopy = [];
     this.filter = {
@@ -34,6 +37,7 @@ export class Tab1Page {
 
     try{
       this.dataIncoming=this.route.snapshot.params.user;
+      this.noPrices = this.route.snapshot.params.precios;
 
       if(this.dataIncoming){
         this.user=this.dataIncoming;
@@ -50,6 +54,9 @@ export class Tab1Page {
 
     if (this.isAdmin) {
       this.getAllOrders();
+      if(this.noPrices){
+        await this.notS.presentToast(this.noPrices,'danger');
+      }
     } else {
       this.getOrders();
     }

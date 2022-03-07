@@ -59,9 +59,10 @@ export class AuthService {
 
   public async loadSession(): Promise<_User> {
     try{
-      let user = await this.storage.getItem('user');
-      if (user) {
-        user = JSON.parse(user);
+      let u = await this.storage.getItem('user');
+
+      if (u) {
+        let user = JSON.parse(u);
         this.gUser = user;
         return user;
       }
