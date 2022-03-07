@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Nuevo Pedido</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="card">
+        <ion-card-header>
+            <ion-card-title class="title">Nuevo pedido</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Usuario:</ion-label>
+                    <ion-label class="name" *ngIf="this.user">{{this.user.name}} </ion-label>
+                </div>
+            </div>
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Fecha de recogida:</ion-label>
+                    <ion-label class="date" *ngIf="this.dateFormatted">{{this.dateFormatted}}</ion-label>
+                    <div class="grid-item">
+                        <ion-button id="open-modal">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                        </ion-button>
+                        <ion-modal trigger="open-modal">
+                            <ng-template>
+                                <ion-content>
+                                    <ion-datetime #popoverDatetime presentation="date-time" locale="es-ES" [(ngModel)]="dateTime" (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+                                </ion-content>
+                            </ng-template>
+                        </ion-modal>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <ion-button class="btn" shape="round" type="submit">Subir documento</ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
