@@ -6,6 +6,7 @@ import { NavController, Platform } from '@ionic/angular';
 import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { getAuth, sendEmailVerification } from "firebase/auth";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   public userinfo:User;
   private isAndroid:boolean;
   public form:FormGroup
-
+  
   constructor(private platform:Platform, private authS:AuthService, private router:Router, private fb:FormBuilder,
     private notS:NotificationsService, private navCtrl:NavController) {
     this.isAndroid=this.platform.is("android");
@@ -48,10 +49,20 @@ export class LoginPage implements OnInit {
   }
 
   public async signin(){
+    
     try {
       let user:_User=await this.authS.login();
+      const auth=getAuth();
+      console.log("Current user: \n"+auth.currentUser)
+      if(auth.currentUser.emailVerified==true){
+        console.log("verificado")
+        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+      }else{
+        console.log("no verificado")
 
-      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+        this.router.navigate(['']);
+      }
+      
     } catch (err) {
       console.error(err);
     }
