@@ -14,7 +14,7 @@
             <div class="item">
                 <div class="parent">
                     <ion-label class="label">Usuario:</ion-label>
-                    <ion-label class="name" *ngIf="this.user">{{this.user.name}} </ion-label>
+                    <ion-label class="labelhidden" *ngIf="this.user">{{this.user.name}} </ion-label>
                 </div>
             </div>
             <div class="item">
@@ -37,7 +37,28 @@
             </div>
 
             <div class="item">
-                <ion-button class="btn" shape="round" type="submit">Subir documento</ion-button>
+                <ion-list>
+                    <ion-item-sliding *ngFor="let document of userDocuments; let i=index">
+                        <ion-item>
+                            <ion-label class="label">Documento {{i+1}}</ion-label>
+                        </ion-item>
+                    </ion-item-sliding>
+                </ion-list>
+            </div>
+
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Precio final: </ion-label>
+                    <ion-label class="labelhidden" *ngIf="this.finalPrice!=0">{{this.finalPrice}} €</ion-label>
+                </div>
+            </div>
+
+            <div class="item">
+                <ion-button class="btn" shape="round" (click)="addOrderModal()">Subir documento</ion-button>
+            </div>
+
+            <div class="orderbtn">
+                <ion-button class="btn" shape="round" [disabled]="this.userDocuments.length==0 || this.pickupDate.length==0" (click)="confirmOrder()">Confirmar pedido</ion-button>
             </div>
         </ion-card-content>
     </ion-card>
