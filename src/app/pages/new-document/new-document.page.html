@@ -1,16 +1,16 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Nuevo Pedido</ion-title>
+        <ion-title>Nuevo Documento</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-card class="card">
         <ion-card-header>
-            <ion-card-title class="title">Características del pedido</ion-card-title>
+            <ion-card-title class="title">Características del documento</ion-card-title>
         </ion-card-header>
 
-        <form [formGroup]="formOrder" (ngSubmit)="saveOrder()">
+        <form [formGroup]="formDocument" (ngSubmit)="saveOrder()">
             <ion-card-content>
                 <div class="item">
                     <ion-label class="subtitle">Copias</ion-label>
@@ -162,7 +162,10 @@
                     </ion-radio-group>
                 </div>
                 <div class="item">
-                    <ion-button class="btn" shape="round" type="submit" [disabled]="this.formOrder.invalid">Enviar pedido</ion-button>
+                    <ion-button class="btn" shape="round" type="submit" [disabled]="this.formDocument.invalid">Confirmar Documento</ion-button>
+                </div>
+                <div class="item">
+                    <ion-button class="exit" shape="round" color="danger" (click)="closeModal()">Descartar documento</ion-button>
                 </div>
             </ion-card-content>
         </form>
