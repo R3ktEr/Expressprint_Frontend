@@ -3,9 +3,9 @@ import { Document } from "./Document";
 import { _User } from "./User";
 
 export interface Order{
-    id:number;
-    pickupDate:Date;
-    orderDate:Date;
+    id?:number;
+    pickupDate:string;
+    orderDate:string;
     user: _User;
     payed:boolean;
     pickedUp:boolean;

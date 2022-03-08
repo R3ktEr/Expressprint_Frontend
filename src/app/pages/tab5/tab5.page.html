@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Nuevo Pedido</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="card">
+        <ion-card-header>
+            <ion-card-title class="title">Nuevo pedido</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Usuario:</ion-label>
+                    <ion-label class="labelhidden" *ngIf="this.user">{{this.user.name}} </ion-label>
+                </div>
+            </div>
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Fecha de recogida:</ion-label>
+                    <ion-label class="date" *ngIf="this.date">{{this.date}}</ion-label>
+                    <div class="grid-item">
+                        <ion-button id="open-modal">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                        </ion-button>
+                        <ion-modal trigger="open-modal">
+                            <ng-template>
+                                <ion-content>
+                                    <ion-datetime #popoverDatetime presentation="date-time" locale="es-ES" [(ngModel)]="dateTime" (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+                                </ion-content>
+                            </ng-template>
+                        </ion-modal>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <ion-list>
+                    <ion-item-sliding *ngFor="let document of userDocuments; let i=index">
+                        <ion-item>
+                            <ion-label class="label">Documento {{i+1}}</ion-label>
+                        </ion-item>
+                    </ion-item-sliding>
+                </ion-list>
+            </div>
+
+            <div class="item">
+                <div class="parent">
+                    <ion-label class="label">Precio final: </ion-label>
+                    <ion-label class="labelhidden" *ngIf="this.finalPrice!=0">{{this.finalPrice}} €</ion-label>
+                </div>
+            </div>
+
+            <div class="item">
+                <ion-button class="btn" shape="round" (click)="addOrderModal()">Subir documento</ion-button>
+            </div>
+
+            <div class="orderbtn">
+                <ion-button class="btn" shape="round" [disabled]="this.userDocuments.length==0 || this.pickupDate.length==0" (click)="confirmOrder()">Confirmar pedido</ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

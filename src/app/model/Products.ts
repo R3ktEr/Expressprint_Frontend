@@ -1,12 +1,12 @@
 import { EndedType, ImpressionsTypes, SheetSize, ThicknessType } from 'src/app/model/Enums';
 
 export interface PricesRequest {
-  colorList: Color[];
-  copyList: Copy[];
-  endedList: Ended[];
-  impressionPerSideList: ImpressionPerSide[];
-  sizeList: Size[];
-  thicknessList: Thickness[];
+  Color: Color[];
+  Copy: Copy[];
+  Endeds: Ended[];
+  ImpressionPerSide: ImpressionPerSide[];
+  Sizes: Size[];
+  Thickness: Thickness[];
 }
 
 export interface Color {
@@ -45,7 +45,7 @@ export interface Size {
   price: number;
   date?: Date;
   isValid?: boolean;
-  sizeSheet: SheetSize;
+  sizeSheet?: SheetSize;
   sheetSize: string;
 }
 
@@ -55,5 +55,5 @@ export interface Thickness {
   date?: Date;
   isValid?: boolean;
   thicknessType: ThicknessType;
-  description: string;
+  description?: string;
 }
