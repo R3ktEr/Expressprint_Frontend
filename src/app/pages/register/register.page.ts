@@ -38,7 +38,7 @@ export class RegisterPage implements OnInit {
       password: this.form.get("password").value,
       repeatedPassword: this.form.get("repeatedPassword").value
     }
-    console.log(userdata)
+    
 
     this.notS.presentLoading();
 
