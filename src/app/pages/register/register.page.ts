@@ -48,11 +48,16 @@ timer:Time;
         let user=await this.authS.singUpWithMail(userdata);
         await this.notS.presentToast("Usuario registrado con exito", "success")
        await sendEmailVerification(auth.currentUser).then(()=>{
-        this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+       
          if(auth.currentUser.emailVerified==true){
+          console.log(this.user.emailVerified);
+
           this.navCtrl.navigateBack(['private/tabs/tab1',{user: JSON.stringify(user)}]);
          }else{
-          console.log(this.user);
+
+          console.log(this.user.emailVerified);
+          this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+
           this.router.navigate([''])
 
          }

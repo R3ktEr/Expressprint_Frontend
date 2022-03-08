@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
     
     try {
       let user:_User=await this.authS.login();
+      console.log(user)
       const auth=getAuth();
       console.log("Current user: \n"+auth.currentUser)
       if(auth.currentUser.emailVerified==true){
