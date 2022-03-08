@@ -5,7 +5,7 @@ import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { getAuth, sendEmailVerification } from "firebase/auth";
-import { Time } from '@angular/common';
+
 
 
 
@@ -19,7 +19,7 @@ export class RegisterPage implements OnInit {
   public form:FormGroup
   public user:any;
  isUserEmailVerified:boolean;
-timer:Time;
+
   constructor(private router:Router, private fb:FormBuilder, private authS:AuthService, private notS:NotificationsService, 
     private navCtrl:NavController) { }
 
@@ -47,26 +47,15 @@ timer:Time;
         
         let user=await this.authS.singUpWithMail(userdata);
         await this.notS.presentToast("Usuario registrado con exito", "success")
-       await sendEmailVerification(auth.currentUser).then(()=>{
-       
+       await sendEmailVerification(auth.currentUser).then(()=>{ 
          if(auth.currentUser.emailVerified==true){
           console.log(this.user.emailVerified);
-
           this.navCtrl.navigateBack(['private/tabs/tab1',{user: JSON.stringify(user)}]);
-         }else{
-
-          console.log(this.user.emailVerified);
+         }else if(auth.currentUser.emailVerified==false){
           this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
-
           this.router.navigate([''])
-
          }
-      
        })
-       
-
-        
-       
       }catch(err){
         this.notS.presentToast("El correo introducido ya está siendo utilizado", "warning");
         console.log(err);

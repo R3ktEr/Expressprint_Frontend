@@ -53,16 +53,8 @@ export class LoginPage implements OnInit {
     try {
       let user:_User=await this.authS.login();
       console.log(user)
-      const auth=getAuth();
-      console.log("Current user: \n"+auth.currentUser)
-      if(auth.currentUser.emailVerified==true){
-        console.log("verificado")
         this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
-      }else{
-        console.log("no verificado")
-
-        this.router.navigate(['']);
-      }
+      
       
     } catch (err) {
       console.error(err);
@@ -74,7 +66,9 @@ export class LoginPage implements OnInit {
   }
 
   public async loginWithMail() {
-    let userdata={
+    const auth = getAuth();
+   
+    let userdata={     
       email: this.form.get("email").value,
       password: this.form.get("password").value
     }
@@ -83,7 +77,13 @@ export class LoginPage implements OnInit {
 
     try{
       let user:_User=await this.authS.login(userdata);
-      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user), tab:'login'}]);
+      if(auth.currentUser.emailVerified==true){
+        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user), tab:'login'}]);
+      }else{
+        this.notS.presentToast("Usuario no verificado", "warning");
+        this.router.navigate(['']);
+      }
+     
     }catch(err){
       this.notS.presentToast("Contraseña incorrecta", "danger");
     }
