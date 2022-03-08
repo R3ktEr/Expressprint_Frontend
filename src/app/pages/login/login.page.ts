@@ -6,6 +6,7 @@ import { NavController, Platform } from '@ionic/angular';
 import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { getAuth, sendEmailVerification } from "firebase/auth";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   public userinfo:User;
   private isAndroid:boolean;
   public form:FormGroup
-
+  
   constructor(private platform:Platform, private authS:AuthService, private router:Router, private fb:FormBuilder,
     private notS:NotificationsService, private navCtrl:NavController) {
     this.isAndroid=this.platform.is("android");
@@ -48,10 +49,13 @@ export class LoginPage implements OnInit {
   }
 
   public async signin(){
+    
     try {
       let user:_User=await this.authS.login();
-
-      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+      console.log(user)
+        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+      
+      
     } catch (err) {
       console.error(err);
     }
@@ -62,7 +66,9 @@ export class LoginPage implements OnInit {
   }
 
   public async loginWithMail() {
-    let userdata={
+    const auth = getAuth();
+   
+    let userdata={     
       email: this.form.get("email").value,
       password: this.form.get("password").value
     }
@@ -71,7 +77,13 @@ export class LoginPage implements OnInit {
 
     try{
       let user:_User=await this.authS.login(userdata);
-      this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user), tab:'login'}]);
+      if(auth.currentUser.emailVerified==true){
+        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user), tab:'login'}]);
+      }else{
+        this.notS.presentToast("Usuario no verificado", "warning");
+        this.router.navigate(['']);
+      }
+     
     }catch(err){
       this.notS.presentToast("Contraseña incorrecta", "danger");
     }

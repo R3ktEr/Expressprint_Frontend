@@ -6,6 +6,10 @@ import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { getAuth, sendEmailVerification } from "firebase/auth";
+
+
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -15,6 +19,7 @@ export class RegisterPage implements OnInit {
 
   public form:FormGroup
   public user:any;
+ isUserEmailVerified:boolean;
 
   constructor(private router:Router, private fb:FormBuilder, private authS:AuthService, private notS:NotificationsService, 
     private navCtrl:NavController) { }
@@ -34,7 +39,7 @@ export class RegisterPage implements OnInit {
       password: this.form.get("password").value,
       repeatedPassword: this.form.get("repeatedPassword").value
     }
-    console.log(userdata)
+    
 
     this.notS.presentLoading();
 
@@ -44,13 +49,16 @@ export class RegisterPage implements OnInit {
         let user=await this.authS.singUpWithMail(userdata);
 
         await this.notS.presentToast("Usuario registrado con exito", "success")
-       await sendEmailVerification(auth.currentUser).then(()=>{
-        this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+       await sendEmailVerification(auth.currentUser).then(()=>{ 
+         if(auth.currentUser.emailVerified==true){
+          console.log(this.user.emailVerified);
+          this.navCtrl.navigateBack(['private/tabs/tab1',{user: JSON.stringify(user)}]);
+         }else if(auth.currentUser.emailVerified==false){
+          this.notS.presentToast("Se ha enviado un correo de verificacion", "warning");
+          this.router.navigate([''])
+         }
        })
-       
 
-        this.navCtrl.navigateForward(['private/tabs/tab1',{user: JSON.stringify(user)}]);
-       
       }catch(err){
         this.notS.presentToast("El correo introducido ya está siendo utilizado", "warning");
         console.log(err);
@@ -65,4 +73,5 @@ export class RegisterPage implements OnInit {
   public goBack() {
     this.router.navigate(['/']);
   }
+
 }
