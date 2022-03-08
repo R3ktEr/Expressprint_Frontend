@@ -13,13 +13,16 @@
         <form [formGroup]="formDocument" (ngSubmit)="saveOrder()">
             <ion-card-content>
                 <div class="item">
+                    <ion-button (click)="select()">Seleccionar documento: </ion-button>
+                </div>
+
+                <div class="item">
                     <ion-label class="subtitle">Copias</ion-label>
 
                     <div class="parent">
                         <ion-label class="label">Numero de copias: </ion-label>
                         <ion-input type="number" class="input" formControlName="ncopies" color="tertiary" placeholder="Ej: 1"></ion-input>
                     </div>
-
                 </div>
 
                 <div class="item">

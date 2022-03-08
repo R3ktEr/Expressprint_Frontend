@@ -26,10 +26,12 @@ export class Tab5Page implements OnInit {
   private pickupDate:string;
   private orderDate:string;
   private date:string;
+  private formData:FormData=new FormData(); //TODO: Revisar direcciones de memoria
 
   public dateTime:string;
   public userDocuments:Document[];
   public finalPrice:number;
+
 
   constructor(private authS:AuthService, private notS:NotificationsService, private modalController: ModalController, 
     @Inject(LOCALE_ID) private locale: string, private orderService:OrderService) {
@@ -83,7 +85,12 @@ export class Tab5Page implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        let document:Document= data['data'];
+        let d=data['data'];
+
+        let document:Document=d[0];
+        let formData:FormData=d[1];
+
+        this.formData.append("files", formData.get("files"))
 
         if(document){
           this.userDocuments.push(document)
@@ -108,6 +115,19 @@ export class Tab5Page implements OnInit {
         user:this.user,
         documents:this.userDocuments
       }
+
+      //TODO: Terminar esta mierda
+
+      this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise().then(map=>{
+
+        map.forEach((value,key,map)=>{
+          let i:number=0;
+          value.forEach(val=>{
+            this.userDocuments[i].url=val;
+            i++;
+          })
+        })
+      })
 
       console.log(order)
 
