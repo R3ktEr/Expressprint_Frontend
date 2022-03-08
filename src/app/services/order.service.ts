@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -34,6 +34,12 @@ export class OrderService {
     return o;
   }
 
+  public uploadDocument(formData: FormData, mail: string, user: string): Observable<Map<string, string[]>> {
+    formData.append('user', user);
+    formData.append('mail', mail);
+    return this.http.post<Map<string, string[]>>(`${environment.serverUrl}orders`, formData);
+  }
+
   public updateOrder(order:Order):Observable<Order> {
     let o=this.http.put<Order>(`${environment.serverUrl}orders`,order)
 
@@ -41,6 +47,7 @@ export class OrderService {
   }
 
   public deleteOrderById(id_user:number, id_order:number):Observable<string> {
+
     let isDeleted=this.http.delete<string>(`${environment.serverUrl}orders/${id_user}/${id_order}`)
 
     return isDeleted;

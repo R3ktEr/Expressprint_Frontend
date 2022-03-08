@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, Platform } from '@ionic/angular';
 import { Document } from 'src/app/model/Document';
 import { Color, Copy, Ended, ImpressionPerSide, PricesRequest, Size, Thickness } from 'src/app/model/Products';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { PriceService } from 'src/app/services/prices.service';
+import { Plugins } from '@capacitor/core'; 
+const { FileSelector } = Plugins 
+import 'capacitor-file-selector' //TODO: Comentar antes de buildear en android
+import { OrderService } from 'src/app/services/order.service';
+import { _User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-new-document',
@@ -16,9 +21,11 @@ import { PriceService } from 'src/app/services/prices.service';
 export class NewDocumentPage implements OnInit {
   public formDocument:FormGroup
   private actualPrices:PricesRequest
+  private formData:FormData;
 
   constructor(private fb:FormBuilder, private pricesService:PriceService, private notS:NotificationsService, private authS:AuthService, 
-    private navCtrl:NavController, private modalController:ModalController, private storage: LocalStorageService) {
+    private navCtrl:NavController, private modalController:ModalController, private storage: LocalStorageService, private platform:Platform,
+    private orderService:OrderService) {
     this.formDocument=this.fb.group({
       ncopies:["", Validators.required],
       color:["", Validators.required],
@@ -108,7 +115,7 @@ export class NewDocumentPage implements OnInit {
         impressionPerSide:impressionPerSide,
         isVertical:this.formDocument.get("orientation").value,
         ringedPosition:this.formDocument.get("ringedPosition").value,
-        finishType:ended
+        finishType:ended,
   
         //Order
         //Comment
@@ -125,13 +132,69 @@ export class NewDocumentPage implements OnInit {
   
       await this.notS.dismissLoading()
   
-      this.modalController.dismiss(newDocument);
+      this.modalController.dismiss([newDocument, this.formData]);
     }
   }
 
   public async closeModal(){
     if(await this.notS.presentAlertConfirm("Descartar Documento", "¿Está seguro de que quiere descartar el documento actual?", "Si", "No")) {
       this.modalController.dismiss();
+    }
+  }
+
+  async select()
+  {
+    let multiple_selection = false
+    //let ext = [".jpg",".png",".pdf",".jpeg"] // list of extensions
+    //let ext = ["MP3", "ImaGes"] // combination of extensions or category 
+    //let ext = ["videos", "audios", "images"] // list of all category
+    let ext = ["*"] // Allow any file type
+    ext = ext.map(v => v.toLowerCase());
+    let formData = new FormData();
+    let selectedFile = await FileSelector.fileSelector({
+      multiple_selection: multiple_selection,
+      ext: ext
+    })
+
+    if(this.platform.is("android"))
+    {
+      let paths = JSON.parse(selectedFile.paths)
+      let original_names = JSON.parse(selectedFile.original_names)
+      let extensions = JSON.parse(selectedFile.extensions)
+      for (let index = 0; index < paths.length; index++) {
+          const file = await fetch(paths[index]).then((r) => r.blob());
+          formData.append(
+            "files",
+            file,
+            original_names[index] + extensions[index]
+          );
+        }
+    }
+    else if(this.platform.is("ios"))
+    {
+      for (let index = 0; index < selectedFile.paths.length; index++) {
+        const file = await fetch(selectedFile.paths[index]).then((r) => r.blob());
+        formData.append(
+          "files",
+          file,
+          selectedFile.original_names[index] + selectedFile.extensions[index]
+        );
+      }
+    }
+    else
+    {
+      FileSelector.addListener("onFilesSelected", async (data:FileList) => {
+            for(var i = 0; i < data.length; i++)
+            {
+              formData.append(
+                "files", //param del endpoint del back
+                data.item(i),
+                data.item(i).name
+              );
+            }
+
+            this.formData=formData;
+        }); 
     }
   }
 }
