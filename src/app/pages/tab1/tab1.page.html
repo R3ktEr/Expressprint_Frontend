@@ -1,24 +1,19 @@
-<<ion-header [translucent]="true">
+<ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>
             Pedidos
         </ion-title>
-        <ion-buttons slot="secondary">
-            <ion-button fill="outline" (click)="logout()">
-                <ion-icon name="log-out-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
-    <ion-list *ngIf="isAdmin">
-        <ion-item>
+    <ion-list-header *ngIf="isAdmin">
+        <ion-item style="display: inline-block;">
             <ion-label>No pagados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotPayed')"></ion-checkbox>
         </ion-item>
-        <ion-item>
+        <ion-item style="display: inline-block;">
             <ion-label>No entregados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotDelivered')"></ion-checkbox>
         </ion-item>
-    </ion-list>
+    </ion-list-header>
     </ion-header>
 
     <ion-content [fullscreen]="true">

@@ -145,11 +145,200 @@
     margin-top: 30px;
     text-align: center;
 }
+/*$accentcolor: #3880ff;
+$lightcolor: #f4f5f8;
+$darkcolor: #222428;
 
-btn sc-ion-input-md-h sc-ion-input-md-s ion-color ion-color-primary md hydrated {
+
+div .item ion-label{
+  position: relative;
+  display: block;
+  float: left;
+  margin-left: 25px;
+  margin-top: 5px;
+
+  ion-radio-group ion-item ion-label .label{
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    text-align: center;
+    float: left;
+    width: 150px;
+    background: lighten($accentcolor, 30%);
+    color: $darkcolor;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: 2px solid lighten($accentcolor, 20%);
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &:after,
+    &:before {
+      content: "";
+      position: absolute;
+      right: 11px;
+      top: 11px;
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background: lighten($accentcolor, 15%);
+    }
+
+    &:before {
+      background: transparent;
+      transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+      z-index: 2;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: 13px;
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS4zIDEzLjIiPiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE0LjcuOGwtLjQtLjRhMS43IDEuNyAwIDAgMC0yLjMuMUw1LjIgOC4yIDMgNi40YTEuNyAxLjcgMCAwIDAtMi4zLjFMLjQgN2ExLjcgMS43IDAgMCAwIC4xIDIuM2wzLjggMy41YTEuNyAxLjcgMCAwIDAgMi40LS4xTDE1IDMuMWExLjcgMS43IDAgMCAwLS4yLTIuM3oiIGRhdGEtbmFtZT0iUGZhZCA0Ii8+PC9zdmc+) !important;
+    }
+  }
+
+  ion-radio-group ion-item ion-radio {
+    display: none;
+    position: absolute;
+    width: 100%;
+    appearance: none;
+
+    &:checked + ion-label {
+      background: lighten($accentcolor, 15%);
+      animation-name: blink;
+      animation-duration: 1s;
+      border-color: $accentcolor;
+
+      &:after {
+        background: $accentcolor;
+      }
+
+      &:before {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }
+
+@keyframes blink {
+  0% {
+    background-color: lighten($accentcolor, 15%);
+  }
+  10% {
+    background-color: lighten($accentcolor, 15%);
+  }
+  11% {
+    background-color: lighten($accentcolor, 20%);
+  }
+  29% {
+    background-color: lighten($accentcolor, 20%);
+  }
+  30% {
+    background-color: lighten($accentcolor, 15%);
+  }
+  50% {
+    background-color: lighten($accentcolor, 20%);
+  }
+  45% {
+    background-color: lighten($accentcolor, 15%);
+  }
+  50% {
+    background-color: lighten($accentcolor, 20%);
+  }
+  100% {
+    background-color: lighten($accentcolor, 15%);
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ion-item {
+  display: inline-block;
+  height: 4rem;
+  padding-top: 2rem;
+}
+
+ion-item ion-radio {
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  display: block;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0.25rem 0.1rem;
+  width: 100%;
+}
+
+ion-radio:invalid {
+  box-shadow: none;
+}
+
+ion-item ion-radio:focus {
+  outline: none;
+}
+
+ion-item ion-label {
+  display: inline-block;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0;
+  pointer-events: none;
+  position: relative;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+ion-item ion-label::before {
+  content: attr(data-content);
+  position: relative;
+  transition: all 0.2s ease;
+  will-change: font-size, top;
+}
+
+ion-item ion-label::after {
+  bottom: 0.9rem;
+  content: "";
+  height: 0.3rem;
+  left: 50%;
+  position: absolute;
+  transition: all 0.2s ease;
+  width: 0;
+  will-change: width, left;
+}
+
+ion-item ion-label::before,
+ion-item ion-radio:focus ~ ion-label::before {
+  font-size: 0.75rem;
+  top: -3.25rem;
+}
+
+ion-item ion-radio:focus ~ ion-label::after {
+  left: 0%;
+  width: 100%;
+}
+
+ion-item ion-radio:invalid ~ ion-label::before {
+  font-size: 1rem;
+  top: -2rem;
+}
+
+ion-radio {
+  border-bottom: 0.1rem solid $accentcolor;
+  color: $accentcolor
+}
+
+ion-label::after {
+  background: $accentcolor
+}
+
+ion-label::before,
+ion-radio[required]:focus ~ ion-label::before {
+  color: $accentcolor
+}
+
+ion-radio[required]invalid ~ ion-label::before {
+  color: $accentcolor;
+}
+*/

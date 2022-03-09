@@ -12,16 +12,16 @@ export class PriceService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public getAllPrices(): Observable<PricesRequest> {
-    return this.http.get<PricesRequest>(`${environment.serverUrl}prices`);
+  public getAllPrices(): Observable<PricesRequest[]> {
+    return this.http.get<PricesRequest[]>(`${environment.serverUrl}prices`);
   }
 
-  public changeAllPrices(newPrices: PricesRequest): Observable<PricesRequest> {
-    return this.http.put<PricesRequest>(`${environment.serverUrl}prices`, newPrices);
+  public changeAllPrices(newPrices: PricesRequest): Observable<PricesRequest[]> {
+    return this.http.put<PricesRequest[]>(`${environment.serverUrl}prices`, newPrices);
   }
 
-  public getAllHistoricalPrices(offset: number): Observable<PricesRequest> {
-    return this.http.get<PricesRequest>(`${environment.serverUrl}prices/history/${offset}`);
+  public getAllHistoricalPrices(offset: number): Observable<PricesRequest[]> {
+    return this.http.get<PricesRequest[]>(`${environment.serverUrl}prices/history/${offset}`);
   }
 
 }

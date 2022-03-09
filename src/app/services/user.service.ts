@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {_User} from '../model/User';
-import {HttpClient, HttpParams, HttpStatusCode} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,10 @@ import { Observable } from 'rxjs';
 
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public createUpdateUser(user:_User): Observable<_User> {
-    let u=this.http.post<_User>(`${environment.serverUrl}user`,user);
-
-    return u;
+  public createUpdateUser(user: _User): Observable<_User> {
+    return this.http.post<_User>(`${environment.serverUrl}user`,user);
   }
 
 

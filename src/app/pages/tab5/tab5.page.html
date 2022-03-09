@@ -58,7 +58,7 @@
             </div>
 
             <div class="orderbtn">
-                <ion-button class="btn" shape="round" [disabled]="this.userDocuments.length==0 || this.pickupDate.length==0" (click)="confirmOrder()">Confirmar pedido</ion-button>
+                <ion-button class="btn" shape="round" [disabled]="this.userDocuments.length===0 || this.pickupDate.length===0" (click)="confirmOrder()">Confirmar pedido</ion-button>
             </div>
         </ion-card-content>
     </ion-card>

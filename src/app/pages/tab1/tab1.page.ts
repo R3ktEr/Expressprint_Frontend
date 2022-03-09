@@ -16,19 +16,17 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  public user: _User;
+  public isAdmin: boolean;
   public orders: Order[];
   private ordersCopy: Order[];
   private subscription: Subscription;
-  private dataIncoming: any;
-  public user: _User;
-  public isAdmin: boolean;
+  private readonly dataIncoming: any;
   private filter: any;
-  private noPrices: string;
+  private readonly noPrices: string;
 
-  constructor(private orderService: OrderService, private authS: AuthService, private router: Router,
-              private navController: NavController, private route: ActivatedRoute, private localstorage: LocalStorageService,
-              private notS:NotificationsService) {
-    
+  constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
+              private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService) {
     this.ordersCopy = [];
     this.filter = {
       payed: false,
@@ -49,7 +47,7 @@ export class Tab1Page {
   }
 
   async ionViewWillEnter() {
-    this.user=await this.authS.loadSession()
+    this.user=await this.authS.loadSession();
     this.isAdmin=this.user.admin;
 
     if (this.isAdmin) {
@@ -63,7 +61,7 @@ export class Tab1Page {
   }
 
   public getOrders(): void {
-    console.log(this.user)
+    console.log(this.user);
     this.subscription = this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
       this.orders = value;
       this.ordersCopy = [];

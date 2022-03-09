@@ -1,7 +1,6 @@
-$accentcolor: #fcae2c;
-$lightcolor: #fff;
-$darkcolor: #444;
-h1 {
+$accentcolor: #3880ff;
+$lightcolor: #f4f5f8;
+$darkcolor: #222428;h1 {
     margin-left: 25px;
 }
 
@@ -190,21 +189,21 @@ form {
 }
 
 .material-textfield.blue input {
-    border-bottom: 0.1rem solid #fcae2c;
-    color: #fcae2c;
+    border-bottom: 0.1rem solid $accentcolor;
+    color: $accentcolor
 }
 
 .material-textfield.blue label::after {
-    background: #fcae2c;
+    background: $accentcolor
 }
 
 .material-textfield.blue label::before,
 .material-textfield.blue input[required]:focus~label::before {
-    color: #fcae2c;
+    color: $accentcolor
 }
 
 .material-textfield.blue input:invalid~label::before {
-    color: #fcae2c;
+    color: $accentcolor;
 }
 
 .material-textfield.red input {
