@@ -48,7 +48,7 @@ export class Tab5Page implements OnInit {
 
     this.user=await this.authS.loadSession();
 
-    this.orderDate=formatDate(Date.now(), "YYYY-MM-ddTHH:mm:SS", this.locale)
+    this.orderDate=formatDate(Date.now(), "YYYY-MM-ddTHH:mm:ss", this.locale)
 
     await this.notS.dismissLoading();
   }
@@ -135,7 +135,7 @@ export class Tab5Page implements OnInit {
         this.userDocuments[i].url = value;
         i++; 
       });
-      
+
       console.log(order);
 
       const orderUploaded = await this.orderService.createOrder(order).toPromise();
