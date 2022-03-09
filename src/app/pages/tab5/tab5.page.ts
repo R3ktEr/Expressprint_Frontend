@@ -35,7 +35,7 @@ export class Tab5Page implements OnInit {
 
   constructor(private authS:AuthService, private notS:NotificationsService, private modalController: ModalController, 
     @Inject(LOCALE_ID) private locale: string, private orderService:OrderService) {
-    this.userDocuments=new Array()
+    this.userDocuments=[]
     this.finalPrice=0;
     this.pickupDate="";
   }
@@ -104,7 +104,9 @@ export class Tab5Page implements OnInit {
 
   async confirmOrder() {
     if(await this.notS.presentAlertConfirm("Confirmacion", "¿Confirmar pedido?", "Si", "No")){
-      //Crear el objeto order y subirlo a la base de datos
+      
+      await this.notS.presentLoading()
+
       let order:Order={
         finalPrice:this.finalPrice,
         orderDate:this.orderDate,
@@ -116,24 +118,31 @@ export class Tab5Page implements OnInit {
         documents:this.userDocuments
       }
 
-      //TODO: Terminar esta mierda
+      let documentLinks= await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
+      console.log(documentLinks.constructor.name)
+      
+      let links:string[]
 
-      this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise().then(map=>{
+      Object.keys(documentLinks).forEach(key=>{
+        console.log("key ", key , " value : ", documentLinks[key])
 
-        map.forEach((value,key,map)=>{
-          let i:number=0;
-          value.forEach(val=>{
-            this.userDocuments[i].url=val;
-            i++;
-          })
-        })
+        links=documentLinks[key]
       })
 
-      console.log(order)
+      links.forEach((value) => {
+        let i = 0;
+        
+        this.userDocuments[i].url = value;
+        i++; 
+      });
+      
+      console.log(order);
 
-      await this.orderService.createOrder(order).toPromise()
+      const orderUploaded = await this.orderService.createOrder(order).toPromise();
+      console.log(orderUploaded);
+      console.log('Pedido subido');
 
-      console.log("Pedido subido")
+      await this.notS.dismissLoading()
     }
   }
 }

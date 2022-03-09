@@ -34,10 +34,10 @@ export class OrderService {
     return o;
   }
 
-  public uploadDocument(formData: FormData, mail: string, user: string): Observable<Map<string, string[]>> {
+  public uploadDocument(formData: FormData, user: string, mail: string): Observable<Map<string, string[]>> {
     formData.append('user', user);
     formData.append('mail', mail);
-    return this.http.post<Map<string, string[]>>(`${environment.serverUrl}orders`, formData);
+    return this.http.post<Map<string, string[]>>(`${environment.serverUrl}orders/upload`, formData);
   }
 
   public updateOrder(order:Order):Observable<Order> {
