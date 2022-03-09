@@ -19,3 +19,6 @@ project(':capacitor-storage').projectDir = new File('../node_modules/@capacitor/
 
 include ':codetrix-studio-capacitor-google-auth'
 project(':codetrix-studio-capacitor-google-auth').projectDir = new File('../node_modules/@codetrix-studio/capacitor-google-auth/android')
+
+include ':capacitor-file-selector'
+project(':capacitor-file-selector').projectDir = new File('../node_modules/capacitor-file-selector/android')
