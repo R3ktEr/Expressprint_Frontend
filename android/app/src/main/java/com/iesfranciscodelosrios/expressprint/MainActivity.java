@@ -13,6 +13,6 @@ public class MainActivity extends BridgeActivity {
         //Aqui los plugin no oficiales
         //registerPlugin(StoragePlugin.class);
         registerPlugin(GoogleAuth.class);
-        registerPlugin(FileSelector.class)
+        registerPlugin(FileSelector.class);
     }
 }

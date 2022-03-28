@@ -58,7 +58,9 @@ export class Tab1Page {
         await this.notS.presentToast(this.noPrices,'danger');
       }
     } else {
+      await this.notS.presentLoading()
       this.getOrders();
+      await this.notS.dismissLoading()
     }
   }
 

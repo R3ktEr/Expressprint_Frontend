@@ -10,6 +10,7 @@ import { Order } from 'src/app/model/Order';
 import { formatDate } from '@angular/common';
 import { Document } from 'src/app/model/Document';
 import { OrderService } from 'src/app/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab5',
@@ -34,7 +35,7 @@ export class Tab5Page implements OnInit {
 
 
   constructor(private authS:AuthService, private notS:NotificationsService, private modalController: ModalController, 
-    @Inject(LOCALE_ID) private locale: string, private orderService:OrderService) {
+    @Inject(LOCALE_ID) private locale: string, private orderService:OrderService, private router:Router) {
     this.userDocuments=[]
     this.finalPrice=0;
     this.pickupDate="";
@@ -143,6 +144,10 @@ export class Tab5Page implements OnInit {
       console.log('Pedido subido');
 
       await this.notS.dismissLoading()
+
+      await this.notS.presentToast("¡Pedido realizado!", "success")
+
+      await this.router.navigate(['private/tabs/tab1'])
     }
   }
 }

@@ -19,8 +19,9 @@ import { _User } from 'src/app/model/User';
   styleUrls: ['./new-document.page.scss'],
 })
 export class NewDocumentPage implements OnInit {
-  public formDocument:FormGroup
-  private actualPrices:PricesRequest
+  public formDocument:FormGroup;
+  public docName:string;
+  private actualPrices:PricesRequest;
   private formData:FormData;
 
   constructor(private fb:FormBuilder, private pricesService:PriceService, private notS:NotificationsService, private authS:AuthService, 
@@ -191,6 +192,8 @@ export class NewDocumentPage implements OnInit {
                 data.item(i),
                 data.item(i).name
               );
+
+              this.docName=data.item(i).name;
             }
 
             this.formData=formData;

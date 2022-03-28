@@ -23,12 +23,13 @@
 
 .login_image {
     display: block;
-    block-size: 30%;
+    block-size: 10%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
-    max-width: 30%;
+    max-width: 200px;
     max-height: 30%;
+    margin-top: 20px;
 }
 
 .card {
@@ -81,4 +82,12 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
 }

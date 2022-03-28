@@ -43,6 +43,10 @@
     margin-left: 10px;
 }
 
+.label.ncopies {
+    margin-left: 25px;
+}
+
 .input {
     display: inline-block;
     text-align: center;
@@ -75,16 +79,6 @@
     text-decoration: solid;
 }
 
-.subtitle {
-    display: block;
-    margin: auto;
-    font-family: 'CrimsonPro-VariableFont';
-    font-size: 28px;
-    text-align: center;
-    text-decoration: solid;
-    color: black;
-}
-
 .item {
     display: block;
     height: auto;
@@ -100,7 +94,7 @@
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    max-width: 700px;
+    max-width: inherit;
 }
 
 .label {
@@ -146,10 +140,15 @@
     text-align: center;
 }
 
-btn sc-ion-input-md-h sc-ion-input-md-s ion-color ion-color-primary md hydrated {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    text-align: center;
+.doc {
+    display: inline-block;
+    font-size: 10px;
+    vertical-align: top;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+.labelhidden {
+    margin: auto;
+    margin-right: unset;
 }
