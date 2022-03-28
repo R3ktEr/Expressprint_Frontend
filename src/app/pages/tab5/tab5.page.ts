@@ -86,18 +86,20 @@ export class Tab5Page implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        let d=data['data'];
-
-        let document:Document=d[0];
-        let formData:FormData=d[1];
-
-        this.formData.append("files", formData.get("files"))
-
-        if(document){
-          this.userDocuments.push(document)
+        if(data.data){
+          let d=data['data'];
+  
+          let document:Document=d[0];
+          let formData:FormData=d[1];
+  
+          this.formData.append("files", formData.get("files"))
+  
+          if(document){
+            this.userDocuments.push(document)
+          }
+        
+          this.calculateFinalPrice()
         }
-      
-        this.calculateFinalPrice()
     });
 
     await modal.present();
