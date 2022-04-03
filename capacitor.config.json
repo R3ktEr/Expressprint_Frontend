@@ -12,16 +12,5 @@
             "serverClientId": "921786245072-15raqampr57qi34d282ts8oevih9okcr.apps.googleusercontent.com",
             "forceCodeForRefreshToken": true
         }
-    },
-    "cordova": {
-        "preferences": {
-            "ScrollEnabled": "false",
-            "BackupWebStorage": "none",
-            "SplashMaintainAspectRatio": "true",
-            "FadeSplashScreenDuration": "300",
-            "SplashShowOnlyFirstTime": "false",
-            "SplashScreen": "screen",
-            "SplashScreenDelay": "3000"
-        }
     }
 }

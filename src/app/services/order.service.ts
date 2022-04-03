@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Order } from '../model/Order';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {Order} from '../model/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +10,20 @@ import { Order } from '../model/Order';
 export class OrderService {
   constructor(private http: HttpClient) { }
 
-  public getAllOrders():Observable<Order[]> {
-    let orders=this.http.get<Order[]>(`${environment.serverUrl}orders`)
-
-    return orders;
+  public getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${environment.serverUrl}orders`);
   }
 
-  public getOrderById(id_user:number, id_order:number):Observable<Order> {
-    let order=this.http.get<Order>(`${environment.serverUrl}orders/${id_user}/${id_order}`)
-
-    return order;
+  public getOrderById(idUser: number, idOrder: number): Observable<Order> {
+    return this.http.get<Order>(`${environment.serverUrl}orders/${idUser}/${idOrder}`);
   }
 
-  public getOrdersByUser(id_user:number): Observable<Order[]> {
-    let order=this.http.get<Order[]>(`${environment.serverUrl}orders/${id_user}`)
-
-    return order;
+  public getOrdersByUser(idUser: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${environment.serverUrl}orders/${idUser}`);
   }
 
-  public createOrder(order:Order):Observable<Order> {
-    let o=this.http.post<Order>(`${environment.serverUrl}orders`, order)
-
-    return o;
+  public createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(`${environment.serverUrl}orders`, order);
   }
 
   public uploadDocument(formData: FormData, user: string, mail: string): Observable<Map<string, string[]>> {
@@ -40,16 +32,11 @@ export class OrderService {
     return this.http.post<Map<string, string[]>>(`${environment.serverUrl}orders/upload`, formData);
   }
 
-  public updateOrder(order:Order):Observable<Order> {
-    let o=this.http.put<Order>(`${environment.serverUrl}orders`,order)
-
-    return o;
+  public updateOrder(order: Order): Observable<Order> {
+    return this.http.put<Order>(`${environment.serverUrl}orders`,order);
   }
 
-  public deleteOrderById(id_user:number, id_order:number):Observable<string> {
-
-    let isDeleted=this.http.delete<string>(`${environment.serverUrl}orders/${id_user}/${id_order}`)
-
-    return isDeleted;
+  public deleteOrderById(idUser: number, idOrder: number): Observable<string> {
+    return this.http.delete<string>(`${environment.serverUrl}orders/${idUser}/${idOrder}`);
   }
 }
