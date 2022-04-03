@@ -22,6 +22,11 @@ export class AppComponent {
     this.menu.close();
   }
 
+  public async goToPrices(){
+    this.router.navigate(['prices']);
+    this.menu.close();
+  }
+
   public disableMenu() {
     if(this.router.url=="/"){
       this.menuDisabled=true;

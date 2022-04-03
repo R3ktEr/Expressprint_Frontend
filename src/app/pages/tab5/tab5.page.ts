@@ -1,14 +1,16 @@
-import {Component, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
-import {_User} from 'src/app/model/User';
-import {AuthService} from 'src/app/services/auth.service';
-import {NotificationsService} from 'src/app/services/notifications.service';
-import {IonDatetime, ModalController} from '@ionic/angular';
-import {format, parseISO} from 'date-fns';
-import {NewDocumentPage} from '../new-document/new-document.page';
-import {Order} from 'src/app/model/Order';
-import {formatDate} from '@angular/common';
-import {Document} from 'src/app/model/Document';
-import {OrderService} from 'src/app/services/order.service';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { _User } from 'src/app/model/User';
+import { AuthService } from 'src/app/services/auth.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { ViewChild } from '@angular/core';
+import { IonDatetime, ModalController } from '@ionic/angular';
+import { format, parseISO } from 'date-fns';
+import { NewDocumentPage } from '../new-document/new-document.page';
+import { Order } from 'src/app/model/Order';
+import { formatDate } from '@angular/common';
+import { Document } from 'src/app/model/Document';
+import { OrderService } from 'src/app/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab5',
@@ -31,11 +33,11 @@ export class Tab5Page implements OnInit {
   private formData: FormData = new FormData();
 
 
-  constructor(private authS: AuthService, private notS: NotificationsService, private modalController: ModalController,
-              @Inject(LOCALE_ID) private locale: string, private orderService: OrderService) {
-    this.userDocuments = [];
-    this.finalPrice = 0;
-    this.pickupDate = '';
+  constructor(private authS:AuthService, private notS:NotificationsService, private modalController: ModalController, 
+    @Inject(LOCALE_ID) private locale: string, private orderService:OrderService, private router:Router) {
+    this.userDocuments=[]
+    this.finalPrice=0;
+    this.pickupDate="";
   }
 
   ngOnInit() {
@@ -81,47 +83,68 @@ export class Tab5Page implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        const d = data.data;
+        if(data.data){
+          const d = data.data;
 
-        const document: Document = d[0];
-        const formData: FormData = d[1];
+          const document: Document = d[0];
+          const formData: FormData = d[1];
 
-        this.formData.append('files', formData.get('files'));
-        if (document) {
-          this.userDocuments.push(document);
+          this.formData.append('files', formData.get('files'));
+          if (document) {
+            this.userDocuments.push(document);
+          }
+          this.calculateFinalPrice();
         }
-        this.calculateFinalPrice();
       });
 
     await modal.present();
   }
 
   async confirmOrder() {
-    if (await this.notS.presentAlertConfirm('Confirmacion', '¿Confirmar pedido?', 'Si', 'No')) {
-      const order: Order = {
-        finalPrice: this.finalPrice,
-        orderDate: this.orderDate,
-        payed: false,
-        pickedUp: false,
-        pickupDate: this.pickupDate,
-        ready: false,
-        user: this.user,
-        documents: this.userDocuments
-      };
+    if(await this.notS.presentAlertConfirm("Confirmacion", "¿Confirmar pedido?", "Si", "No")){
+      
+      await this.notS.presentLoading()
 
-      const documentLinks = await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
-      documentLinks.forEach((value) => {
+      let order:Order={
+        finalPrice:this.finalPrice,
+        orderDate:this.orderDate,
+        payed:false,
+        pickedUp:false,
+        pickupDate:this.pickupDate,
+        ready:false,
+        user:this.user,
+        documents:this.userDocuments
+      }
+
+      let documentLinks= await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
+      console.log(documentLinks.constructor.name)
+      
+      let links:string[]
+
+      Object.keys(documentLinks).forEach(key=>{
+        console.log("key ", key , " value : ", documentLinks[key])
+
+        links=documentLinks[key]
+      })
+
+      links.forEach((value) => {
         let i = 0;
-        value.forEach(val => {
-          this.userDocuments[i].url = val;
-          i++;
-        });
+        
+        this.userDocuments[i].url = value;
+        i++; 
       });
+
       console.log(order);
 
       const orderUploaded = await this.orderService.createOrder(order).toPromise();
       console.log(orderUploaded);
       console.log('Pedido subido');
+
+      await this.notS.dismissLoading()
+
+      await this.notS.presentToast("¡Pedido realizado!", "success")
+
+      await this.router.navigate(['private/tabs/tab1'])
     }
   }
 }

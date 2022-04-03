@@ -1,79 +1,88 @@
 .bar_title {
-  text-align: center;
-  font-size: x-large;
-  font-family: sans-serif;
-  text-decoration: solid;
+    text-align: center;
+    font-size: x-large;
+    font-family: sans-serif;
+    text-decoration: solid;
 }
 
 .title {
-  text-align: center;
+    text-align: center;
 }
 
 .login_google_button {
-  display: block;
-  margin: 4% 10% 10%;
-  text-align: left;
+    display: block;
+    margin: 4% 10% 10%;
+    text-align: left;
 }
 
 .google_icon {
-  text-align: left;
-  margin-right: 10px;
+    text-align: left;
+    margin-right: 10px;
 }
 
 .login_image {
-  display: block;
-  block-size: 30%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  max-width: 30%;
-  max-height: 30%;
+    display: block;
+    block-size: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    max-width: 200px;
+    max-height: 30%;
+    margin-top: 20px;
 }
 
 .card {
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 25px;
-  width: fit-content;
-  height: fit-content;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .input {
-  border-style: solid;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
-  border-radius: 25px;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 25px;
 }
 
 .card-title {
-  text-align: center;
-  font-family: Georgia;
-  font-weight: bold;
-  font-size: 24px;
-  text-decoration: underline;
+    text-align: center;
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: underline;
 }
 
 .login-button {
-  display: block;
-  margin: 10% 10% 4%;
-  text-align: left;
+    display: block;
+    margin: 10% 10% 4%;
+    text-align: left;
 }
 
 .register-button {
-  display: block;
-  margin: 0% 10% 4%;
-  text-align: left;
+    display: block;
+    margin: 0% 10% 4%;
+    text-align: left;
 }
 
 .card-content {
-  margin: 2%;
+    margin: 2%;
 }
 
 .orlabel {
-  display: block;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
 }
