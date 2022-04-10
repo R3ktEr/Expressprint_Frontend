@@ -33,4 +33,5 @@ npm-debug.log*
 
 
 proxy.conf.json
+package-lock.json
 

@@ -1,3 +1,7 @@
+ion-content.background {
+    --background: url(/assets/images/ExpressprintLoginBackground.jpg);
+}
+
 .bar_title {
     text-align: center;
     font-size: x-large;
@@ -38,6 +42,10 @@
     border-radius: 25px;
     width: fit-content;
     height: fit-content;
+    border: 4px solid;
+    border-color: lightsteelblue;
+    background: transparentize($color: #ffffff, $amount: 0.10);
+    max-width: 700px;
 }
 
 .input {
@@ -85,4 +93,12 @@
     margin-right: auto;
     margin-top: 10px;
     text-align: center;
+}
+
+.transparent {
+    background: transparent;
+}
+
+ion-item::part(native) {
+    background: transparent !important;
 }

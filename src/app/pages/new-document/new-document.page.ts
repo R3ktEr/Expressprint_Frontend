@@ -9,7 +9,7 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 import { PriceService } from 'src/app/services/prices.service';
 import { Plugins } from '@capacitor/core';
 const { FileSelector } = Plugins;
-import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
+//import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
 import { OrderService } from 'src/app/services/order.service';
 
 
@@ -163,7 +163,11 @@ export class NewDocumentPage implements OnInit {
       for (let index = 0; index < paths.length; index++) {
           const file = await fetch(paths[index]).then((r) => r.blob());
           formData.append('files', file, originalNames[index] + extensions[index]);
+
+          this.docName=originalNames[index];
         }
+
+        this.formData=formData;
     } else if(this.platform.is('ios')) {
       for (let index = 0; index < selectedFile.paths.length; index++) {
         const file = await fetch(selectedFile.paths[index]).then((r) => r.blob());
