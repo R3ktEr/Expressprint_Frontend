@@ -1,3 +1,11 @@
+.transparent {
+    background: transparent;
+}
+
+ion-item::part(native) {
+    background: transparent !important;
+}
+
 .title {
     font-family: 'Courgette-Regular';
     font-size: 30px;
@@ -12,7 +20,6 @@
     font-size: 28px;
     text-align: center;
     text-decoration: solid;
-    color: black;
 }
 
 .item {
@@ -31,13 +38,16 @@
     margin-left: 10px;
     margin-right: 10px;
     max-width: 700px;
+    border-radius: 25px;
+    border: 4px solid;
+    border-color: lightsteelblue;
+    background: transparentize($color: #ffffff, $amount: 0.10);
 }
 
 .label {
     display: inline-block;
     font-family: 'CrimsonPro-VariableFont';
     font-size: 20px;
-    color: black;
     vertical-align: top;
     margin-top: 6px;
     margin-left: 10px;
@@ -87,49 +97,13 @@
     max-width: 700px;
 }
 
-.card {
-    display: block;
-    height: auto;
-    margin: auto;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    max-width: inherit;
-}
-
-.label {
-    display: inline-block;
-    font-family: 'CrimsonPro-VariableFont';
-    font-size: 20px;
-    color: black;
-    vertical-align: top;
-    margin-top: 6px;
-    margin-left: 10px;
-}
-
-.input {
-    display: inline-block;
-    text-align: center;
-    border-style: solid;
-    border-radius: 25px;
-    vertical-align: top;
-    margin-left: auto;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    max-width: 150px;
+.item.confirm {
+    margin-top: 30px;
 }
 
 .parent {
     display: flex;
     justify-content: space-between;
-}
-
-.btn {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    text-align: center;
 }
 
 .exit {
@@ -138,6 +112,11 @@
     margin-right: auto;
     margin-top: 30px;
     text-align: center;
+}
+
+.docname {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 
@@ -156,4 +135,4 @@ $darkcolor: #222428;
 .labelhidden {
     margin: auto;
     margin-right: unset;
-}
+}*/

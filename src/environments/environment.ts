@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost:8100/',
+  serverUrl: 'https://express-print.herokuapp.com/',
 
   firebaseConfig : {
     apiKey: 'AIzaSyB6oYqOeCcgf9Pk4sTW8YWKunoZ6ypPdjU',

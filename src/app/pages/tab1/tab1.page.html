@@ -4,13 +4,8 @@
             Pedidos
         </ion-title>
     </ion-toolbar>
-<<<<<<< HEAD
     <ion-list-header style="background-color: white !important;" *ngIf="isAdmin">
         <ion-item>
-=======
-    <ion-list-header *ngIf="isAdmin">
-        <ion-item style="display: inline-block;">
->>>>>>> main
             <ion-label>No pagados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotPayed')"></ion-checkbox>
         </ion-item>
@@ -19,11 +14,10 @@
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotDelivered')"></ion-checkbox>
         </ion-item>
     </ion-list-header>
-<<<<<<< HEAD
 </ion-header>
 
-<ion-content [fullscreen]="true">
-    <ion-list>
+<ion-content class="background" [fullscreen]="true">
+    <ion-list class="transparent">
         <ion-item-sliding *ngFor="let order of orders; let i=index">
             <ion-item (click)="viewOrder(order)">
                 <ion-label>
@@ -76,25 +70,3 @@
         </ion-item-sliding>
     </ion-list>
 </ion-content>
-=======
-    </ion-header>
-
-    <ion-content [fullscreen]="true">
-        <ion-list>
-            <ion-item-sliding *ngFor="let order of orders; let i=index">
-                <ion-item (click)="viewOrder(order)">
-                    <ion-label>
-                        <h2>Número de pedido: {{order.id}}</h2>
-                        <h3>Realizado el día: {{order.orderDate | date: 'dd-MM-yyyy'}}</h3>
-                        <h3 *ngIf="user.admin">Hora y día de recogida: {{order.pickupDate | date: 'HH:mm | dd-MM-yyyy'}}</h3>
-                        <p>Número de documentos: {{order.documents.length}}</p>
-                        <p>{{order.finalPrice}} €</p>
-                        <p>Está listo<span *ngIf="order.ready">✅</span><span *ngIf="!order.ready">❌</span></p>
-                        <p>Esta pagado<span *ngIf="order.payed">✅</span><span *ngIf="!order.payed">❌</span></p>
-                        <p>Ha sido recogido<span *ngIf="order.pickedUp">✅</span><span *ngIf="!order.pickedUp">❌</span></p>
-                    </ion-label>
-                </ion-item>
-            </ion-item-sliding>
-        </ion-list>
-    </ion-content>
->>>>>>> main
