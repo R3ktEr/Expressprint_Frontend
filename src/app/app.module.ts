@@ -36,6 +36,5 @@ registerLocaleData(localeEs);
   providers: [HTTP,{ provide: LOCALE_ID, useValue: 'es'},{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ,LocalStorageService, AuthService],
   bootstrap: [AppComponent],
-  
 })
 export class AppModule {}

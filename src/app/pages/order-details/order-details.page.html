@@ -5,14 +5,18 @@
         </ion-card-header>
         <ion-card-content>
             <ion-card-content>
-                <ion-item *ngIf="user.isAdmin">
+                <ion-item *ngIf="user.admin">
                     <ion-label class="label client-name">Cliente: </ion-label>
                     <ion-label class="label align-end">{{order.user.name}}</ion-label>
                 </ion-item>
                 <ion-item>
                     <ion-label class="label">Realizado el día: </ion-label>
-                    <ion-label class="label align-end">{{order.orderDate | date: 'dd-MM-yyyy'}}</ion-label>
+                    <ion-label class="label align-end">{{order.orderDate | date: 'dd-MM-yyyy | HH:mm'}}</ion-label>
                 </ion-item>
+              <ion-item>
+                <ion-label class="label">Fecha recogida: </ion-label>
+                <ion-label class="label align-end">{{order.pickupDate | date: 'dd-MM-yyyy | HH:mm'}}</ion-label>
+              </ion-item>
                 <ion-item>
                     <ion-label class="label">Número de documentos: </ion-label>
                     <ion-label class="label align-end">{{order.documents.length}}</ion-label>
