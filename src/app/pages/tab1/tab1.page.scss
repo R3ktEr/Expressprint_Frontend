@@ -1,111 +1,95 @@
-ion-content.background {--background: url(/assets/images/ExpressprintBackground.jpg);
+ion-content.background {
+    --background: url(/assets/images/ExpressprintBackground.jpg);
 }
 
 .transparent {
-  background: transparent;
+    background: transparent;
 }
 
 ion-item::part(native) {
-  background: transparent !important;
+    background: transparent !important;
+}
+
+.card-header {
+    display: block;
+}
+
+.flex {
+    flex: 1 1 0%;
 }
 
 .card {
-  display: block;
-  height: auto;
-  margin: 10px;
-  background: transparentize($color: #ffffff, $amount: 0.15);
-  border-radius: 25px;
-  border: 4px solid;
-  border-color: lightsteelblue;
-  background: transparentize($color: #ffffff, $amount: 0.10);
+    display: block;
+    height: auto;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparentize($color: #ffffff, $amount: 0.15);
+    border-radius: 25px;
+    border: 4px solid;
+    border-color: lightsteelblue;
+    background: transparentize($color: #ffffff, $amount: 0.10);
+}
+
+.card:hover {
+    cursor: pointer;
 }
 
 .title {
-  font-family: 'Courgette-Regular';
-  font-size: 15px;
-  text-align: center;
-  text-decoration: solid;
+    font-family: 'Courgette-Regular';
+    font-size: 30px;
+    text-align: center;
+    text-decoration: solid;
 }
 
 .subtitle {
-  display: block;
-  margin: auto;
-  font-family: 'CrimsonPro-VariableFont';
-  font-size: 10px;
-  text-align: center;
-  text-decoration: solid;
-  color: black;
-}
-
-.subtitle1 {
-  display: block;
-  margin: auto;
-  padding: 10px;
-  font-family: 'CrimsonPro-VariableFont';
-  font-size: 17px;
-  text-align: center;
-  text-decoration: solid;
-  color: black;
-}
-
-.title1 {
-  margin: 10px;
-  font-family: 'Courgette-Regular';
-  font-size: 15px;
-  text-align: center;
-  text-decoration: solid;
-}
-
-.ioncardiv {
-  display: inline-block;
-  margin: auto;
-  width: 25%;
-}
-
-@media all and (max-width: 1060px) {
-  .ioncardiv {
-    margin: auto;
     display: block;
-    width: 100%;
-  }
+    margin: auto;
+    font-family: 'Courgette-Regular';
+    font-size: 24px;
+    text-align: center;
+    text-decoration: solid;
+    text-decoration: underline;
 }
 
+.label {
+    font-family: 'CrimsonPro-VariableFont';
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.client-name {
+    font-weight: bold;
+}
+
+.check-icon {
+    color: green;
+    vertical-align: middle;
+}
+
+.check-icon {
+    color: green;
+    vertical-align: middle;
+}
+
+.close-icon {
+    color: red;
+    vertical-align: middle;
+}
 
 .titlepage {
-  font-family: 'Courgette-Regular';
-  font-size: 30px;
-  text-align: center;
-  text-decoration: solid;
+    font-family: 'Courgette-Regular';
+    font-size: 30px;
+    text-align: center;
+    text-decoration: solid;
 }
 
-.toolbar{
-  border-radius: 25px 25px 0 0;
-  border-top: 4px solid;
-  border-color: lightsteelblue;
-  background: transparentize($color: #ffffff, $amount: 0.10);
-}
-
-.document-img{
-  max-width: 30px;
-  max-height: 30px;
-}
-
-.list-header{
-  background-color: white !important;
-}
-
-.list-item-header{
-  display: inline-block;
-}
-
-.item-p {
-  margin: auto
-}
-
-.checkbox-item{
-  color: green;
-}
-
-.close-circle-item{
-  color: red;
+.toolbar {
+    border-radius: 25px 25px 0 0;
+    border-top: 4px solid;
+    border-color: lightsteelblue;
+    background: transparentize($color: #ffffff, $amount: 0.10);
 }

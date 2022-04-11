@@ -1,0 +1,77 @@
+.transparent {
+    background: transparent;
+}
+
+ion-item::part(native) {
+    background: transparent !important;
+}
+
+.title {
+    font-family: 'Courgette-Regular';
+    font-size: 30px;
+    text-align: center;
+    text-decoration: solid;
+}
+
+.subtitle {
+    display: block;
+    margin: auto;
+    font-family: 'CrimsonPro-VariableFont';
+    font-size: 28px;
+    text-align: center;
+    text-decoration: solid;
+    color: black;
+}
+
+.item {
+    display: block;
+    height: auto;
+    margin: auto;
+    //outline: 3px solid;
+    max-width: 700px;
+}
+
+.card {
+    display: block;
+    height: auto;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 700px;
+    border-radius: 25px;
+    border: 4px solid;
+    border-color: lightsteelblue;
+    background: transparentize($color: #ffffff, $amount: 0.10);
+}
+
+.label {
+    font-family: 'CrimsonPro-VariableFont';
+    font-size: 20px;
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.align-end {
+    text-align: end;
+}
+
+.client-name {
+    font-weight: bold;
+}
+
+.check-icon {
+    color: green;
+    vertical-align: middle;
+}
+
+.check-icon {
+    color: green;
+    vertical-align: middle;
+}
+
+.close-icon {
+    color: red;
+    vertical-align: middle;
+}

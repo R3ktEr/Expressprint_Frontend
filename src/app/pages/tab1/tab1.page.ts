@@ -4,11 +4,12 @@ import {OrderService} from 'src/app/services/order.service';
 import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {_User} from '../../model/User';
-import {NavController} from '@ionic/angular';
+import {ModalController, NavController} from '@ionic/angular';
 import {Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {LocalStorageService} from '../../services/local-storage.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { OrderDetailsPage } from '../order-details/order-details.page';
 
 @Component({
   selector: 'app-tab1',
@@ -26,7 +27,8 @@ export class Tab1Page {
   private readonly noPrices: string;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
-              private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService) {
+              private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService, 
+              private modalController: ModalController,) {
     this.ordersCopy = [];
     this.filter = {
       payed: false,
@@ -106,4 +108,16 @@ export class Tab1Page {
     }
   }
 
+  async showOrderModal(order: Order) {
+    const modal = await this.modalController.create({
+      component: OrderDetailsPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'order': order,
+        'user': this.user
+      }
+    });
+
+    await modal.present();
+  }
 }
