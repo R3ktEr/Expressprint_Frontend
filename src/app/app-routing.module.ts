@@ -21,9 +21,10 @@ const routes: Routes = [
   {
     path: 'tab5',
     loadChildren: () => import('./pages/tab5/tab5.module').then( m => m.Tab5PageModule)
-  },  {
-    path: 'prices',
-    loadChildren: () => import('./pages/prices/prices.module').then( m => m.PricesPageModule)
+  },
+  {
+    path: 'price',
+    loadChildren: () => import('./pages/price/prices.module').then(m => m.PricesPageModule)
   }
 
 

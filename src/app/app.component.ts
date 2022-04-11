@@ -11,24 +11,24 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   @ViewChild(IonMenu) menu: IonMenu;
 
-  public menuDisabled:boolean;
+  public menuDisabled: boolean;
 
-  constructor(private authS:AuthService,
-    private router:Router) {}
+  constructor(private authS: AuthService,
+    private router: Router) {}
 
   public async logout(){
-    await this.authS.logout()
+    await this.authS.logout();
     this.router.navigate(['']);
     this.menu.close();
   }
 
   public async goToPrices(){
-    this.router.navigate(['prices']);
+    this.router.navigate(['price']);
     this.menu.close();
   }
 
   public disableMenu() {
-    if(this.router.url=="/"){
+    if(this.router.url==='/'){
       this.menuDisabled=true;
     }else{
       this.menuDisabled=false;

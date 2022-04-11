@@ -14,6 +14,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 
 @NgModule({
@@ -29,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule],
-  providers: [HTTP,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },LocalStorageService, AuthService],
+  providers: [HTTP,{ provide: LOCALE_ID, useValue: 'es'},{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ,LocalStorageService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

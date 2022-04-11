@@ -1,5 +1,5 @@
 export const enum EndedType {
-  noended = 0,
+  no_ended = 0,
   bound = 1,
   stapled = 2,
   twoHoles = 3,
@@ -14,13 +14,13 @@ export const enum ImpressionsTypes {
 }
 
 export const enum SheetSize {
-  a3 = 0,
-  a4 = 1,
-  a5 = 2,
+  A3 = 0,
+  A4 = 1,
+  A5 = 2,
 }
 
 export const enum ThicknessType {
-  g80 = 0,
-  g160 = 1,
-  g280 = 2,
+  G80 = 0,
+  G160 = 1,
+  G280 = 2,
 }
