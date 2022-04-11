@@ -27,7 +27,7 @@ export class Tab1Page {
   private readonly noPrices: string;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
-              private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService, 
+              private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService,
               private modalController: ModalController,) {
     this.ordersCopy = [];
     this.filter = {
@@ -113,8 +113,8 @@ export class Tab1Page {
       component: OrderDetailsPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'order': order,
-        'user': this.user
+        order,
+        user: this.user
       }
     });
 

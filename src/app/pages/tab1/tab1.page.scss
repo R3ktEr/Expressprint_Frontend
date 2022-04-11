@@ -6,6 +6,18 @@ ion-content.background {
     background: transparent;
 }
 
+.list-header{
+  background-color: white;
+  width: 100%;
+  margin: auto;
+}
+
+.list-item-header{
+  display: inline-block;
+  width: 50%;
+  margin: auto;
+}
+
 ion-item::part(native) {
     background: transparent !important;
 }

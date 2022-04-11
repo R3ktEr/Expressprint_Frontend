@@ -33,11 +33,11 @@ export class Tab5Page implements OnInit {
   private formData: FormData = new FormData();
 
 
-  constructor(private authS:AuthService, private notS:NotificationsService, private modalController: ModalController, 
-    @Inject(LOCALE_ID) private locale: string, private orderService:OrderService, private router:Router) {
-    this.userDocuments=[]
+  constructor(private authS: AuthService, private notS: NotificationsService, private modalController: ModalController,
+    @Inject(LOCALE_ID) private locale: string, private orderService: OrderService, private router: Router) {
+    this.userDocuments=[];
     this.finalPrice=0;
-    this.pickupDate="";
+    this.pickupDate='';
   }
 
   ngOnInit() {
@@ -51,19 +51,6 @@ export class Tab5Page implements OnInit {
     this.orderDate = formatDate(Date.now(), 'YYYY-MM-ddTHH:mm:ss', this.locale);
 
     await this.notS.dismissLoading();
-  }
-
-  private calculateFinalPrice() {
-    this.userDocuments.forEach(document => {
-      this.finalPrice += document.copyPrice.price * document.nCopies; //nCopies debe de sacarlo de los metadatos del documento
-      this.finalPrice += document.finishType.price;
-      this.finalPrice += document.impressionPerSide.price;
-      this.finalPrice += document.isColor.price;
-      this.finalPrice += document.sizes.price;
-      this.finalPrice += document.thickness.price;
-    });
-
-    this.finalPrice = Math.round((this.finalPrice + Number.EPSILON) * 100) / 100;
   }
 
   async formatDate(value: string) {
@@ -102,10 +89,9 @@ export class Tab5Page implements OnInit {
 
   async confirmOrder() {
     if(await this.notS.presentAlertConfirm("Confirmacion", "¿Confirmar pedido?", "Si", "No")){
-      
-      await this.notS.presentLoading()
+      await this.notS.presentLoading();
 
-      let order:Order={
+      const order: Order={
         finalPrice:this.finalPrice,
         orderDate:this.orderDate,
         payed:false,
@@ -114,24 +100,24 @@ export class Tab5Page implements OnInit {
         ready:false,
         user:this.user,
         documents:this.userDocuments
-      }
+      };
 
-      let documentLinks= await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
-      console.log(documentLinks.constructor.name)
-      
-      let links:string[]
+      const documentLinks= await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
+      console.log(documentLinks.constructor.name);
+
+      let links: string[];
 
       Object.keys(documentLinks).forEach(key=>{
-        console.log("key ", key , " value : ", documentLinks[key])
+        console.log('key', key , ' value :', documentLinks[key]);
 
-        links=documentLinks[key]
-      })
+        links=documentLinks[key];
+      });
 
       links.forEach((value) => {
         let i = 0;
-        
+
         this.userDocuments[i].url = value;
-        i++; 
+        i++;
       });
 
       console.log(order);
@@ -140,11 +126,24 @@ export class Tab5Page implements OnInit {
       console.log(orderUploaded);
       console.log('Pedido subido');
 
-      await this.notS.dismissLoading()
+      await this.notS.dismissLoading();
 
-      await this.notS.presentToast("¡Pedido realizado!", "success")
+      await this.notS.presentToast('¡Pedido realizado!', 'success');
 
-      await this.router.navigate(['private/tabs/tab1'])
+      await this.router.navigate(['private/tabs/tab1']);
     }
+  }
+
+  private calculateFinalPrice() {
+    this.userDocuments.forEach(document => {
+      this.finalPrice += document.copyPrice.price * document.nCopies; //nCopies debe de sacarlo de los metadatos del documento
+      this.finalPrice += document.finishType.price;
+      this.finalPrice += document.impressionPerSide.price;
+      this.finalPrice += document.isColor.price;
+      this.finalPrice += document.sizes.price;
+      this.finalPrice += document.thickness.price;
+    });
+
+    this.finalPrice = Math.round((this.finalPrice + Number.EPSILON) * 100) / 100;
   }
 }

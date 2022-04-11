@@ -19,10 +19,10 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./new-document.page.scss'],
 })
 export class NewDocumentPage implements OnInit {
-  public formDocument:FormGroup;
-  public docName:string;
-  private actualPrices:PricesRequest;
-  private formData:FormData;
+  public formDocument: FormGroup;
+  public docName: string;
+  private actualPrices: PricesRequest;
+  private formData: FormData;
 
   constructor(private fb: FormBuilder, private pricesService: PriceService, private notS: NotificationsService, private authS: AuthService,
     private navCtrl: NavController, private modalController: ModalController, private storage: LocalStorageService, private platform: Platform,
@@ -176,11 +176,11 @@ export class NewDocumentPage implements OnInit {
     }
     else
     {
-      FileSelector.addListener("onFilesSelected", async (data:FileList) => {
-            for(var i = 0; i < data.length; i++)
+      FileSelector.addListener('onFilesSelected', async (data: FileList) => {
+            for(let i = 0; i < data.length; i++)
             {
               formData.append(
-                "files", //param del endpoint del back
+                'files', //param del endpoint del back
                 data.item(i),
                 data.item(i).name
               );
