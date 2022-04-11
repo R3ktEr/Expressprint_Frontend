@@ -1,15 +1,15 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
+    <ion-toolbar class="toolbar" color="primary">
+        <ion-title class="titlepage">
             Pedidos
         </ion-title>
     </ion-toolbar>
-    <ion-list-header style="background-color: white !important;" *ngIf="isAdmin">
+    <ion-list-header class="list-header" *ngIf="isAdmin">
         <ion-item>
             <ion-label>No pagados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotPayed')"></ion-checkbox>
         </ion-item>
-        <ion-item style="display: inline-block;">
+        <ion-item class="list-item-header">
             <ion-label>No entregados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotDelivered')"></ion-checkbox>
         </ion-item>
@@ -25,10 +25,10 @@
                         <ion-card>
                             <ion-card-header>
                                 <ion-card-title class="title">
-                                    <div style="display: inline-block; margin: auto">Número de pedido: {{order.id}}</div>
-                                    <div style="display: inline-block; margin-left: 100px">Realizado el día: {{order.orderDate | date: 'dd-MM-yyyy'}}</div>
-                                    <div style="display: inline-block; margin-left: 100px">Total del pedido: {{order.finalPrice}} €</div>
-                                    <div style="display: inline-block; margin-left: 100px">Hora de recogida: {{order.pickupDate | date: 'dd-MM-yyyy'}}</div>
+                                    <div class="ioncardiv">Número de pedido: {{order.id}}</div>
+                                    <div class="ioncardiv">Realizado el día: {{order.orderDate | date: 'dd-MM-yyyy'}}</div>
+                                    <div class="ioncardiv">Total del pedido: {{order.finalPrice}} €</div>
+                                    <div class="ioncardiv">Hora de recogida: {{order.pickupDate | date: 'dd-MM-yyyy | HH:mm'}}</div>
                                 </ion-card-title>
                             </ion-card-header>
                         </ion-card>
@@ -39,30 +39,30 @@
                             </ion-card-title>
                             <ion-card-content class="subtitle">
                                 <ion-item>
-                                    <p style="margin: auto">Esta pagado
-                                        <ion-icon *ngIf="order.payed" name="checkbox" style="color: green"></ion-icon>
-                                        <ion-icon *ngIf="!order.payed" style="color: red" name="close-circle"></ion-icon>
+                                    <p class="item-p">Esta pagado
+                                        <ion-icon *ngIf="order.payed" name="checkbox" class="checkbox-item"></ion-icon>
+                                        <ion-icon *ngIf="!order.payed" name="close-circle" class="close-circle-item"></ion-icon>
                                     </p>
                                 </ion-item>
                                 <ion-item>
-                                    <p style="margin: auto">Está listo
-                                        <ion-icon *ngIf="order.payed" name="checkbox" style="color: green"></ion-icon>
-                                        <ion-icon *ngIf="!order.payed" style="color: red" name="close-circle"></ion-icon>
+                                    <p class="item-p">Está listo
+                                        <ion-icon *ngIf="order.payed" name="checkbox" class="checkbox-item">></ion-icon>
+                                        <ion-icon *ngIf="!order.payed" name="close-circle" class="close-circle-item"></ion-icon>
                                     </p>
                                 </ion-item>
                             </ion-card-content>
 
                             <p>Número de documentos: {{order.documents.length}}</p>
-                            <p style="display: inline-block" *ngFor="let documento of order.documents">
+                            <p class="item-p" *ngFor="let documento of order.documents">
                                 <ion-card>
-                                    <ion-img style="max-width: 30px; max-height: 30px;" src="/assets/images/pdf.png"></ion-img>
+                                    <ion-img class="document-img" src="/assets/images/pdf.png"></ion-img>
                                 </ion-card>
                             </p>
                         </ion-card-content>
                         <ion-footer class="subtitle1">
                             Ha sido recogido
-                            <ion-icon *ngIf="order.payed" name="checkbox" style="color: green"></ion-icon>
-                            <ion-icon *ngIf="!order.payed" style="color: red" name="close-circle"></ion-icon>
+                            <ion-icon *ngIf="order.payed" name="checkbox" class="checkbox-item"></ion-icon>
+                            <ion-icon *ngIf="!order.payed" name="close-circle" class="close-circle-item"></ion-icon>
                         </ion-footer>
                     </ion-card>
                 </ion-label>
