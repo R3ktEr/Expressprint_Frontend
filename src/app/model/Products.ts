@@ -45,8 +45,8 @@ export interface Size {
   price: number;
   date?: Date;
   isValid?: boolean;
-  sizeSheet?: SheetSize;
-  sheetSize: string;
+  sheetSize?: SheetSize;
+  sizeOfSheet: string;
 }
 
 export interface Thickness {

@@ -33,7 +33,7 @@ registerLocaleData(localeEs);
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule],
-    providers: [HTTP,{ provide: LOCALE_ID, useValue: 'es'},{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  providers: [HTTP,{ provide: LOCALE_ID, useValue: 'es'},{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ,LocalStorageService, AuthService],
   bootstrap: [AppComponent],
   

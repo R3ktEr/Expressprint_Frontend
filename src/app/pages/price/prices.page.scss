@@ -1,0 +1,191 @@
+ion-content.background {
+  --background: url(/assets/images/ExpressprintBackground.jpg);
+}
+
+.title {
+  font-family: 'Courgette-Regular';
+  font-size: 30px;
+  text-align: center;
+  text-decoration: solid;
+}
+
+.subtitle {
+  display: block;
+  margin: auto;
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 28px;
+  text-align: center;
+  text-decoration: solid;
+  color: black;
+}
+
+.item {
+  width: 18%;
+  margin: auto;
+  border: 2px solid;
+  border-color: lightsteelblue;
+}
+@media all and (max-width: 750px) {
+  .item {
+    margin: auto;
+    display: block;
+    width: 100%;
+    border: 2px solid;
+    border-color: lightsteelblue;
+  }
+}
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-card.item{
+  display: inline-block;
+  height: auto;
+  margin: auto;
+}
+
+.item.buttons {
+  margin-top: 10%;
+}
+
+.transparent {
+  background: transparent;
+}
+
+ion-item::part(native) {
+  background: transparent !important;
+}
+
+.card {
+  display: block;
+  height: auto;
+  margin: auto;
+  max-width: 700px;
+  border-radius: 25px;
+  border: 4px solid;
+  border-color: lightsteelblue;
+  background: transparentize($color: #ffffff, $amount: 0.10);
+}
+
+.cardcontent {
+  display: block;
+  height: auto;
+}
+
+.label {
+  display: inline-block;
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 20px;
+  color: black;
+  vertical-align: top;
+  margin-top: 6px;
+  margin-left: 10px;
+  margin-bottom: 6px;
+}
+
+.labelhidden {
+  display: inline-block;
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 20px;
+  color: black;
+  vertical-align: top;
+  margin-top: 6px;
+  margin-left: auto;
+  margin-bottom: 6px;
+}
+
+.input {
+  display: inline-block;
+  text-align: center;
+  border-style: solid;
+  border-radius: 25px;
+  vertical-align: top;
+  margin-left: auto;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  max-width: 150px;
+}
+
+.parent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.orderbtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.md .card {
+  margin-top: 20px;
+}
+
+ion-content {
+  --background: #f2f2f7;
+  --padding-start: 20px;
+  --padding-end: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  grid-gap: 0 10px;
+}
+
+ion-modal {
+  --width: 290px;
+  --height: 382px;
+  --border-radius: 8px;
+}
+
+ion-modal ion-datetime {
+  height: 382px;
+}
+
+.item-title{
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 18px;
+  color: black;
+  text-align: center;
+  text-decoration: solid;
+  border-bottom: 2px solid lightsteelblue;
+  background-color: var(--ion-color-secondary);
+}
+
+.item-note{
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 14px;
+  color: black;
+  text-align: center;
+  text-decoration: solid;
+}
+
+.write{
+  font-family: 'CrimsonPro-VariableFont';
+  font-size: 14px;
+  color: black;
+  text-align: center;
+  text-decoration: solid;
+}
+
+.sc-ion-input-md-h{
+  --padding-top: 0px !important;
+  --padding-bottom: 0px !important;
+  --padding-start: 0px !important;
+  --padding-end: 0px !important;
+}
+
