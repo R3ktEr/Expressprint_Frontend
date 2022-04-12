@@ -22,16 +22,15 @@ ion-content.background {
 .item {
   width: 18%;
   margin: auto;
-  border: 2px solid;
-  border-color: lightsteelblue;
+  border: 2px solid lightsteelblue;
 }
 @media all and (max-width: 750px) {
   .item {
-    margin: auto;
+    //margin: auto;
     display: block;
     width: 100%;
-    border: 2px solid;
-    border-color: lightsteelblue;
+    border: 2px solid lightsteelblue;
+    margin-block: 10px;
   }
 }
 .cards{
@@ -44,7 +43,7 @@ ion-content.background {
 ion-card.item{
   display: inline-block;
   height: auto;
-  margin: auto;
+
 }
 
 .item.buttons {
@@ -65,8 +64,7 @@ ion-item::part(native) {
   margin: auto;
   max-width: 700px;
   border-radius: 25px;
-  border: 4px solid;
-  border-color: lightsteelblue;
+  border: 4px solid lightsteelblue;
   background: transparentize($color: #ffffff, $amount: 0.10);
 }
 
@@ -189,3 +187,34 @@ ion-modal ion-datetime {
   --padding-end: 0px !important;
 }
 
+.titlepage{
+  font-family: 'Courgette-Regular';
+  font-size: 30px;
+  text-align: center;
+  text-decoration: solid;
+  display: inline-block;
+  margin: auto;
+  vertical-align: middle;
+  width: 90%;
+}
+
+.toolbar{
+  width: 100%;
+  vertical-align: middle;
+}
+
+ion-button{
+  display: block;
+}
+
+.toolbar ion-button{
+  display: inline-block;
+  align-self: center;
+  margin: auto;
+  vertical-align: middle;
+  width: 10%;
+}
+
+ion-icon{
+  position: absolute or fixed;
+}

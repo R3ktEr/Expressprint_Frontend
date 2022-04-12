@@ -29,15 +29,14 @@ export class Tab5Page implements OnInit {
   public userDocuments: Document[];
   public finalPrice: number;
   private orderDate: string;
-  private date: string;
   private formData: FormData = new FormData();
 
 
   constructor(private authS: AuthService, private notS: NotificationsService, private modalController: ModalController,
-    @Inject(LOCALE_ID) private locale: string, private orderService: OrderService, private router: Router) {
-    this.userDocuments=[];
-    this.finalPrice=0;
-    this.pickupDate='';
+              @Inject(LOCALE_ID) private locale: string, private orderService: OrderService, private router: Router) {
+    this.userDocuments = [];
+    this.finalPrice = 0;
+    this.pickupDate = '';
   }
 
   ngOnInit() {
@@ -56,7 +55,6 @@ export class Tab5Page implements OnInit {
   async formatDate(value: string) {
     console.log(value);
     this.pickupDate = formatDate(Date.now(), 'YYYY-MM-ddTHH:mm:ss', this.locale)
-    this.date = format(parseISO(value), 'dd-MM-yyyy HH:mm');
 
     console.log(this.pickupDate);
   }
@@ -88,7 +86,7 @@ export class Tab5Page implements OnInit {
   }
 
   async confirmOrder() {
-    if(await this.notS.presentAlertConfirm("Confirmacion", "¿Confirmar pedido?", "Si", "No")){
+    if(await this.notS.presentAlertConfirm('Confirmacion', '¿Confirmar pedido?', 'Si', 'No')){
       await this.notS.presentLoading();
 
       const order: Order={
@@ -140,7 +138,7 @@ export class Tab5Page implements OnInit {
       this.finalPrice += document.finishType.price;
       this.finalPrice += document.impressionPerSide.price;
       this.finalPrice += document.isColor.price;
-      this.finalPrice += document.sizes.price;
+      this.finalPrice += document.size.price;
       this.finalPrice += document.thickness.price;
     });
 

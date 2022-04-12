@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavController, Platform } from '@ionic/angular';
-import { Document } from 'src/app/model/Document';
-import { Color, Copy, Ended, ImpressionPerSide, PricesRequest, Size, Thickness } from 'src/app/model/Products';
-import { AuthService } from 'src/app/services/auth.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { NotificationsService } from 'src/app/services/notifications.service';
-import { PriceService } from 'src/app/services/prices.service';
-import { Plugins } from '@capacitor/core';
-const { FileSelector } = Plugins;
-//import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
-import { OrderService } from 'src/app/services/order.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ModalController, NavController, Platform} from '@ionic/angular';
+import {Document} from 'src/app/model/Document';
+import {Color, Copy, Ended, ImpressionPerSide, PricesRequest, Size, Thickness} from 'src/app/model/Products';
+import {AuthService} from 'src/app/services/auth.service';
+import {LocalStorageService} from 'src/app/services/local-storage.service';
+import {NotificationsService} from 'src/app/services/notifications.service';
+import {PriceService} from 'src/app/services/prices.service';
+import {Plugins} from '@capacitor/core';
+
+const {FileSelector} = Plugins;
+import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
+import {OrderService} from 'src/app/services/order.service';
 
 
 @Component({
@@ -38,15 +39,14 @@ export class NewDocumentPage implements OnInit {
       ringedPosition:['', Validators.required],
       ended:['', Validators.required]
     });
-
   }
 
   ngOnInit() {
 
   }
 
-  async ionViewWillEnter(){
-    this.actualPrices=(await this.pricesService.getAllPrices().toPromise())[0];
+  async ionViewWillEnter() {
+    this.actualPrices = (await this.pricesService.getAllPrices().toPromise())[0];
     console.log(this.actualPrices);
 
     let prices = 0;
@@ -86,7 +86,7 @@ export class NewDocumentPage implements OnInit {
     }
   }
 
-  public async saveOrder(){
+  public async saveOrder() {
     //Copy, Color, Size, Thickness, Ended, ImpressionPerSide
 
     /**
@@ -94,28 +94,28 @@ export class NewDocumentPage implements OnInit {
      * a la hora de crear el newDocument va a reventar o va a provocar un bad request a la hora de subirlo
      */
 
-    if(await this.notS.presentAlertConfirm('Confirmacion', '¿Confirma que los datos introducidos son correctos?', 'Si', 'No')){
+    if (await this.notS.presentAlertConfirm('Confirmacion', '¿Confirma que los datos introducidos son correctos?', 'Si', 'No')) {
 
       await this.notS.presentLoading();
 
-      const copy: Copy=this.actualPrices.Copy[0];
-      const color: Color=this.actualPrices.Color.filter(c=>String(c.isColor)===this.formDocument.get('color').value)[0];
-      const sizes: Size=this.actualPrices.Sizes.filter(s=>s.sizeOfSheet===this.formDocument.get('size').value)[0];
-      const thickness: Thickness=this.actualPrices.Thickness.filter(t=>t.thicknessType===this.formDocument.get('thickness').value)[0];
-      const ended: Ended=this.actualPrices.Endeds.filter(e=>e.endedType===this.formDocument.get('ended').value)[0];
-      const impressionPerSide: ImpressionPerSide=this.actualPrices.ImpressionPerSide.filter(i=>i.impressionsTypes===this.formDocument.get('impressionPerSide').value)[0];
+      const copy: Copy = this.actualPrices.Copy[0];
+      const color: Color = this.actualPrices.Color.filter(c => String(c.isColor) === this.formDocument.get('color').value)[0];
+      const size: Size = this.actualPrices.Sizes.filter(s => s.sheetSize === this.formDocument.get('size').value)[0];
+      const thickness: Thickness = this.actualPrices.Thickness.filter(t => t.thicknessType === this.formDocument.get('thickness').value)[0];
+      const ended: Ended = this.actualPrices.Endeds.filter(e => e.endedType === this.formDocument.get('ended').value)[0];
+      const impressionPerSide: ImpressionPerSide = this.actualPrices.ImpressionPerSide.filter(i => i.impressionsTypes === this.formDocument.get('impressionPerSide').value)[0];
 
-      const newDocument: Document={
-        copyPrice:copy,
-        nCopies:this.formDocument.get('ncopies').value,
-        isColor:color,
-        sizes,
+      const newDocument: Document = {
+        copyPrice: copy,
+        nCopies: this.formDocument.get('ncopies').value,
+        isColor: color,
+        size,
         thickness,
-        isTwoSides:this.formDocument.get('impressionType').value,
+        isTwoSides: this.formDocument.get('impressionType').value,
         impressionPerSide,
-        isVertical:this.formDocument.get('orientation').value,
-        ringedPosition:this.formDocument.get('ringedPosition').value,
-        finishType:ended,
+        isVertical: this.formDocument.get('orientation').value,
+        ringedPosition: this.formDocument.get('ringedPosition').value,
+        finishType: ended,
 
         //Order
         //Comment
@@ -136,14 +136,13 @@ export class NewDocumentPage implements OnInit {
     }
   }
 
-  public async closeModal(){
-    if(await this.notS.presentAlertConfirm('Descartar Documento', '¿Está seguro de que quiere descartar el documento actual?', 'Si', 'No')) {
+  public async closeModal() {
+    if (await this.notS.presentAlertConfirm('Descartar Documento', '¿Está seguro de que quiere descartar el documento actual?', 'Si', 'No')) {
       await this.modalController.dismiss();
     }
   }
 
-  async select()
-  {
+  async select() {
     const multipleSelection = false;
     //let ext = [".jpg",".png",".pdf",".jpeg"] // list of extensions
     //let ext = ["MP3", "ImaGes"] // combination of extensions or category
@@ -156,39 +155,30 @@ export class NewDocumentPage implements OnInit {
       ext
     });
 
-    if(this.platform.is('android')) {
+    if (this.platform.is('android')) {
       const paths = JSON.parse(selectedFile.paths);
       const originalNames = JSON.parse(selectedFile.original_names);
       const extensions = JSON.parse(selectedFile.extensions);
       for (let index = 0; index < paths.length; index++) {
-          const file = await fetch(paths[index]).then((r) => r.blob());
-          formData.append('files', file, originalNames[index] + extensions[index]);
+        const file = await fetch(paths[index]).then((r) => r.blob());
+        formData.append('files', file, originalNames[index] + extensions[index]);
 
-          this.docName=originalNames[index];
-        }
-
-        this.formData=formData;
-    } else if(this.platform.is('ios')) {
+        this.docName = originalNames[index];
+      }
+      this.formData = formData;
+    } else if (this.platform.is('ios')) {
       for (let index = 0; index < selectedFile.paths.length; index++) {
         const file = await fetch(selectedFile.paths[index]).then((r) => r.blob());
         formData.append('files', file, selectedFile.original_names[index] + selectedFile.extensions[index]);
       }
-    }
-    else
-    {
+    } else {
       FileSelector.addListener('onFilesSelected', async (data: FileList) => {
-            for(let i = 0; i < data.length; i++)
-            {
-              formData.append(
-                'files', //param del endpoint del back
-                data.item(i),
-                data.item(i).name
-              );
-
-              this.docName=data.item(i).name;
-            }
-            this.formData=formData;
-        });
+        for (let i = 0; i < data.length; i++) {
+          formData.append('files', data.item(i), data.item(i).name);
+          this.docName = data.item(i).name;
+        }
+        this.formData = formData;
+      });
     }
   }
 }
