@@ -8,15 +8,19 @@ ion-item::part(native) {
 
 .title {
     font-family: 'Courgette-Regular';
-    font-size: 30px;
+    font-size: 26px;
     text-align: center;
     text-decoration: solid;
+    vertical-align: middle;
+    display: inline-block;
+    width: -webkit-fill-available;
+    margin-top: 0px;
 }
 
 .title.title2 {
     border-radius: 25px;
     margin-top: 20px;
-    margin-bottom: 11.5px;
+    margin-bottom: 20px;
     font-size: 24px;
 }
 
@@ -31,7 +35,8 @@ ion-item::part(native) {
     font-size: 26px;
     text-align: center;
     text-decoration: solid;
-    color: royalblue;
+    color: #297ab1;
+    //color: royalblue;
 }
 
 .item {
@@ -56,12 +61,24 @@ ion-item::part(native) {
     background: transparentize($color: #ffffff, $amount: 0.10);
 }
 
+.header {
+    background-color: #3f9fe15e;
+}
+
+.border {
+    border: 3px solid;
+    border-color: #81b6da;
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
 .label {
     font-family: 'CrimsonPro-VariableFont';
-    font-size: 20px;
+    font-size: 18px;
     color: black;
     margin-top: auto;
     margin-bottom: auto;
+    display: inline-table;
 }
 
 .align-end {
@@ -85,4 +102,16 @@ ion-item::part(native) {
 .close-icon {
     color: red;
     vertical-align: middle;
+}
+
+.close {
+    overflow: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

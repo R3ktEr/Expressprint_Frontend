@@ -1,7 +1,13 @@
 <ion-content>
     <ion-card class="card">
-        <ion-card-header color="primary">
-            <ion-card-title class="title">Información del pedido</ion-card-title>
+        <ion-card-header class="parent" color="primary">
+            <ion-button class="close" (click)="closeModal()">
+                <ion-icon size="large" name="arrow-undo-outline"></ion-icon>
+            </ion-button>
+            <ion-card-title class="title">
+                Información del pedido
+            </ion-card-title>
+
         </ion-card-header>
         <ion-card-content>
             <ion-card-content>
@@ -43,25 +49,69 @@
                 <ion-card-header class="title title2" color="primary">
                     <ion-card-title>Documentos del Pedido</ion-card-title>
                 </ion-card-header>
-                <ion-list *ngFor="let document of order.documents; let i=index">
-                    <ion-list-header>
-                        <ion-label class="subtitle">Documento {{i+1}}</ion-label>
-                    </ion-list-header>
-                    <ion-item>
-                        <ion-label class="label">Enlace al documento: </ion-label>
-                        <ion-button href="{{document.url}}" target="_blank">
-                            <ion-icon class="align-end" name="document-attach-outline"></ion-icon>
-                        </ion-button>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="label">Numero de Copias: </ion-label>
-                        <ion-label class="label align-end">{{document.nCopies}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="label">Color: </ion-label>
-                        <ion-label class="label align-end">{{document.isColor.color == true ? 'Color' : 'Blanco y Negro'}}</ion-label>
-                    </ion-item>
-                </ion-list>
+
+                <ion-accordion-group *ngFor="let document of order.documents; let i=index">
+                    <ion-accordion class="border" value="document">
+                        <ion-item class="header" slot="header">
+                            <ion-label class="subtitle">Documento {{i+1}}</ion-label>
+                        </ion-item>
+
+                        <ion-list slot="content">
+                            <ion-item>
+                                <ion-label class="label">Enlace al documento: </ion-label>
+                                <ion-button href="{{document.url}}" target="_blank">
+                                    <ion-icon class="align-end" name="document-attach-outline"></ion-icon>
+                                </ion-button>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Numero de Copias: </ion-label>
+                                <ion-label class="label align-end">{{document.nCopies}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Color: </ion-label>
+                                <ion-label class="label align-end">{{document.isColor.color === true ? 'Color' : 'Blanco y Negro'}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Tamaño del papel: </ion-label>
+                                <ion-label class="label align-end">{{document.size.sheetSize}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Grosor del papel: </ion-label>
+                                <ion-label class="label align-end" *ngIf="document.thickness.thicknessType === 'G80'">80GR</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.thickness.thicknessType === 'G160'">160GR</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.thickness.thicknessType === 'G280'">280GR</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Forma de impresión: </ion-label>
+                                <ion-label class="label align-end">{{document.twoSides === true ? 'Dos Caras' : 'Una Cara'}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Impresiones por cara: </ion-label>
+                                <ion-label class="label align-end" *ngIf="document.impressionPerSide.impressionsTypes === 'normal'">Normal</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.impressionPerSide.impressionsTypes === 'twoPages'">Dos Páginas</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.impressionPerSide.impressionsTypes === 'twoSlides'">Dos Diapositivas</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.impressionPerSide.impressionsTypes === 'fourSlides'">Cuatro Diapositivas</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Orientación: </ion-label>
+                                <ion-label class="label align-end">{{document.vertical === true ? 'Vertical' : 'Horizontal'}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Paso de página: </ion-label>
+                                <ion-label class="label align-end">{{document.ringedPosition === true ? 'Por el lado largo' : 'Por el lado corto'}}</ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="label">Acabados: </ion-label>
+                                <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'no_ended'">Sin Acabado</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'bound'">Encuadernado</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'stapled'">Grapado</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'twoHoles'">2 Agujeros</ion-label>
+                                <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'fourHoles'">4 Agujeros</ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </ion-accordion>
+                </ion-accordion-group>
+
             </ion-card-content>
         </ion-card-content>
     </ion-card>
