@@ -13,14 +13,25 @@ ion-item::part(native) {
     text-decoration: solid;
 }
 
+.title.title2 {
+    border-radius: 25px;
+    margin-top: 20px;
+    margin-bottom: 11.5px;
+    font-size: 24px;
+}
+
+.title.title2 ion-card-title {
+    font-size: 24px;
+}
+
 .subtitle {
     display: block;
     margin: auto;
     font-family: 'CrimsonPro-VariableFont';
-    font-size: 28px;
+    font-size: 26px;
     text-align: center;
     text-decoration: solid;
-    color: black;
+    color: royalblue;
 }
 
 .item {
