@@ -16,7 +16,7 @@ export class PriceService {
     return this.http.get<PricesRequest[]>(`${environment.serverUrl}prices`);
   }
 
-  public changeAllPrices(newPrices: PricesRequest): Observable<PricesRequest[]> {
+  public changeAllPrices(newPrices: PricesRequest[]): Observable<PricesRequest[]> {
     return this.http.put<PricesRequest[]>(`${environment.serverUrl}prices`, newPrices);
   }
 

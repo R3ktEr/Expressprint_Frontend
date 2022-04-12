@@ -5,14 +5,15 @@
       <ion-card-title class="titlepage">Tabla de Precios</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content class="cardcontent" *ngIf="prices">
+    <ion-card-content class="cardcontent" *ngIf="prices" [formGroup]="formPrices" >
       <p class="title">Colores</p>
       <div class="cards">
         <ion-card class="item" *ngFor="let color of prices.Color">
           <ion-card-title *ngIf="color.isColor" class="item-title">Color</ion-card-title>
           <ion-card-title *ngIf="!color.isColor" class="item-title">Blanco y Negro</ion-card-title>
           <ion-card-content class="item-note">{{color.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="color.isColor? 'priceColor':'priceBnW'" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
       <p class="title">Copias</p>
@@ -20,7 +21,8 @@
         <ion-card class="item" *ngFor="let copy of prices.Copy">
           <ion-card-title class="item-title">Copia</ion-card-title>
           <ion-card-content class="item-note">{{copy.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="'priceCopy'" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
       <p class="title">Tipos de Acabado</p>
@@ -32,7 +34,8 @@
           <ion-card-title *ngSwitchCase="'twoHoles'" class="item-title">2 Agujeros</ion-card-title>
           <ion-card-title *ngSwitchCase="'fourHoles'" class="item-title">4 Agujeros</ion-card-title>
           <ion-card-content class="item-note">{{ended.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="getControlName(ended.endedType.toString())" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
       <p class="title">Impresiones por Cara</p>
@@ -43,7 +46,8 @@
           <ion-card-title *ngSwitchCase="'twoSlides'" class="item-title">2 Diapositivas</ion-card-title>
           <ion-card-title *ngSwitchCase="'fourSlides'" class="item-title">4 Diapositivas</ion-card-title>
           <ion-card-content class="item-note">{{impressionPerSide.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="getControlName(impressionPerSide.impressionsTypes.toString())" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
       <p class="title">Tamaños</p>
@@ -52,9 +56,10 @@
           <ion-card-title *ngSwitchCase="'A3'" class="item-title">A3</ion-card-title>
           <ion-card-title *ngSwitchCase="'A4'" class="item-title">A4</ion-card-title>
           <ion-card-title *ngSwitchCase="'A5'" class="item-title">A5</ion-card-title>
-          <ion-card-content class="item-note">{{size.sizeOfSheet}}</ion-card-content>
+          <ion-card-content class="item-note two">{{size.sizeOfSheet}}</ion-card-content>
           <ion-card-content class="item-note">{{size.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="getControlName(size.sheetSize.toString())" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
       <p class="title">Gramajes</p>
@@ -63,12 +68,13 @@
           <ion-card-title *ngSwitchCase="'G80'" class="item-title">80 Gramos</ion-card-title>
           <ion-card-title *ngSwitchCase="'G160'" class="item-title">160 Gramos</ion-card-title>
           <ion-card-title *ngSwitchCase="'G280'" class="item-title">280 Gramos</ion-card-title>
-          <ion-card-content class="item-note">{{thickness.description}}</ion-card-content>
+          <ion-card-content class="item-note two">{{thickness.description}}</ion-card-content>
           <ion-card-content class="item-note">{{thickness.price | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-card-content>
-          <ion-input class="write" *ngIf="isAdmin" placeholder="Ej: 0.2"></ion-input>
+          <ion-label class="changepricelabel" *ngIf="isAdmin" >Cambiar precio</ion-label>
+          <ion-input class="write" *ngIf="isAdmin" [formControlName]="getControlName(thickness.thicknessType.toString())" placeholder="Ej: 0.2"></ion-input>
         </ion-card>
       </div>
     </ion-card-content>
-    <ion-button *ngIf="isAdmin" class="btn" shape="round" color="success" [disabled]="" (click)="sendNewPrices()">Cambiar precios</ion-button>
+    <ion-button *ngIf="isAdmin" class="btn" shape="round" color="success" [disabled]="this.formPrices.invalid" (click)="sendNewPrices()">Cambiar precios</ion-button>
   </ion-card>
 </ion-content>
