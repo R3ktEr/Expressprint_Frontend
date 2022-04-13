@@ -5,7 +5,8 @@ import {AuthService} from '../../services/auth.service';
 import {_User} from '../../model/User';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {EndedType, ImpressionsTypes, SheetSize, ThicknessType} from "../../model/Enums";
+import {EndedType, ImpressionsTypes, SheetSize, ThicknessType} from '../../model/Enums';
+import {NotificationsService} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-price',
@@ -17,9 +18,12 @@ export class PricesPage implements OnInit {
   public formPrices: FormGroup;
   public prices: PricesRequest;
   public isAdmin: boolean;
+  public noPrices = false;
+  public noDDBBPrices: PricesRequest;
   private user: _User;
 
-  constructor(private fgb: FormBuilder, private priceService: PriceService, private authS: AuthService, private route: Router) {
+  constructor(private notS: NotificationsService, private fgb: FormBuilder, private priceService: PriceService
+    , private authS: AuthService, private route: Router) {
     this.formPrices = this.fgb.group({
       priceColor: ['', Validators.required],
       priceBnW: ['', Validators.required],
@@ -40,30 +44,106 @@ export class PricesPage implements OnInit {
       priceG160:['', Validators.required],
       priceG280:['', Validators.required],
     });
-    /*this.formPrices = {
-      priceColor: '',
-      priceBnW: '',
-      priceCopy:'',
-      priceNE:'',
-      priceBound:'',
-      priceStapled:'',
-      priceTwoHoles:'',
-      priceFourHoles:'',
-      priceNormal:'',
-      priceTwoPages:'',
-      priceTwoSlides:'',
-      priceFourSlides:'',
-      priceA3:'',
-      priceA4:'',
-      priceA5:'',
-      priceG80:'',
-      priceG160:'',
-      priceG280:'',
-    };*/
+    this.noDDBBPrices = {
+      Color: [
+        {
+          price: 0.0,
+          isColor: false
+        },
+        {
+          price: 0.0,
+          isColor: true
+        }
+      ],
+      Copy: [
+        {
+          price: 0.0
+        }
+      ],
+      Endeds: [
+        {
+          price: 0.0,
+          endedType: EndedType.no_ended
+        },
+        {
+          price: 0.0,
+          endedType: EndedType.bound
+        },
+        {
+          price: 0.0,
+          endedType: EndedType.stapled
+        },
+        {
+          price: 0.0,
+          endedType: EndedType.twoHoles
+        },
+        {
+          price: 0.0,
+          endedType: EndedType.fourHoles
+        }
+      ],
+      ImpressionPerSide: [
+        {
+          price: 0.0,
+          impressionsTypes: ImpressionsTypes.normal
+        },
+        {
+          price: 0.0,
+          impressionsTypes: ImpressionsTypes.twoPages
+        },
+        {
+          price: 0.0,
+          impressionsTypes: ImpressionsTypes.twoSlides
+        },
+        {
+          price: 0.0,
+          impressionsTypes: ImpressionsTypes.fourSlides
+        }
+      ],
+      Sizes: [
+        //TODO cambiar sizeOfSheet¿?
+        {
+          price: 0.0,
+          sheetSize: SheetSize.A3,
+          sizeOfSheet: 'A3'
+        },
+        {
+          price: 0.0,
+          sheetSize: SheetSize.A4,
+          sizeOfSheet: 'A4'
+        },
+        {
+          price: 0.0,
+          sheetSize: SheetSize.A5,
+          sizeOfSheet: 'A5'
+        }
+      ],
+      Thickness: [
+        //TODO cambiar descripción¿?
+        {
+          price: 0.0,
+          thicknessType: ThicknessType.G80,
+          description: '80 g'
+        },
+        {
+          price: 0.0,
+          thicknessType: ThicknessType.G160,
+          description: '160 g'
+        },
+        {
+          price: 0.0,
+          thicknessType: ThicknessType.G280,
+          description: '280 g'
+        }
+      ]
+    };
   }
 
   ngOnInit(): void {
-    this.getPrices();
+    this.notS.presentLoading().then(async () => {
+      this.getPrices();
+      await this.notS.dismissLoading();
+    });
   }
 
   async ionViewWillEnter(): Promise<void> {
@@ -71,46 +151,33 @@ export class PricesPage implements OnInit {
     this.isAdmin = this.user.admin;
   }
 
-  public getPrices(): void {
-    this.priceService.getAllPrices().forEach(value => {
+  public async getPrices(): Promise<void> {
+    await this.priceService.getAllPrices().forEach(value => {
       value.forEach(value1 => {
-        this.prices = value1;
-        this.formPrices.get('priceBnW').setValue(value1.Color[0].price);
-        this.formPrices.get('priceColor').setValue(value1.Color[1].price);
-        this.formPrices.get('priceCopy').setValue(value1.Copy[0].price);
-        this.formPrices.get('priceNE').setValue(value1.Endeds[0].price);
-        this.formPrices.get('priceBound').setValue(value1.Endeds[1].price);
-        this.formPrices.get('priceStapled').setValue(value1.Endeds[2].price);
-        this.formPrices.get('priceTwoHoles').setValue(value1.Endeds[3].price);
-        this.formPrices.get('priceFourHoles').setValue(value1.Endeds[4].price);
-        this.formPrices.get('priceNormal').setValue(value1.ImpressionPerSide[0].price);
-        this.formPrices.get('priceTwoPages').setValue(value1.ImpressionPerSide[1].price);
-        this.formPrices.get('priceTwoSlides').setValue(value1.ImpressionPerSide[2].price);
-        this.formPrices.get('priceFourSlides').setValue(value1.ImpressionPerSide[3].price);
-        this.formPrices.get('priceA3').setValue(value1.Sizes[0].price);
-        this.formPrices.get('priceA4').setValue(value1.Sizes[1].price);
-        this.formPrices.get('priceA5').setValue(value1.Sizes[2].price);
-        this.formPrices.get('priceG80').setValue(value1.Thickness[0].price);
-        this.formPrices.get('priceG160').setValue(value1.Thickness[1].price);
-        this.formPrices.get('priceG280').setValue(value1.Thickness[2].price);
-        /*this.formPrices.priceColor = value1.Color[0].price;
-        this.formPrices.priceBnW = value1.Color[1].price;
-        this.formPrices.priceCopy = value1.Copy[0].price;
-        this.formPrices.priceNE = value1.Endeds[0].price;
-        this.formPrices.priceBound = value1.Endeds[1].price;
-        this.formPrices.priceStapled = value1.Endeds[2].price;
-        this.formPrices.priceTwoHoles = value1.Endeds[3].price;
-        this.formPrices.priceFourHoles = value1.Endeds[4].price;
-        this.formPrices.priceNormal = value1.ImpressionPerSide[0].price;
-        this.formPrices.priceTwoPages = value1.ImpressionPerSide[1].price;
-        this.formPrices.priceTwoSlides = value1.ImpressionPerSide[2].price;
-        this.formPrices.priceFourSlides = value1.ImpressionPerSide[3].price;
-        this.formPrices.priceA3 = value1.Sizes[0].price;
-        this.formPrices.priceA4 = value1.Sizes[1].price;
-        this.formPrices.priceA5 = value1.Sizes[2].price;
-        this.formPrices.priceG80 = value1.Thickness[0].price;
-        this.formPrices.priceG160 = value1.Thickness[1].price;
-        this.formPrices.priceG280 = value1.Thickness[2].price;*/
+        if(value1.Color === undefined){
+          this.noPrices = true;
+          this.prices = undefined;
+        }else{
+          this.prices = value1;
+          this.formPrices.get('priceBnW').setValue(value1.Color[0].price);
+          this.formPrices.get('priceColor').setValue(value1.Color[1].price);
+          this.formPrices.get('priceCopy').setValue(value1.Copy[0].price);
+          this.formPrices.get('priceNE').setValue(value1.Endeds[0].price);
+          this.formPrices.get('priceBound').setValue(value1.Endeds[1].price);
+          this.formPrices.get('priceStapled').setValue(value1.Endeds[2].price);
+          this.formPrices.get('priceTwoHoles').setValue(value1.Endeds[3].price);
+          this.formPrices.get('priceFourHoles').setValue(value1.Endeds[4].price);
+          this.formPrices.get('priceNormal').setValue(value1.ImpressionPerSide[0].price);
+          this.formPrices.get('priceTwoPages').setValue(value1.ImpressionPerSide[1].price);
+          this.formPrices.get('priceTwoSlides').setValue(value1.ImpressionPerSide[2].price);
+          this.formPrices.get('priceFourSlides').setValue(value1.ImpressionPerSide[3].price);
+          this.formPrices.get('priceA3').setValue(value1.Sizes[0].price);
+          this.formPrices.get('priceA4').setValue(value1.Sizes[1].price);
+          this.formPrices.get('priceA5').setValue(value1.Sizes[2].price);
+          this.formPrices.get('priceG80').setValue(value1.Thickness[0].price);
+          this.formPrices.get('priceG160').setValue(value1.Thickness[1].price);
+          this.formPrices.get('priceG280').setValue(value1.Thickness[2].price);
+        }
       });
     });
   }
@@ -119,9 +186,8 @@ export class PricesPage implements OnInit {
     this.route.navigate(['private/tabs/tab1']);
   }
 
-  public sendNewPrices(): void{
-    const newPricesArray: PricesRequest[] = [];
-    const newPrices: PricesRequest = {
+  public async sendNewPrices(): Promise<void>{
+    const newPricesArray: PricesRequest[] = [{
       Color: [
         {
           price: this.formPrices.get('priceBnW').value,
@@ -213,44 +279,91 @@ export class PricesPage implements OnInit {
           description: '280 g'
         }
       ]
-    };
-    newPricesArray.push(newPrices);
-    this.priceService.changeAllPrices(newPricesArray).subscribe(() => {
-      this.route.navigate(['private/tabs/tab1']);
+    }];
+    await this.notS.presentLoading();
+    console.log(newPricesArray);
+    await this.priceService.changeAllPrices(newPricesArray).toPromise().then(async () => {
+      await this.notS.presentToast('Precios actualizados correctamente','success');
+      await this.getPrices();
+    }).catch(async () => {
+      await this.notS.presentToast('Error al actualizar los precios','danger');
     });
+    await this.notS.dismissLoading();
   }
 
-  public getControlName(name: string): string {
-    if (name === 'no_ended') {
-      return 'priceNE';
-    } else if (name === 'bound') {
-      return 'priceBound';
-    } else if (name === 'stapled') {
-      return 'priceStapled';
-    } else if (name === 'twoHoles') {
-      return 'priceTwoHoles';
-    } else if (name === 'fourHoles') {
-      return 'priceFourHoles';
-    } else if (name === 'normal') {
-      return 'priceNormal';
-    } else if (name === 'twoPages') {
-      return 'priceTwoPages';
-    } else if (name === 'twoSlides') {
-      return 'priceTwoSlides';
-    } else if (name === 'fourSlides') {
-      return 'priceFourSlides';
-    } else if (name === 'A3') {
-      return 'priceA3';
-    } else if (name === 'A4') {
-      return 'priceA4';
-    } else if (name === 'A5') {
-      return 'priceA5';
-    } else if (name === 'G80') {
-      return 'priceG80';
-    } else if (name === 'G160') {
-      return 'priceG160';
-    } else if (name === 'G280') {
-      return 'priceG280';
+  public getControlName(name: string, noDDBBPrices?: string): string {
+    if (!noDDBBPrices) {
+      if (name === 'no_ended') {
+        return 'priceNE';
+      } else if (name === 'bound') {
+        return 'priceBound';
+      } else if (name === 'stapled') {
+        return 'priceStapled';
+      } else if (name === 'twoHoles') {
+        return 'priceTwoHoles';
+      } else if (name === 'fourHoles') {
+        return 'priceFourHoles';
+      } else if (name === 'normal') {
+        return 'priceNormal';
+      } else if (name === 'twoPages') {
+        return 'priceTwoPages';
+      } else if (name === 'twoSlides') {
+        return 'priceTwoSlides';
+      } else if (name === 'fourSlides') {
+        return 'priceFourSlides';
+      } else if (name === 'A3') {
+        return 'priceA3';
+      } else if (name === 'A4') {
+        return 'priceA4';
+      } else if (name === 'A5') {
+        return 'priceA5';
+      } else if (name === 'G80') {
+        return 'priceG80';
+      } else if (name === 'G160') {
+        return 'priceG160';
+      } else if (name === 'G280') {
+        return 'priceG280';
+      }
+    } else {
+      if (noDDBBPrices === 'Endeds') {
+        if (name === '0') {
+          return 'priceNE';
+        } else if (name === '1') {
+          return 'priceBound';
+        } else if (name === '2') {
+          return 'priceStapled';
+        } else if (name === '3') {
+          return 'priceTwoHoles';
+        } else if (name === '4') {
+          return 'priceFourHoles';
+        }
+      } else if (noDDBBPrices === 'ImpressionsPerSide') {
+        if (name === '0') {
+          return 'priceNormal';
+        } else if (name === '1') {
+          return 'priceTwoPages';
+        } else if (name === '2') {
+          return 'priceTwoSlides';
+        } else if (name === '3') {
+          return 'priceFourSlides';
+        }
+      } else if (noDDBBPrices === 'SheetSize') {
+        if (name === '0') {
+          return 'priceA3';
+        } else if (name === '1') {
+          return 'priceA4';
+        } else if (name === '2') {
+          return 'priceA5';
+        }
+      } else if (noDDBBPrices === 'Thickness') {
+        if (name === '0') {
+          return 'priceG80';
+        } else if (name === '1') {
+          return 'priceG160';
+        } else if (name === '2') {
+          return 'priceG280';
+        }
+      }
     }
   }
 
