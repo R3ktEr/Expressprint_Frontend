@@ -140,7 +140,7 @@ export class Tab5Page implements OnInit {
       this.finalPrice += document.finishType.price;
       this.finalPrice += document.impressionPerSide.price;
       this.finalPrice += document.isColor.price;
-      this.finalPrice += document.sizes.price;
+      this.finalPrice += document.size.price;
       this.finalPrice += document.thickness.price;
     });
 

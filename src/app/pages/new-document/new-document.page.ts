@@ -9,7 +9,7 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 import { PriceService } from 'src/app/services/prices.service';
 import { Plugins } from '@capacitor/core';
 const { FileSelector } = Plugins;
-//import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
+import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
 import { OrderService } from 'src/app/services/order.service';
 
 
@@ -100,7 +100,7 @@ export class NewDocumentPage implements OnInit {
 
       const copy: Copy=this.actualPrices.Copy[0];
       const color: Color=this.actualPrices.Color.filter(c=>String(c.isColor)===this.formDocument.get('color').value)[0];
-      const sizes: Size=this.actualPrices.Sizes.filter(s=>s.sizeOfSheet===this.formDocument.get('size').value)[0];
+      const size: Size=this.actualPrices.Sizes.filter(s=>s.sheetSize===this.formDocument.get('size').value)[0];
       const thickness: Thickness=this.actualPrices.Thickness.filter(t=>t.thicknessType===this.formDocument.get('thickness').value)[0];
       const ended: Ended=this.actualPrices.Endeds.filter(e=>e.endedType===this.formDocument.get('ended').value)[0];
       const impressionPerSide: ImpressionPerSide=this.actualPrices.ImpressionPerSide.filter(i=>i.impressionsTypes===this.formDocument.get('impressionPerSide').value)[0];
@@ -109,7 +109,7 @@ export class NewDocumentPage implements OnInit {
         copyPrice:copy,
         nCopies:this.formDocument.get('ncopies').value,
         isColor:color,
-        sizes,
+        size,
         thickness,
         isTwoSides:this.formDocument.get('impressionType').value,
         impressionPerSide,

@@ -6,16 +6,16 @@ ion-content.background {
     background: transparent;
 }
 
-.list-header{
-  background-color: white;
-  width: 100%;
-  margin: auto;
+.list-header {
+    background-color: white;
+    width: 100%;
+    margin: auto;
 }
 
-.list-item-header{
-  display: inline-block;
-  width: 50%;
-  margin: auto;
+.list-item-header {
+    display: inline-block;
+    width: 50%;
+    margin: auto;
 }
 
 ion-item::part(native) {
@@ -43,10 +43,6 @@ ion-item::part(native) {
     background: transparentize($color: #ffffff, $amount: 0.10);
 }
 
-.card:hover {
-    cursor: pointer;
-}
-
 .title {
     font-family: 'Courgette-Regular';
     font-size: 30px;
@@ -68,9 +64,13 @@ ion-item::part(native) {
     font-family: 'CrimsonPro-VariableFont';
     font-size: 20px;
     color: black;
-    text-align: center;
+    text-align: start;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.align-end {
+    text-align: end;
 }
 
 .client-name {
@@ -104,4 +104,17 @@ ion-item::part(native) {
     border-top: 4px solid;
     border-color: lightsteelblue;
     background: transparentize($color: #ffffff, $amount: 0.10);
+}
+
+.buttons {
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content:hover {
+    cursor: pointer;
 }

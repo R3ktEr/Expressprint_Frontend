@@ -159,7 +159,15 @@ export class AuthService {
   }
 
   public async checkDatabase(u: _User): Promise<_User>{
-    return this.userService.getUserByMail(u.mail).toPromise();
+    return new Promise<_User>(async (resolve, reject) => {
+      try{
+        let dbUser:_User=await this.userService.getUserByMail(u.mail).toPromise();
+        delete dbUser.userOrders;
+        resolve(dbUser);
+      }catch(err){
+        resolve(err)
+      }
+    })
   }
 
 }

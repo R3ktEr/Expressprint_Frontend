@@ -6,7 +6,7 @@ export interface Document {
   copyPrice: Copy;
   nCopies: number;
   isColor: Color;
-  sizes: Size;
+  size: Size;
   thickness: Thickness;
   isTwoSides: boolean;
   finishType: Ended;
