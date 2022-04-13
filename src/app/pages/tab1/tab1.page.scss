@@ -111,7 +111,7 @@ ion-item::part(native) {
     vertical-align: middle;
 }
 
-.toolbar ion-menu-button{
+.toolbar ion-menu-button {
     display: inline-block;
     width: 10%;
     height: 100%;
@@ -120,12 +120,16 @@ ion-item::part(native) {
 }
 
 .buttons {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 48px;
+    padding-right: 48px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+}
+
+.bt {
+    --background: #3880fff5;
 }
 
 .content:hover {
