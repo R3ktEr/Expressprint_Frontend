@@ -97,6 +97,9 @@ ion-item::part(native) {
     font-size: 30px;
     text-align: center;
     text-decoration: solid;
+    display: inline-block;
+    width: 90%;
+    vertical-align: middle;
 }
 
 .toolbar {
@@ -104,6 +107,16 @@ ion-item::part(native) {
     border-top: 4px solid;
     border-color: lightsteelblue;
     background: transparentize($color: #ffffff, $amount: 0.10);
+    width: 100%;
+    vertical-align: middle;
+}
+
+.toolbar ion-menu-button{
+    display: inline-block;
+    width: 10%;
+    height: 100%;
+    align-self: center;
+    vertical-align: middle;
 }
 
 .buttons {

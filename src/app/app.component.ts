@@ -18,20 +18,21 @@ export class AppComponent {
 
   public async logout(){
     await this.authS.logout();
-    this.router.navigate(['']);
-    this.menu.close();
+    await this.router.navigate(['']);
+    await this.menu.close();
   }
 
   public async goToPrices(){
-    this.router.navigate(['price']);
-    this.menu.close();
+    await this.router.navigate(['price']);
+    await this.menu.close();
+  }
+
+  public async goToOrders(){
+    await this.router.navigate(['private/tabs/tab1']);
+    await this.menu.close();
   }
 
   public disableMenu() {
-    if(this.router.url==='/'){
-      this.menuDisabled=true;
-    }else{
-      this.menuDisabled=false;
-    }
+    this.menuDisabled = this.router.url === '/';
   }
 }

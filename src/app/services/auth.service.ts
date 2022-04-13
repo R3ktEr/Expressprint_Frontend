@@ -147,6 +147,7 @@ export class AuthService {
   }
 
   public async keepSession() {
+    delete this.gUser.userOrders;
     await this.storage.setItem('user', JSON.stringify(this.gUser));
   }
 
