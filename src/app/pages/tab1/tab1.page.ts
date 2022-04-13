@@ -44,7 +44,7 @@ export class Tab1Page {
         this.isAdmin=this.user.admin;
       }
     }catch(err){
-      //console.log(err)
+      console.log(err)
     }
   }
 
@@ -83,10 +83,6 @@ export class Tab1Page {
         this.ordersCopy.push(values);
       });
     });
-  }
-
-  public viewOrder(order: Order): void {
-    this.navController.navigateForward(['private/tabs/tab3', {data: JSON.stringify(order)}]);
   }
 
   public async logout() {

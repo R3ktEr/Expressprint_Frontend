@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalController, NavController, Platform} from '@ionic/angular';
@@ -12,7 +13,6 @@ import {Plugins} from '@capacitor/core';
 const {FileSelector} = Plugins;
 import 'capacitor-file-selector';//TODO: Comentar antes de buildear en android
 import {OrderService} from 'src/app/services/order.service';
-
 
 @Component({
   selector: 'app-new-document',
