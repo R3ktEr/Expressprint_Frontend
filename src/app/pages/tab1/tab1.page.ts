@@ -21,15 +21,17 @@ export class Tab1Page {
   public isAdmin: boolean;
   public orders: Order[];
   private ordersCopy: Order[];
-  private subscription: Subscription;
   private readonly dataIncoming: any;
   private filter: any;
   private readonly noPrices: string;
+  public showPayed: boolean;
+  public showPickedUp: boolean;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
               private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService,
               private modalController: ModalController,) {
     this.ordersCopy = [];
+    
     this.filter = {
       payed: false,
       pickedUp: false
@@ -46,11 +48,16 @@ export class Tab1Page {
     }catch(err){
       console.log(err)
     }
+
+    this.showPayed=true;
+    this.showPickedUp=true;
   }
 
   async ionViewWillEnter() {
     this.user=await this.authS.loadSession();
     this.isAdmin=this.user.admin;
+    
+    await this.notS.presentLoading();
 
     if (this.isAdmin) {
       this.getAllOrders();
@@ -58,15 +65,15 @@ export class Tab1Page {
         await this.notS.presentToast(this.noPrices,'danger');
       }
     } else {
-      await this.notS.presentLoading();
       this.getOrders();
-      await this.notS.dismissLoading();
     }
+
+    await this.notS.dismissLoading();
   }
 
   public getOrders(): void {
     console.log(this.user);
-    this.subscription = this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
+    this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
       this.orders = value;
       this.ordersCopy = [];
       this.orders.forEach(values => {
@@ -76,7 +83,7 @@ export class Tab1Page {
   }
 
   public getAllOrders(): void {
-    this.subscription = this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).subscribe(value => {
+    this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).subscribe(value => {
       this.orders = value;
       this.ordersCopy = [];
       this.orders.forEach(values => {
@@ -90,20 +97,6 @@ export class Tab1Page {
     await this.router.navigate(['']);
   }
 
-  public showOnly(event?, type?: string) {
-    if (type === 'NotDelivered') {
-      this.filter.pickedUp = event.detail.checked;
-    }
-    if (type === 'NotPayed') {
-      this.filter.payed = event.detail.checked;
-    }
-    if(this.filter.payed === true || this.filter.pickedUp === true) {
-      this.orders = this.ordersCopy.filter(obj => obj.payed === this.filter.payed && obj.pickedUp === this.filter.pickedUp);
-    }else{
-      this.orders = this.ordersCopy;
-    }
-  }
-
   async showOrderModal(order: Order) {
     const modal = await this.modalController.create({
       component: OrderDetailsPage,
@@ -115,5 +108,37 @@ export class Tab1Page {
     });
 
     await modal.present();
+  }
+
+  public async changeStatus(order:Order, str:string, status:boolean) {
+    switch(str){
+      case 'payed': order.payed=status;
+                    break;
+      case 'ready': order.ready=status;
+                    break;
+      case 'pickedUp': order.pickedUp=status;
+                    break;
+    }
+
+    await this.orderService.updateOrder(order).toPromise();
+  }
+
+  public showOnly(event?, type?: string) {
+    if (type === 'NotDelivered') {
+      this.filter.pickedUp = event.detail.checked;
+    }
+    if (type === 'NotPayed') {
+      this.filter.payed = event.detail.checked;
+    }
+
+    if(this.filter.pickedUp===true&&this.filter.payed===false){
+      this.orders = (this.ordersCopy.filter(obj => (obj.pickedUp === !this.filter.pickedUp)))
+    }else if(this.filter.payed===true&&this.filter.pickedUp===false){
+      this.orders = this.ordersCopy.filter(obj => (obj.payed === !this.filter.payed));
+    }else if(this.filter.pickedUp===true&&this.filter.payed===true){
+      this.orders = this.ordersCopy.filter(obj => obj.payed === !this.filter.payed && obj.pickedUp === !this.filter.pickedUp);
+    }else{
+      this.orders = this.ordersCopy;
+    }
   }
 }

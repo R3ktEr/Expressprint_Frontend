@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
     <ion-toolbar class="toolbar" color="primary">
-      <ion-menu-button></ion-menu-button>
+        <ion-menu-button></ion-menu-button>
         <ion-title class="titlepage">
             Pedidos
         </ion-title>
@@ -52,29 +52,31 @@
                                 </ion-item>
                                 <ion-item>
                                     <ion-label class="label">Está listo</ion-label>
-                                    <ion-icon *ngIf="order.payed" name="checkmark-circle" class="check-icon align-end"></ion-icon>
-                                    <ion-icon *ngIf="!order.payed" name="close-circle" class="close-icon align-end"></ion-icon>
+                                    <ion-icon *ngIf="order.ready" name="checkmark-circle" class="check-icon align-end"></ion-icon>
+                                    <ion-icon *ngIf="!order.ready" name="close-circle" class="close-icon align-end"></ion-icon>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label class="label">Ha sido recogido</ion-label>
-                                    <ion-icon *ngIf="order.payed" name="checkmark-circle" class="check-icon"></ion-icon>
-                                    <ion-icon *ngIf="!order.payed" name="close-circle" class="close-icon"></ion-icon>
+                                    <ion-icon *ngIf="order.pickedUp" name="checkmark-circle" class="check-icon"></ion-icon>
+                                    <ion-icon *ngIf="!order.pickedUp" name="close-circle" class="close-icon"></ion-icon>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label class="label">Total del pedido: </ion-label>
                                     <ion-label class="label align-end">{{order.finalPrice | currency: 'EUR':'symbol':'1.2-2':'es'}}</ion-label>
                                 </ion-item>
                             </ion-card-content>
-                            <div class="buttons">
-                                <ion-button class="">Pagado
+                            <div class="buttons" *ngIf="isAdmin">
+                                <ion-button class="bt" shape="round" (click)="changeStatus(order, 'payed', !order.payed)">Pagado&nbsp;
                                     <ion-icon *ngIf="order.payed" name="checkmark-circle" class="check-icon align-end"></ion-icon>
                                     <ion-icon *ngIf="!order.payed" name="close-circle" class="close-icon align-end"></ion-icon>
                                 </ion-button>
-                                <ion-button>
-                                    Listo
+                                <ion-button class="bt" shape="round" (click)="changeStatus(order, 'ready', !order.ready)">Listo&nbsp;
+                                    <ion-icon *ngIf="order.ready" name="checkmark-circle" class="check-icon align-end"></ion-icon>
+                                    <ion-icon *ngIf="!order.ready" name="close-circle" class="close-icon align-end"></ion-icon>
                                 </ion-button>
-                                <ion-button>
-                                    Recogido
+                                <ion-button class="bt" shape="round" (click)="changeStatus(order, 'pickedUp', !order.pickedUp)">Recogido&nbsp;
+                                    <ion-icon *ngIf="order.pickedUp" name="checkmark-circle" class="check-icon align-end"></ion-icon>
+                                    <ion-icon *ngIf="!order.pickedUp" name="close-circle" class="close-icon align-end"></ion-icon>
                                 </ion-button>
                             </div>
                         </ion-card-content>

@@ -29,6 +29,7 @@ export class Tab5Page implements OnInit {
   public userDocuments: Document[];
   public finalPrice: number;
   private orderDate: string;
+  private date: string;
   private formData: FormData = new FormData();
 
 
@@ -55,6 +56,7 @@ export class Tab5Page implements OnInit {
   async formatDate(value: string) {
     console.log(value);
     this.pickupDate = formatDate(Date.now(), 'YYYY-MM-ddTHH:mm:ss', this.locale)
+    this.date = format(parseISO(value), 'dd-MM-yyyy HH:mm');
 
     console.log(this.pickupDate);
   }
