@@ -21,18 +21,18 @@ export class Tab1Page {
   public user: _User;
   public isAdmin: boolean;
   public orders: Order[];
+  public showPayed: boolean;
+  public showPickedUp: boolean;
   private ordersCopy: Order[];
   private readonly dataIncoming: any;
   private filter: any;
   private readonly noPrices: string;
-  public showPayed: boolean;
-  public showPickedUp: boolean;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
               private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService,
               private modalController: ModalController,) {
     this.ordersCopy = [];
-    
+
     this.filter = {
       payed: false,
       pickedUp: false
@@ -47,7 +47,7 @@ export class Tab1Page {
         this.isAdmin=this.user.admin;
       }
     }catch(err){
-      console.log(err)
+      console.log(err);
     }
 
     this.showPayed=false;
@@ -57,7 +57,7 @@ export class Tab1Page {
   async ionViewWillEnter() {
     this.user=await this.authS.loadSession();
     this.isAdmin=this.user.admin;
-    
+
     await this.notS.presentLoading();
 
     if (this.isAdmin) {

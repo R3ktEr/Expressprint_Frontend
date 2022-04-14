@@ -13,13 +13,13 @@ import { PushNotifications } from '@capacitor/push-notifications';
 export class FcmService {
 
   constructor(private router: Router) { }
- 
+
   initPush() {
     if (Capacitor.getPlatform() !== 'web') {
       this.registerPush();
     }
   }
- 
+
   private registerPush() {
     PushNotifications.requestPermissions().then((permission) => {
       if (permission.receive==='granted') {
@@ -29,7 +29,7 @@ export class FcmService {
         // No permission for push granted
       }
     });
- 
+
     PushNotifications.addListener(
       'registration',
       (token: Token) => {
@@ -47,7 +47,7 @@ export class FcmService {
         console.log('Push received: ' + JSON.stringify(notification));
       }
     );
- 
+
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       async (notification: ActionPerformed) => {

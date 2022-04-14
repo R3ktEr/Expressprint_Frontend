@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: 'price',
     loadChildren: () => import('./pages/price/prices.module').then(m => m.PricesPageModule)
+  },  {
+    path: 'prices-history',
+    loadChildren: () => import('./pages/prices-history/prices-history.module').then( m => m.PricesHistoryPageModule)
   }
+
 
 
 

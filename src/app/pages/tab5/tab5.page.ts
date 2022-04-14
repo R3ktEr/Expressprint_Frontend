@@ -26,10 +26,10 @@ export class Tab5Page implements OnInit {
 
   public pickupDate: string;
   public dateTime: string;
+  public date: string;
   public userDocuments: Document[];
   public finalPrice: number;
   private orderDate: string;
-  private date: string;
   private formData: FormData = new FormData();
 
 

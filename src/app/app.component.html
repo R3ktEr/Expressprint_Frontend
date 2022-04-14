@@ -12,11 +12,15 @@
               </ion-item>
               <ion-item (click)="goToPrices()">
                   <ion-label>Listado de precios</ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-button class="logout" expand="full" size="medium" shape="round" color="primary" (click)="logout()">
-                        <ion-icon name="arrow-back-outline"></ion-icon>Cerrar Sesion</ion-button>
-                </ion-item>
+              </ion-item>
+              <ion-item *ngIf="isAdmin" (click)="goToHistory()">
+                <ion-label>Historial de precios</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-button class="logout" expand="full" size="medium" shape="round" color="primary" (click)="logout()">
+                  <ion-icon name="arrow-back-outline"></ion-icon>Cerrar Sesion
+                </ion-button>
+              </ion-item>
             </ion-list>
         </ion-content>
     </ion-menu>

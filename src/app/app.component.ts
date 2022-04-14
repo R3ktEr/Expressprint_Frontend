@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonMenu, Platform } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
+import {_User} from './model/User';
 import { FcmService } from './services/fcm.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class AppComponent {
   @ViewChild(IonMenu) menu: IonMenu;
 
   public menuDisabled: boolean;
+  public isAdmin: boolean;
 
   constructor(private authS: AuthService,
     private router: Router,
@@ -47,7 +49,18 @@ export class AppComponent {
     await this.menu.close();
   }
 
+  public async goToHistory(){
+    await this.router.navigate(['prices-history']);
+    await this.menu.close();
+  }
+
   public disableMenu() {
     this.menuDisabled = this.router.url === '/';
+    this.authS.loadSession().then((user: _User)=>{
+      if(user){
+        this.isAdmin = user.admin;
+      }
+    });
   }
+
 }
