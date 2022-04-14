@@ -20,18 +20,18 @@ export class Tab1Page {
   public user: _User;
   public isAdmin: boolean;
   public orders: Order[];
+  public showPayed: boolean;
+  public showPickedUp: boolean;
   private ordersCopy: Order[];
   private readonly dataIncoming: any;
   private filter: any;
   private readonly noPrices: string;
-  public showPayed: boolean;
-  public showPickedUp: boolean;
 
   constructor(private orderService: OrderService, private authS: AuthService, private router: Router, private navController: NavController,
               private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService,
               private modalController: ModalController,) {
     this.ordersCopy = [];
-    
+
     this.filter = {
       payed: false,
       pickedUp: false
@@ -46,7 +46,7 @@ export class Tab1Page {
         this.isAdmin=this.user.admin;
       }
     }catch(err){
-      console.log(err)
+      console.log(err);
     }
 
     this.showPayed=true;
@@ -56,7 +56,7 @@ export class Tab1Page {
   async ionViewWillEnter() {
     this.user=await this.authS.loadSession();
     this.isAdmin=this.user.admin;
-    
+
     await this.notS.presentLoading();
 
     if (this.isAdmin) {
@@ -132,7 +132,7 @@ export class Tab1Page {
     }
 
     if(this.filter.pickedUp===true&&this.filter.payed===false){
-      this.orders = (this.ordersCopy.filter(obj => (obj.pickedUp === !this.filter.pickedUp)))
+      this.orders = (this.ordersCopy.filter(obj => (obj.pickedUp === !this.filter.pickedUp)));
     }else if(this.filter.payed===true&&this.filter.pickedUp===false){
       this.orders = this.ordersCopy.filter(obj => (obj.payed === !this.filter.payed));
     }else if(this.filter.pickedUp===true&&this.filter.payed===true){
