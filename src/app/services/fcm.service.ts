@@ -36,11 +36,11 @@ export class FcmService {
         console.log('My token: ' + JSON.stringify(token));
       }
     );
-
+ 
     PushNotifications.addListener('registrationError', (error: any) => {
       console.log('Error: ' + JSON.stringify(error));
     });
-
+ 
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotificationSchema) => {

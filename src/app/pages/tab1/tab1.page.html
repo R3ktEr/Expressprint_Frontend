@@ -6,14 +6,23 @@
         </ion-title>
     </ion-toolbar>
     <ion-list-header class="list-header" *ngIf="isAdmin">
-        <ion-item class="list-item-header">
+        <ion-chip class="list-item-header" (click)="changePickedUp()">
+            <ion-label class="chip">Mostrar no pagados</ion-label>
+            <ion-icon *ngIf="this.showPayed" name="checkmark-circle" class="check-icon align-end"></ion-icon>
+        </ion-chip>
+        <ion-chip class="list-item-header" (click)="changePayed()">
+            <ion-label class="chip">Mostrar no entregados</ion-label>
+            <ion-icon *ngIf="this.showPickedUp" name="checkmark-circle" class="check-icon align-end"></ion-icon>
+        </ion-chip>
+
+        <!-- <ion-item class="list-item-header">
             <ion-label>No pagados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotPayed')"></ion-checkbox>
         </ion-item>
         <ion-item class="list-item-header">
             <ion-label>No entregados</ion-label>
             <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotDelivered')"></ion-checkbox>
-        </ion-item>
+        </ion-item>-->
     </ion-list-header>
 </ion-header>
 

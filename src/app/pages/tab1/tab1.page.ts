@@ -10,6 +10,7 @@ import {map} from 'rxjs/operators';
 import {LocalStorageService} from '../../services/local-storage.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { OrderDetailsPage } from '../order-details/order-details.page';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-tab1',
@@ -49,8 +50,8 @@ export class Tab1Page {
       console.log(err);
     }
 
-    this.showPayed=true;
-    this.showPickedUp=true;
+    this.showPayed=false;
+    this.showPickedUp=false;
   }
 
   async ionViewWillEnter() {
@@ -67,6 +68,8 @@ export class Tab1Page {
     } else {
       this.getOrders();
     }
+
+    //this.resetBadgeCount()
 
     await this.notS.dismissLoading();
   }
@@ -123,22 +126,32 @@ export class Tab1Page {
     await this.orderService.updateOrder(order).toPromise();
   }
 
-  public showOnly(event?, type?: string) {
-    if (type === 'NotDelivered') {
-      this.filter.pickedUp = event.detail.checked;
-    }
-    if (type === 'NotPayed') {
-      this.filter.payed = event.detail.checked;
-    }
-
-    if(this.filter.pickedUp===true&&this.filter.payed===false){
-      this.orders = (this.ordersCopy.filter(obj => (obj.pickedUp === !this.filter.pickedUp)));
-    }else if(this.filter.payed===true&&this.filter.pickedUp===false){
-      this.orders = this.ordersCopy.filter(obj => (obj.payed === !this.filter.payed));
-    }else if(this.filter.pickedUp===true&&this.filter.payed===true){
-      this.orders = this.ordersCopy.filter(obj => obj.payed === !this.filter.payed && obj.pickedUp === !this.filter.pickedUp);
+  public filterOrders() {
+    if(this.showPickedUp===true&&this.showPayed===false){
+      this.orders = (this.ordersCopy.filter(obj => (obj.pickedUp === !this.showPickedUp)))
+    }else if(this.showPayed===true&&this.showPickedUp===false){
+      this.orders = this.ordersCopy.filter(obj => (obj.payed === !this.showPayed));
+    }else if(this.showPickedUp===true&&this.showPayed===true){
+      this.orders = this.ordersCopy.filter(obj => obj.payed === !this.showPayed && obj.pickedUp === !this.showPickedUp);
     }else{
       this.orders = this.ordersCopy;
     }
+  }
+
+  public changePickedUp() {
+    this.showPayed=!this.showPayed;
+
+    this.filterOrders();
+  }
+
+  public changePayed() {
+    this.showPickedUp=!this.showPickedUp;
+
+    this.filterOrders();
+  }
+
+  
+  resetBadgeCount() {
+    PushNotifications.removeAllDeliveredNotifications();
   }
 }
