@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonMenu } from '@ionic/angular';
+import { IonMenu, Platform } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
+import { FcmService } from './services/fcm.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,21 @@ export class AppComponent {
   public menuDisabled: boolean;
 
   constructor(private authS: AuthService,
-    private router: Router) {}
+    private router: Router,
+    private platform: Platform,
+    private fcmService: FcmService) {
+
+      this.initializeApp();
+    }
+
+  initializeApp() {
+    if(this.platform.is("android")) {
+      this.platform.ready().then(() => {
+        // Trigger the push setup 
+        this.fcmService.initPush();
+      });
+    }
+  }
 
   public async logout(){
     await this.authS.logout();

@@ -14,7 +14,7 @@ ion-content.background {
 
 .list-item-header {
     display: inline-block;
-    width: 50%;
+    width: auto;
     margin: auto;
 }
 
@@ -134,4 +134,8 @@ ion-item::part(native) {
 
 .content:hover {
     cursor: pointer;
+}
+
+.chip {
+    vertical-align: middle;
 }
