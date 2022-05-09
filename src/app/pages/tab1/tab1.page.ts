@@ -78,6 +78,7 @@ export class Tab1Page {
     console.log(this.user);
     this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
       this.orders = value;
+      this.sortOrdersByDate();
       this.ordersCopy = [];
       this.orders.forEach(values => {
         this.ordersCopy.push(values);
@@ -88,11 +89,18 @@ export class Tab1Page {
   public getAllOrders(): void {
     this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).subscribe(value => {
       this.orders = value;
+      this.sortOrdersByDate();
       this.ordersCopy = [];
       this.orders.forEach(values => {
         this.ordersCopy.push(values);
       });
     });
+  }
+
+  private sortOrdersByDate(){
+    this.orders = this.orders.sort(
+      (order1, order2) => new Date(order2.orderDate).getTime() - new Date(order1.orderDate).getTime(),
+    );
   }
 
   public async logout() {
