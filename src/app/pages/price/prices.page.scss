@@ -7,6 +7,7 @@ ion-content.background {
     font-size: 30px;
     text-align: center;
     text-decoration: solid;
+    margin-top: 10px
 }
 
 .subtitle {
@@ -119,6 +120,7 @@ ion-item::part(native) {
     margin-right: auto;
     margin-top: 10px;
     text-align: center;
+    margin: 18px;
 }
 
 .orderbtn {
@@ -237,4 +239,23 @@ ion-icon {
     overflow: auto;
     vertical-align: middle;
     display: inline-block;
+}
+
+.separator {
+    border-top: 2px solid lightsteelblue;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.row-colored {
+    background-color: #70add963;
+    padding: inherit;
+}
+
+.no-padding {
+    padding: inherit;
+}
+
+.input-padding {
+    padding-left: 13px !important;
 }

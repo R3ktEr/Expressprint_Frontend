@@ -85,6 +85,8 @@ ion-content.background {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .btn {
@@ -97,6 +99,31 @@ ion-content.background {
 
 .transparent {
     background: transparent;
+}
+
+.register {
+    display: inline-block;
+    width: -webkit-fill-available;
+    margin-inline-end: inherit;
+}
+
+.register-icon {
+    margin-right: auto;
+}
+
+.login {
+    padding-inline-end: inherit;
+    display: inline-block;
+}
+
+.separator {
+    border-top: 2px solid lightsteelblue;
+    margin-top: 10px;
+}
+
+.disclamer {
+    display: block;
+    max-width: fit-content;
 }
 
 ion-item::part(native) {

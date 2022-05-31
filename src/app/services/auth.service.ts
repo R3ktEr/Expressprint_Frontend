@@ -166,7 +166,7 @@ export class AuthService {
         delete dbUser.userOrders;
         resolve(dbUser);
       }catch(err){
-        resolve(err)
+        reject(err)
       }
     })
   }

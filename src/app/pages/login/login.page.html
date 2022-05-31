@@ -5,22 +5,26 @@
             <ion-card-title class="card-title" color="secondary">Iniciar Sesión</ion-card-title>
         </ion-card-header>
         <ion-card-content class="card-content">
-            <form [formGroup]="form" (ngSubmit)="loginWithMail()">
-                <ion-input class="input" color="secondary" placeholder="Correo" formControlName="email"></ion-input>
+            <!--<form [formGroup]="form" (ngSubmit)="loginWithMail()">-->
+            <!--<ion-input class="input" color="secondary" placeholder="Correo" formControlName="email"></ion-input>
                 <ion-input class="input" color="secondary" type="password" placeholder="Contraseña" formControlName="password"></ion-input>
-                <ion-button class="login-button" shape="round">
-                    <!--<ion-button class="login-button" type="submit" shape="round">-->
+                <ion-button class="login-button" type="submit" shape="round">
+                    <ion-button class="login-button" type="submit" shape="round">
                     <ion-icon name="person"></ion-icon>&nbsp;Iniciar Sesion
-                </ion-button>
-                <ion-button class="register-button" shape="round">
-                    <!--<ion-button class="register-button" (click)="register()" shape="round">-->
-                    <ion-icon name="person-add"></ion-icon>&nbsp;Registrarse
-                </ion-button>
-                <ion-label class="orlabel">O</ion-label>
-                <ion-button shape="round" (click)="signin()">
-                    <ion-icon name="logo-google"></ion-icon>&nbsp;Iniciar Sesion con Google
-                </ion-button>
-            </form>
+                </ion-button>-->
+            <ion-button class="login" shape="round" (click)="signin()">
+                <ion-icon name="logo-google"></ion-icon>&nbsp;Iniciar Sesion con Google
+            </ion-button>
+            <ion-label class="orlabel">¿No tienes cuenta?</ion-label>
+            <ion-button class="register" shape="round" href="https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp" target="_blank">
+                <!--<ion-button class="register-button" (click)="register()" shape="round">-->
+                <ion-icon class="register-icon" name="person-add"></ion-icon>&nbsp;Registrarse con Google
+            </ion-button>
+            <!--</form>-->
+            <hr class="separator" />
+            <ion-label class="disclamer">
+                * Esta aplicación usa los servicios de Google para su normal funcionamiento. Al usar dicha aplicación, usted acepta estar de acuerdo con la política de privacidad de Google.
+            </ion-label>
         </ion-card-content>
     </ion-card>
 </ion-content>
