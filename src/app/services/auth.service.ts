@@ -73,6 +73,8 @@ export class AuthService {
   public async login(userdata?): Promise<_User>{
     return new Promise(async (resolve,reject)=>{
 
+      var notFound;
+
       if(!userdata){
         try{
           this.gUser=await GoogleAuth.signIn();
@@ -80,6 +82,7 @@ export class AuthService {
             googleId: this.gUser.id,
             mail: this.gUser.email,
             name: this.gUser.name,
+            phoneNumber: 0,
             admin: false,
             disabled: false,
           };
@@ -87,8 +90,12 @@ export class AuthService {
             this.gUser = await this.checkDatabase(this.gUser);
             await this.keepSession();
           }catch(notFound){
+            console.log("Crea usuario")
+            console.log(notFound)
+                   
+            this.gUser = await this.userService.createUpdateUser(this.gUser).toPromise();
+
             await this.keepSession();
-            this.userService.createUpdateUser(this.gUser);
           }
 
           resolve(this.gUser);

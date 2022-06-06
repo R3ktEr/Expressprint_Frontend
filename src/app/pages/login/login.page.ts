@@ -51,12 +51,13 @@ export class LoginPage implements OnInit {
   public async signin() {
 
     try {
+      this.notS.presentLoading();
       const user: _User = await this.authS.login();
-      console.log(user);
+      this.notS.dismissLoading();
+
       await this.navCtrl.navigateForward(['private/tabs/tab1', {user: JSON.stringify(user)}]);
-
-
     } catch (err) {
+      this.notS.dismissLoading();
       console.error(err);
     }
   }

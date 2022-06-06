@@ -156,28 +156,46 @@ export class PricesPage implements OnInit {
       value.forEach(value1 => {
         if(value1.Color === undefined){
           this.noPrices = true;
-          this.prices = undefined;
-        }else{
+          this.prices = this.noDDBBPrices;
+        }else{       
+
+          value1.Endeds[0].endedType = 0;
+          value1.Endeds[1].endedType = 1;
+          value1.Endeds[2].endedType = 2;
+          value1.Endeds[3].endedType = 3;
+          value1.Endeds[4].endedType = 4;
+          value1.ImpressionPerSide[0].impressionsTypes = 0;
+          value1.ImpressionPerSide[1].impressionsTypes = 1;
+          value1.ImpressionPerSide[2].impressionsTypes = 2;
+          value1.ImpressionPerSide[3].impressionsTypes = 3;
+          value1.Sizes[0].sheetSize = 0;
+          value1.Sizes[1].sheetSize = 1;
+          value1.Sizes[2].sheetSize = 2;
+          value1.Thickness[0].thicknessType = 0;
+          value1.Thickness[1].thicknessType = 1;
+          value1.Thickness[2].thicknessType = 2;
+
           this.prices = value1;
-          this.formPrices.get('priceBnW').setValue(value1.Color[0].price);
-          this.formPrices.get('priceColor').setValue(value1.Color[1].price);
-          this.formPrices.get('priceCopy').setValue(value1.Copy[0].price);
-          this.formPrices.get('priceNE').setValue(value1.Endeds[0].price);
-          this.formPrices.get('priceBound').setValue(value1.Endeds[1].price);
-          this.formPrices.get('priceStapled').setValue(value1.Endeds[2].price);
-          this.formPrices.get('priceTwoHoles').setValue(value1.Endeds[3].price);
-          this.formPrices.get('priceFourHoles').setValue(value1.Endeds[4].price);
-          this.formPrices.get('priceNormal').setValue(value1.ImpressionPerSide[0].price);
-          this.formPrices.get('priceTwoPages').setValue(value1.ImpressionPerSide[1].price);
-          this.formPrices.get('priceTwoSlides').setValue(value1.ImpressionPerSide[2].price);
-          this.formPrices.get('priceFourSlides').setValue(value1.ImpressionPerSide[3].price);
-          this.formPrices.get('priceA3').setValue(value1.Sizes[0].price);
-          this.formPrices.get('priceA4').setValue(value1.Sizes[1].price);
-          this.formPrices.get('priceA5').setValue(value1.Sizes[2].price);
-          this.formPrices.get('priceG80').setValue(value1.Thickness[0].price);
-          this.formPrices.get('priceG160').setValue(value1.Thickness[1].price);
-          this.formPrices.get('priceG280').setValue(value1.Thickness[2].price);
         }
+
+        this.formPrices.get('priceBnW').setValue(this.prices.Color[0].price);
+        this.formPrices.get('priceColor').setValue(this.prices.Color[1].price);
+        this.formPrices.get('priceCopy').setValue(this.prices.Copy[0].price);
+        this.formPrices.get('priceNE').setValue(this.prices.Endeds[0].price);
+        this.formPrices.get('priceBound').setValue(this.prices.Endeds[1].price);
+        this.formPrices.get('priceStapled').setValue(this.prices.Endeds[2].price);
+        this.formPrices.get('priceTwoHoles').setValue(this.prices.Endeds[3].price);
+        this.formPrices.get('priceFourHoles').setValue(this.prices.Endeds[4].price);
+        this.formPrices.get('priceNormal').setValue(this.prices.ImpressionPerSide[0].price);
+        this.formPrices.get('priceTwoPages').setValue(this.prices.ImpressionPerSide[1].price);
+        this.formPrices.get('priceTwoSlides').setValue(this.prices.ImpressionPerSide[2].price);
+        this.formPrices.get('priceFourSlides').setValue(this.prices.ImpressionPerSide[3].price);
+        this.formPrices.get('priceA3').setValue(this.prices.Sizes[0].price);
+        this.formPrices.get('priceA4').setValue(this.prices.Sizes[1].price);
+        this.formPrices.get('priceA5').setValue(this.prices.Sizes[2].price);
+        this.formPrices.get('priceG80').setValue(this.prices.Thickness[0].price);
+        this.formPrices.get('priceG160').setValue(this.prices.Thickness[1].price);
+        this.formPrices.get('priceG280').setValue(this.prices.Thickness[2].price);
       });
     });
   }
