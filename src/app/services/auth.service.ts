@@ -26,7 +26,6 @@ export class AuthService {
         await this.firebase.createUserWithEmailAndPassword(userdata.email,
           userdata.password).then(response => {
             this.gUser = response.user;
-            console.log(this.gUser);
           });
           this.loggedWithMail=true;
 
@@ -45,7 +44,6 @@ export class AuthService {
             reject('El usuario ya existe en la base de datos');
           }catch(notFound){
             this.gUser = await this.userService.createUpdateUser(user).toPromise();
-            console.log(this.gUser);
             await this.keepSession();
             resolve(this.gUser);
           }
@@ -89,10 +87,7 @@ export class AuthService {
           try{
             this.gUser = await this.checkDatabase(this.gUser);
             await this.keepSession();
-          }catch(notFound){
-            console.log("Crea usuario")
-            console.log(notFound)
-                   
+          }catch(notFound){                 
             this.gUser = await this.userService.createUpdateUser(this.gUser).toPromise();
 
             await this.keepSession();
@@ -100,7 +95,7 @@ export class AuthService {
 
           resolve(this.gUser);
         }catch(err){
-          //console.log(err);
+          console.log(err);
           reject(err);
         }
       }else{
@@ -115,7 +110,6 @@ export class AuthService {
             disabled:false,
           };
 
-          console.log(user);
           this.gUser = user;
           try{
             this.gUser = await this.checkDatabase(user);

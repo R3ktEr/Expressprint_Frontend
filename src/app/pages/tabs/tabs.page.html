@@ -6,18 +6,7 @@
             <ion-label>Pedidos</ion-label>
         </ion-tab-button>
 
-        <!--
-        <ion-tab-button tab="tab2" [disabled]="true">
-            <ion-icon name="ellipse"></ion-icon>
-            <ion-label>Tab 2</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="tab3" [disabled]="true">
-            <ion-icon name="square"></ion-icon>
-            <ion-label>Tab 3</ion-label>
-        </ion-tab-button>
-    -->
-        <ion-tab-button tab="tab2">
+        <ion-tab-button tab="tab2" *ngIf="!isAdmin">
             <ion-icon name="duplicate-outline"></ion-icon>
             <ion-label>Nuevo Pedido</ion-label>
         </ion-tab-button>

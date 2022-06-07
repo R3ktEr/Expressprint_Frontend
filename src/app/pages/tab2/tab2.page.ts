@@ -3,7 +3,7 @@ import { _User } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { ViewChild } from '@angular/core';
-import { IonDatetime, ModalController } from '@ionic/angular';
+import { IonDatetime, ModalController, NavController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { NewDocumentPage } from '../new-document/new-document.page';
 import { Order } from 'src/app/model/Order';
@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 import { Document } from 'src/app/model/Document';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
+import { PriceService } from 'src/app/services/prices.service';
 
 @Component({
   selector: 'app-tab2',
@@ -34,31 +35,37 @@ export class Tab2Page {
 
 
   constructor(private authS: AuthService, private notS: NotificationsService, private modalController: ModalController,
-              @Inject(LOCALE_ID) private locale: string, private orderService: OrderService, private router: Router) {
+              @Inject(LOCALE_ID) private locale: string, private orderService: OrderService, private router: Router,
+              private pricesService:PriceService, private navCtrl:NavController) {
     this.userDocuments = [];
     this.finalPrice = 0;
     this.pickupDate = '';
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
   }
 
   async ionViewWillEnter() {
     await this.notS.presentLoading();
+    var actualPrices = (await this.pricesService.getAllPrices().toPromise())[0];
 
     this.user = await this.authS.loadSession();
 
     this.orderDate = formatDate(Date.now(), 'YYYY-MM-ddTHH:mm:ss', this.locale);
 
+    if(actualPrices.Color == null || actualPrices.Copy == null || actualPrices.Endeds == null || actualPrices.ImpressionPerSide == null ||
+      actualPrices.Sizes == null || actualPrices.Thickness == null ){
+      await this.navCtrl.navigateForward(['private/tabs/tab1']);
+      await this.notS.presentToast("Error: No hay un listado de precios definidos en la base de datos", "danger")
+    }
+
     await this.notS.dismissLoading();
   }
 
   async formatDate(value: string) {
-    console.log(value);
-    this.pickupDate = formatDate(Date.now(), 'YYYY-MM-ddTHH:mm:ss', this.locale)
+    this.pickupDate = formatDate(value, 'YYYY-MM-ddTHH:mm:ss', this.locale)
     this.date = format(parseISO(value), 'dd-MM-yyyy HH:mm');
-
-    console.log(this.pickupDate);
   }
 
   async addOrderModal() {
@@ -103,13 +110,10 @@ export class Tab2Page {
       };
 
       const documentLinks= await this.orderService.uploadDocument(this.formData, this.user.name, this.user.mail).toPromise();
-      console.log(documentLinks.constructor.name);
 
       let links: string[];
 
       Object.keys(documentLinks).forEach(key=>{
-        console.log('key', key , ' value :', documentLinks[key]);
-
         links=documentLinks[key];
       });
 
@@ -120,11 +124,12 @@ export class Tab2Page {
         i++;
       });
 
-      console.log(order);
-
       const orderUploaded = await this.orderService.createOrder(order).toPromise();
-      console.log(orderUploaded);
-      console.log('Pedido subido');
+
+      this.userDocuments = [];
+      this.finalPrice = 0;
+      this.dateTime = '';
+      this.date=null;
 
       await this.notS.dismissLoading();
 
@@ -145,5 +150,19 @@ export class Tab2Page {
     });
 
     this.finalPrice = Math.round((this.finalPrice + Number.EPSILON) * 100) / 100;
+  }
+
+  public async discardOrder() {
+    var confirmation = await this.notS.presentAlertConfirm("Descartar pedido", "¿Confirmas que quieres descartar este pedido?", "Si", "No")
+
+    if(confirmation){
+      this.userDocuments = [];
+      this.finalPrice = 0;
+      this.dateTime = '';
+      this.date=null;
+
+      this.notS.presentToast("¡Pedido descartado!", "success");
+      await this.navCtrl.navigateForward(['private/tabs/tab1']);
+    }
   }
 }

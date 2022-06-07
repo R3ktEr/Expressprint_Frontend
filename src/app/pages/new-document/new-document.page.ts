@@ -47,7 +47,6 @@ export class NewDocumentPage implements OnInit {
 
   async ionViewWillEnter() {
     this.actualPrices = (await this.pricesService.getAllPrices().toPromise())[0];
-    console.log(this.actualPrices);
 
     let prices = 0;
     if (this.actualPrices.Copy) {
@@ -80,9 +79,9 @@ export class NewDocumentPage implements OnInit {
         prices++;
       });
     }
-    if (prices !== 18) {
+    if (prices != 18) {
       //Hay que cambiarlo
-      await this.navCtrl.navigateForward(['private/tabs/tab1', {precios: 'No hay precios en la base de datos'}]);
+      await this.navCtrl.navigateForward(['private/tabs/tab1']);
     }
   }
 
@@ -122,7 +121,7 @@ export class NewDocumentPage implements OnInit {
         //url
       };
 
-      console.log(newDocument);
+      //console.log(newDocument);
 
       //console.log(new Date().toLocaleString())
 

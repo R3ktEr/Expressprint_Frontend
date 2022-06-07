@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content class="background" [fullscreen]="true">
-    <ion-list class="transparent">
+    <ion-list *ngIf="this.orders!=null" class="transparent">
         <ion-item-sliding *ngFor="let order of orders; let i=index">
             <ion-item>
                 <div class="flex">
@@ -85,4 +85,9 @@
             </ion-item>
         </ion-item-sliding>
     </ion-list>
+    <div *ngIf="this.orders?.length==0">
+        <div class="no-prices">
+            <ion-label class="no-prices-label">No se han encontrado pedidos</ion-label>
+        </div>
+    </div>
 </ion-content>

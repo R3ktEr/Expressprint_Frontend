@@ -144,3 +144,17 @@ ion-item::part(native) {
 .chip {
     vertical-align: middle;
 }
+
+.no-prices {
+    display: flex;
+    background-color: aquamarine;
+    width: fit-content;
+    min-width: 60vw;
+    min-height: 25vh;
+    margin: 30vh 20%;
+}
+
+.no-prices-label {
+    display: block;
+    margin: auto;
+}

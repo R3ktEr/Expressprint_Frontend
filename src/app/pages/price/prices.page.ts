@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EndedType, ImpressionsTypes, SheetSize, ThicknessType} from '../../model/Enums';
 import {NotificationsService} from '../../services/notifications.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-price',
@@ -299,7 +300,7 @@ export class PricesPage implements OnInit {
       ]
     }];
     await this.notS.presentLoading();
-    console.log(newPricesArray);
+   
     await this.priceService.changeAllPrices(newPricesArray).toPromise().then(async () => {
       await this.notS.presentToast('Precios actualizados correctamente','success');
       await this.getPrices();
@@ -310,39 +311,6 @@ export class PricesPage implements OnInit {
   }
 
   public getControlName(name: string, noDDBBPrices?: string): string {
-    if (!noDDBBPrices) {
-      if (name === 'no_ended') {
-        return 'priceNE';
-      } else if (name === 'bound') {
-        return 'priceBound';
-      } else if (name === 'stapled') {
-        return 'priceStapled';
-      } else if (name === 'twoHoles') {
-        return 'priceTwoHoles';
-      } else if (name === 'fourHoles') {
-        return 'priceFourHoles';
-      } else if (name === 'normal') {
-        return 'priceNormal';
-      } else if (name === 'twoPages') {
-        return 'priceTwoPages';
-      } else if (name === 'twoSlides') {
-        return 'priceTwoSlides';
-      } else if (name === 'fourSlides') {
-        return 'priceFourSlides';
-      } else if (name === 'A3') {
-        return 'priceA3';
-      } else if (name === 'A4') {
-        return 'priceA4';
-      } else if (name === 'A5') {
-        return 'priceA5';
-      } else if (name === 'G80') {
-        return 'priceG80';
-      } else if (name === 'G160') {
-        return 'priceG160';
-      } else if (name === 'G280') {
-        return 'priceG280';
-      }
-    } else {
       if (noDDBBPrices === 'Endeds') {
         if (name === '0') {
           return 'priceNE';
@@ -382,7 +350,7 @@ export class PricesPage implements OnInit {
           return 'priceG280';
         }
       }
-    }
+    
   }
 
 }
