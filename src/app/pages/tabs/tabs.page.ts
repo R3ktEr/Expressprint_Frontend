@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { _User } from 'src/app/model/User';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  public isAdmin:boolean;
 
+  constructor(private authS:AuthService) {
+    
+  }
+
+  ionViewWillEnter() {
+    this.authS.loadSession().then((user: _User)=>{
+      if(user){
+        this.isAdmin = user.admin;
+      }
+    });
+  }
 }

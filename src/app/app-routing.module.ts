@@ -19,17 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'tab5',
-    loadChildren: () => import('./pages/tab5/tab5.module').then( m => m.Tab5PageModule)
-  },
-  {
     path: 'price',
     loadChildren: () => import('./pages/price/prices.module').then(m => m.PricesPageModule)
-  },  {
+  },
+  {
     path: 'prices-history',
     loadChildren: () => import('./pages/prices-history/prices-history.module').then( m => m.PricesHistoryPageModule)
   }

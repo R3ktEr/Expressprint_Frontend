@@ -51,12 +51,16 @@ export class LoginPage implements OnInit {
   public async signin() {
 
     try {
+      this.notS.presentLoading();
       const user: _User = await this.authS.login();
-      console.log(user);
+      this.notS.dismissLoading();
+
       await this.navCtrl.navigateForward(['private/tabs/tab1', {user: JSON.stringify(user)}]);
 
-
+      this.notS.presentToast("Sesion iniciada con exito", "success")
     } catch (err) {
+      this.notS.dismissLoading();
+      this.notS.presentToast("Error al iniciar sesion", "danger")
       console.error(err);
     }
   }

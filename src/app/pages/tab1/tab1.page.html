@@ -2,7 +2,7 @@
     <ion-toolbar class="toolbar" color="primary">
         <ion-menu-button></ion-menu-button>
         <ion-title class="titlepage">
-            Pedidos
+            <ion-label class="title-label">Pedidos</ion-label>
         </ion-title>
     </ion-toolbar>
     <ion-list-header class="list-header" *ngIf="isAdmin">
@@ -14,20 +14,11 @@
             <ion-label class="chip">Mostrar no entregados</ion-label>
             <ion-icon *ngIf="this.showPickedUp" name="checkmark-circle" class="check-icon align-end"></ion-icon>
         </ion-chip>
-
-        <!-- <ion-item class="list-item-header">
-            <ion-label>No pagados</ion-label>
-            <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotPayed')"></ion-checkbox>
-        </ion-item>
-        <ion-item class="list-item-header">
-            <ion-label>No entregados</ion-label>
-            <ion-checkbox slot="end" (ionChange)="showOnly($event, 'NotDelivered')"></ion-checkbox>
-        </ion-item>-->
     </ion-list-header>
 </ion-header>
 
 <ion-content class="background" [fullscreen]="true">
-    <ion-list class="transparent">
+    <ion-list *ngIf="this.orders!=null" class="transparent">
         <ion-item-sliding *ngFor="let order of orders; let i=index">
             <ion-item>
                 <div class="flex">
@@ -94,4 +85,9 @@
             </ion-item>
         </ion-item-sliding>
     </ion-list>
+    <div *ngIf="this.orders?.length==0">
+        <div class="no-prices">
+            <ion-label class="no-prices-label">No se han encontrado pedidos</ion-label>
+        </div>
+    </div>
 </ion-content>

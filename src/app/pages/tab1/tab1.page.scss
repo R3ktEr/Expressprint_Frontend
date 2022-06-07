@@ -50,6 +50,10 @@ ion-item::part(native) {
     text-decoration: solid;
 }
 
+.title-label {
+    margin-right: 13%;
+}
+
 .subtitle {
     display: block;
     margin: auto;
@@ -120,8 +124,9 @@ ion-item::part(native) {
 }
 
 .buttons {
-    padding-left: 48px;
-    padding-right: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -138,4 +143,18 @@ ion-item::part(native) {
 
 .chip {
     vertical-align: middle;
+}
+
+.no-prices {
+    display: flex;
+    background-color: aquamarine;
+    width: fit-content;
+    min-width: 60vw;
+    min-height: 25vh;
+    margin: 30vh 20%;
+}
+
+.no-prices-label {
+    display: block;
+    margin: auto;
 }

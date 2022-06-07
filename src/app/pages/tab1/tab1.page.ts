@@ -32,6 +32,7 @@ export class Tab1Page {
               private route: ActivatedRoute, private localstorage: LocalStorageService, private notS: NotificationsService,
               private modalController: ModalController,) {
     this.ordersCopy = [];
+    this.orders = [];
 
     this.filter = {
       payed: false,
@@ -75,7 +76,6 @@ export class Tab1Page {
   }
 
   public getOrders(): void {
-    console.log(this.user);
     this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
       this.orders = value;
       this.sortOrdersByDate();
@@ -86,15 +86,15 @@ export class Tab1Page {
     });
   }
 
-  public getAllOrders(): void {
-    this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).subscribe(value => {
+  public async getAllOrders() {
+    await this.orderService.getAllOrders().pipe(map(value => value.map(c => ({key: c.id, ...c})))).toPromise().then(value => {
       this.orders = value;
       this.sortOrdersByDate();
       this.ordersCopy = [];
       this.orders.forEach(values => {
         this.ordersCopy.push(values);
       });
-    });
+    })
   }
 
   private sortOrdersByDate(){
