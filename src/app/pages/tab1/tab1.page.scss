@@ -163,3 +163,11 @@ ion-item::part(native) {
     font-family: 'Courgette-Regular';
     text-align: center;
 }
+
+ion-item::part(native) {
+    padding-left: 0px;
+}
+
+ion-item {
+    --inner-padding-end: 0px;
+}
