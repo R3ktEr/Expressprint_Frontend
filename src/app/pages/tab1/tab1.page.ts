@@ -67,7 +67,7 @@ export class Tab1Page {
         await this.notS.presentToast(this.noPrices,'danger');
       }
     } else {
-      this.getOrders();
+      await this.getOrders();
     }
 
     //this.resetBadgeCount()
@@ -75,7 +75,7 @@ export class Tab1Page {
     await this.notS.dismissLoading();
   }
 
-  public getOrders(): void {
+  public async getOrders():Promise<void> {
     this.orderService.getOrdersByUser(this.user.id).toPromise().then(value => {
       this.orders = value;
       this.sortOrdersByDate();
