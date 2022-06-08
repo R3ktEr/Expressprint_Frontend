@@ -34,13 +34,13 @@
                 </ion-item>
                 <ion-item>
                     <ion-label class="label">Está listo &nbsp;</ion-label>
-                    <ion-icon *ngIf="order.payed" name="checkmark-circle" class="check-icon"></ion-icon>
-                    <ion-icon *ngIf="!order.payed" name="close-circle" class="close-icon"></ion-icon>
+                    <ion-icon *ngIf="order.ready" name="checkmark-circle" class="check-icon"></ion-icon>
+                    <ion-icon *ngIf="!order.ready" name="close-circle" class="close-icon"></ion-icon>
                 </ion-item>
                 <ion-item>
                     <ion-label class="label">Ha sido recogido &nbsp;</ion-label>
-                    <ion-icon *ngIf="order.payed" name="checkmark-circle" class="check-icon"></ion-icon>
-                    <ion-icon *ngIf="!order.payed" name="close-circle" class="close-icon"></ion-icon>
+                    <ion-icon *ngIf="order.pickedUp" name="checkmark-circle" class="check-icon"></ion-icon>
+                    <ion-icon *ngIf="!order.pickedUp" name="close-circle" class="close-icon"></ion-icon>
                 </ion-item>
                 <ion-item>
                     <ion-label class="label">Total del pedido: </ion-label>
@@ -101,7 +101,7 @@
                                 <ion-label class="label align-end">{{document.ringedPosition === true ? 'Por el lado largo' : 'Por el lado corto'}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label class="label">Acabados: </ion-label>
+                                <ion-label class="label">Acabado: </ion-label>
                                 <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'no_ended'">Sin Acabado</ion-label>
                                 <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'bound'">Encuadernado</ion-label>
                                 <ion-label class="label align-end" *ngIf="document.finishType.endedType === 'stapled'">Grapado</ion-label>

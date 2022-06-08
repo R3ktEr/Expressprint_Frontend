@@ -39,6 +39,8 @@ export class NewDocumentPage implements OnInit {
       ringedPosition:['', Validators.required],
       ended:['', Validators.required]
     });
+
+    this.docName="Selecciona un documento";
   }
 
   ngOnInit() {

@@ -6,19 +6,20 @@
 
         <form [formGroup]="formDocument" (ngSubmit)="saveOrder()">
             <ion-card-content>
-                <ion-card-content>
+                <ion-card-content class="document-padding">
                     <div class="item">
+                        <ion-label class="subtitle copy-margin">Documento</ion-label>
                         <div class="parent">
+                            <ion-label class="docname" *ngIf="this.docName">{{this.docName}} </ion-label>
                             <ion-button class="doc" (click)="select()">
                                 <ion-icon name="document-attach-outline"></ion-icon>
                             </ion-button>
-                            <ion-label class="docname" *ngIf="this.docName">{{this.docName}} </ion-label>
                         </div>
                     </div>
                 </ion-card-content>
 
                 <div class="item">
-                    <ion-label class="subtitle">Copias</ion-label>
+                    <ion-label class="subtitle copy-margin">Copias</ion-label>
 
                     <div class="parent">
                         <ion-label class="label ncopies">Numero de copias: </ion-label>
