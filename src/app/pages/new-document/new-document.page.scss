@@ -16,10 +16,20 @@ ion-item::part(native) {
 .subtitle {
     display: block;
     margin: auto;
-    font-family: 'CrimsonPro-VariableFont';
+    font-family: 'Courgette-Regular';
     font-size: 28px;
     text-align: center;
     text-decoration: solid;
+    color: #397ead;
+    margin-top: 17px;
+}
+
+.copy-margin {
+    margin-top: 0px;
+}
+
+.document-padding {
+    padding-top: 0px;
 }
 
 .item {
@@ -51,6 +61,7 @@ ion-item::part(native) {
     vertical-align: top;
     margin-top: 6px;
     margin-left: 10px;
+    color: black;
 }
 
 .label.ncopies {
@@ -117,6 +128,7 @@ ion-item::part(native) {
 .docname {
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: 10px;
 }
 
 

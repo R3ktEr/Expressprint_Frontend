@@ -147,14 +147,19 @@ ion-item::part(native) {
 
 .no-prices {
     display: flex;
-    background-color: aquamarine;
+    background: transparentize($color: #ffffff, $amount: 0.10);
     width: fit-content;
     min-width: 60vw;
     min-height: 25vh;
     margin: 30vh 20%;
+    border-radius: 35px;
+    border: 2px solid lightsteelblue;
 }
 
 .no-prices-label {
     display: block;
     margin: auto;
+    font-size: 22px;
+    font-family: 'Courgette-Regular';
+    text-align: center;
 }

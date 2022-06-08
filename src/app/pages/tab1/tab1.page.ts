@@ -76,13 +76,15 @@ export class Tab1Page {
   }
 
   public getOrders(): void {
-    this.orderService.getOrdersByUser(this.user.id).subscribe(value => {
+    this.orderService.getOrdersByUser(this.user.id).toPromise().then(value => {
       this.orders = value;
       this.sortOrdersByDate();
       this.ordersCopy = [];
       this.orders.forEach(values => {
         this.ordersCopy.push(values);
       });
+    }).catch(err=>{
+      
     });
   }
 

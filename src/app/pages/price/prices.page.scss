@@ -46,6 +46,7 @@ ion-content.background {
 ion-card.item {
     display: inline-block;
     height: auto;
+    max-width: 120px;
 }
 
 .item.buttons {
@@ -199,6 +200,7 @@ ion-modal ion-datetime {
     margin: auto;
     vertical-align: middle;
     width: 90%;
+    padding-right: 4vw;
 }
 
 .toolbar {
@@ -257,5 +259,5 @@ ion-icon {
 }
 
 .input-padding {
-    padding-left: 13px !important;
+    padding-left: 0.8vw !important;
 }
