@@ -164,10 +164,18 @@ ion-item::part(native) {
     text-align: center;
 }
 
+.card-content {
+    padding-left: 0px;
+}
+
+
+/*
 ion-item::part(native) {
     padding-left: 0px;
+    padding-rigth: 0px;
 }
 
 ion-item {
     --inner-padding-end: 0px;
 }
+*/
